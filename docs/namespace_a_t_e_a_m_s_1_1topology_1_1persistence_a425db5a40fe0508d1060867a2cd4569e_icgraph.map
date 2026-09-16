@@ -1,0 +1,8 @@
+<map id="parallel" name="parallel">
+<area shape="rect" id="Node000001" title="Computes the persistent homology of a complex over &#160;coefficients, where &#160;is prime...." alt="" coords="116,31,178,56"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="164,15,158,12,147,9,136,11,130,16,129,22,132,31,127,29,124,22,126,13,134,6,147,4,161,7,169,16"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1topology_1_1persistence.html#a837e752c544907283ae6a911063dc1b1" title="Computes the persistent homology of a complex over &#160;coefficients, where &#160;is prime...." alt="" coords="5,5,68,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,34,68,28,68,23,103,32"/>
+<area shape="rect" id="Node000003" href="$namespace_a_t_e_a_m_s_1_1topology_1_1persistence.html#a75d8f488a761a3448d8ec442aae944ee" title="Computes the persistent homology of a complex over &#160;coefficients, where &#160;is prime...." alt="" coords="5,55,68,80"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="98,54,69,63,67,58,103,53"/>
+</map>

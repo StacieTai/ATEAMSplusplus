@@ -1,10 +1,11 @@
 <map id="satisfied" name="satisfied">
-<area shape="rect" id="Node000001" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,29,76,55"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="18,29,14,21,17,11,26,5,41,3,56,5,65,14,60,15,54,10,40,8,28,10,21,14,20,20,24,29"/>
-<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="256,22,433,62"/>
-<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="75,33,123,28,183,26,243,31,238,32,183,31,124,33,77,39"/>
-<area shape="rect" id="Node000003" href="$namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="124,67,208,92"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="76,50,111,62,106,63,76,55"/>
-<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="208,68,238,64,243,64,209,73"/>
-<area shape="poly" id="edge5_Node000003_Node000003" title=" " alt="" coords="144,65,140,58,142,49,151,42,166,40,182,43,191,52,185,51,179,48,166,45,153,47,147,52,145,58,149,67"/>
+<area shape="rect" id="Node000001" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,37,76,62"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="18,37,14,28,17,19,26,12,41,10,56,13,65,21,60,22,54,18,40,15,28,17,21,22,20,28,24,36"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="256,29,433,70"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="75,41,123,35,183,33,243,38,238,39,183,39,124,40,77,46"/>
+<area shape="rect" id="Node000003" href="$namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="124,74,208,100"/>
+<area shape="poly" id="edge4_Node000001_Node000003" title=" " alt="" coords="76,57,111,69,106,71,76,63"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="311,27,309,19,314,10,326,5,345,3,364,5,377,14,372,13,363,10,345,8,328,10,318,14,314,20,315,30"/>
+<area shape="poly" id="edge5_Node000003_Node000002" title=" " alt="" coords="208,76,238,72,243,71,209,81"/>
+<area shape="poly" id="edge6_Node000003_Node000003" title=" " alt="" coords="144,73,140,65,142,56,151,50,166,48,182,50,191,59,185,58,179,55,166,53,153,55,147,59,145,65,149,75"/>
 </map>

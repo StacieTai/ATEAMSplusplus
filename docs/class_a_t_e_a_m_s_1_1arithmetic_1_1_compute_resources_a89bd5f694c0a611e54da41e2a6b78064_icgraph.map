@@ -1,0 +1,9 @@
+<map id="arithmetize" name="arithmetize">
+<area shape="rect" id="Node000001" title=" " alt="" coords="190,78,275,104"/>
+<area shape="rect" id="Node000002" href="$class_a_t_e_a_m_s_1_1statistics_1_1_chain.html#a3dda99d3acfd636f587263a24b3d8f5d" title="Constructor; uses default ComputeResources." alt="" coords="5,5,142,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="183,73,125,49,125,44,188,71"/>
+<area shape="rect" id="Node000003" href="$class_a_t_e_a_m_s_1_1statistics_1_1_chain.html#a59a3a689e79bba002ca1f4f0f4d336f3" title="Constructor; uses user&#45;provided ComputeResources." alt="" coords="5,71,142,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="171,92,143,94,142,88,176,90"/>
+<area shape="rect" id="Node000004" href="$class_a_t_e_a_m_s_1_1statistics_1_1_chain.html#afdd85c5890e0b92ccc5d7fb2da7a6646" title="Constructor; uses default ComputeResources." alt="" coords="5,136,142,177"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="188,109,126,138,124,133,183,111"/>
+</map>

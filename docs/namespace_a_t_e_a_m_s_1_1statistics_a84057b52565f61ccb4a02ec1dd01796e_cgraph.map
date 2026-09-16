@@ -1,5 +1,7 @@
 <map id="energy" name="energy">
-<area shape="rect" id="Node000001" title="Computes the total energy of the given configuration." alt="" coords="5,13,66,38"/>
-<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="114,5,291,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,23,100,25,95,26,66,28"/>
+<area shape="rect" id="Node000001" title="Computes the total energy of the given configuration." alt="" coords="7,37,67,62"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="8,37,3,28,6,19,18,12,37,10,57,13,69,21,64,22,55,18,37,15,20,17,10,22,8,28,13,36"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="115,29,292,70"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="67,47,102,49,97,50,68,52"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="172,27,170,19,175,11,187,5,204,3,222,5,234,14,229,13,220,10,204,8,188,10,179,14,175,20,176,30"/>
 </map>

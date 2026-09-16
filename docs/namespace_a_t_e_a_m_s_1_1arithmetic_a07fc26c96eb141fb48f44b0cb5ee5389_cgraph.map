@@ -1,5 +1,7 @@
 <map id="SparseMatrixKernel" name="SparseMatrixKernel">
-<area shape="rect" id="Node000001" title="Computes ." alt="" coords="5,5,141,31"/>
-<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a41c0fe25f857de33869baf10247269fc" title="Computes the reduced row echelon form ." alt="" coords="189,5,324,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,16,176,18,171,18,141,21"/>
+<area shape="rect" id="Node000001" title="Computes ." alt="" coords="5,29,141,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="42,29,36,21,40,11,52,5,73,3,95,5,108,14,103,14,94,10,73,8,54,10,44,15,41,20,47,29"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a41c0fe25f857de33869baf10247269fc" title="Computes the reduced row echelon form ." alt="" coords="189,29,324,55"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="141,40,176,42,171,42,141,45"/>
+<area shape="poly" id="edge3_Node000002_Node000002" title=" " alt="" coords="225,28,219,21,223,11,236,5,256,3,279,5,292,15,286,14,277,10,256,8,237,10,227,15,225,20,230,30"/>
 </map>

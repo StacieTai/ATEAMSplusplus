@@ -1,5 +1,4 @@
 <map id="randomLinearCombination" name="randomLinearCombination">
-<area shape="rect" id="Node000001" title="A uniform random linear combination of the rows of , typically the kernel of a reduced coboundary mat..." alt="" coords="5,5,178,31"/>
-<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="226,5,395,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="178,16,213,18,207,18,178,21"/>
+<area shape="rect" id="Node000001" title="A uniform random linear combination of the rows of , typically the kernel of a reduced coboundary mat..." alt="" coords="5,29,178,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="62,29,57,21,60,11,72,5,92,3,112,5,125,14,119,14,111,10,91,8,74,10,64,15,62,20,67,29"/>
 </map>

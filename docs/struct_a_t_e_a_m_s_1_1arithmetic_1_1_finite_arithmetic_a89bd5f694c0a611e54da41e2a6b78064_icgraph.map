@@ -1,5 +1,11 @@
 <map id="arithmetize" name="arithmetize">
-<area shape="rect" id="Node000001" title=" " alt="" coords="207,20,292,46"/>
-<area shape="rect" id="Node000002" href="$class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html#a89bd5f694c0a611e54da41e2a6b78064" title=" " alt="" coords="5,5,159,61"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,33,159,36,159,31,194,33"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="391,78,476,104"/>
+<area shape="rect" id="Node000002" href="$class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html#a89bd5f694c0a611e54da41e2a6b78064" title=" " alt="" coords="190,63,343,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="373,91,344,94,343,88,378,91"/>
+<area shape="rect" id="Node000003" href="$class_a_t_e_a_m_s_1_1statistics_1_1_chain.html#a3dda99d3acfd636f587263a24b3d8f5d" title="Constructor; uses default ComputeResources." alt="" coords="5,5,142,46"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="172,61,136,49,135,44,177,59"/>
+<area shape="rect" id="Node000004" href="$class_a_t_e_a_m_s_1_1statistics_1_1_chain.html#a59a3a689e79bba002ca1f4f0f4d336f3" title="Constructor; uses user&#45;provided ComputeResources." alt="" coords="5,71,142,111"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="172,92,143,94,142,88,177,90"/>
+<area shape="rect" id="Node000005" href="$class_a_t_e_a_m_s_1_1statistics_1_1_chain.html#afdd85c5890e0b92ccc5d7fb2da7a6646" title="Constructor; uses default ComputeResources." alt="" coords="5,136,142,177"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="177,121,137,138,135,133,172,123"/>
 </map>

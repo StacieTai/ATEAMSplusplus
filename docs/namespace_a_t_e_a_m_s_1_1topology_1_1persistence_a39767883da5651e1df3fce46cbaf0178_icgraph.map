@@ -1,0 +1,8 @@
+<map id="stagger" name="stagger">
+<area shape="rect" id="Node000001" title="Computes the persistent homology of a complex over &#160;coefficients, where &#160;is prime...." alt="" coords="118,31,182,56"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="167,15,162,12,150,9,139,11,133,16,131,22,135,31,130,29,126,22,128,13,137,6,150,4,164,7,172,16"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1topology_1_1persistence.html#a42a7583576be5f4a1a0af772513cce84" title="Computes the persistent homology of a complex over &#160;coefficients, where &#160;is prime...." alt="" coords="5,5,70,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,34,70,28,70,23,105,32"/>
+<area shape="rect" id="Node000003" href="$namespace_a_t_e_a_m_s_1_1topology_1_1persistence.html#aa3657e4808c19859ea0c30cf2761a7b4" title="Computes the persistent homology of a complex over &#160;coefficients, where &#160;is prime...." alt="" coords="5,55,70,80"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="100,54,71,63,69,58,105,53"/>
+</map>

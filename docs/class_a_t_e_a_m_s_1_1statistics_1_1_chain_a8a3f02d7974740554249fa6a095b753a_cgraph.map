@@ -1,0 +1,7 @@
+<map id="simulate" name="simulate">
+<area shape="rect" id="Node000001" title="Model&#45;generic iterator." alt="" coords="5,60,76,86"/>
+<area shape="rect" id="Node000002" href="$class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html#a811b0a7568016bef9db2a19c9d67b3d3" title="&quot;Spins down&quot; the multithreaded computing environment." alt="" coords="124,5,277,61"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,62,111,55,107,58,77,67"/>
+<area shape="rect" id="Node000003" href="$class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html#ab70b70876fadf31e281646d1f002525e" title="Initializes a multithreaded computing environment." alt="" coords="124,85,277,141"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="76,79,111,89,106,91,76,85"/>
+</map>
