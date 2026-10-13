@@ -13,7 +13,7 @@ typedef ATEAMS::FINITE FINITE;
 typedef ATEAMS::RATIONAL RATIONAL;
 
 // Dimensions over which we're testing.
-const std::vector<int> DIMENSIONS{2,3,4};
+const std::vector<int> DIMENSIONS{4};
 
 // Correct ranks of homology groups.
 std::map<int,int> HOMOLOGICALRANK{

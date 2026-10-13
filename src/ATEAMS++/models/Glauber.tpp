@@ -13,6 +13,7 @@
 
 #include <SparseRREF/sparse_type.h>
 #include <SparseRREF/sparse_mat.h>
+#include <SparseRREF/sparse_vec.h>
 
 #include <random>
 #include <algorithm>
@@ -38,14 +39,27 @@ namespace ATEAMS::models {
 			(INDEX)flippedIndex,
 			(typename RingLike::dtype)this->intuniform(this->RNG)
 		);
+		flipped.compress();
 
-		// Compute the energies of the cochains.
-		// TODO this is gonna be really slow, so we should work out a better way to
-		// compute these.
-		int original = statistics::energy(this->complex, state.cochain, this->coefficients, this->dimension);
-		int updated = statistics::energy(this->complex, flipped, this->coefficients, this->dimension);
+		// From the boundary matrix, check the indices of the d-cells that have
+		// the chosen (d-1)-cell as a face; we only need to compute the difference
+		// in the energy on those cells.
+		SparseVector<RingLike> coboundary = this->complex->Boundary.Matrices[this->dimension][flippedIndex];
 
-		// Comptue the probability of accepting the new cochain; perform the Metropolis
+		int originalNonzero = 0, flippedNonzero = 0;
+
+		for (int i=0; i < coboundary.size(); i++) {
+			int index = coboundary(i);
+			SparseVector<RingLike> boundary = this->complex->Coboundary.Matrices[this->dimension][index];
+
+			originalNonzero += (int)(arithmetic::SparseVectorDot<RingLike>(state.cochain, boundary, this->coefficients) > 0);
+			flippedNonzero += (int)(arithmetic::SparseVectorDot<RingLike>(flipped, boundary, this->coefficients) > 0);
+		}
+
+		int original = state.energy;
+		int updated = state.energy + (originalNonzero-flippedNonzero);
+
+		// Compute the probability of accepting the new cochain; perform the Metropolis
 		// step.
 		double random = this->unituniform(this->RNG);
 		double diff = min(1.0, exp(temp*(original-updated)));
@@ -53,8 +67,6 @@ namespace ATEAMS::models {
 		if (random < diff) {
 			state.cochain = flipped;
 			state.energy = updated;
-		} else {
-			state.energy = original;
 		}
 
 		state.t = t;
@@ -75,6 +87,7 @@ namespace ATEAMS::models {
 
 		cochain.compress();
 		state.cochain = cochain;
+		state.energy = statistics::energy(this->complex, state.cochain, this->coefficients, this->dimension);
 
 		return state;
 	}
@@ -86,6 +99,7 @@ namespace ATEAMS::models {
 		Glauber<RingLike>::State& state
 	) {
 		state.cochain = c;
+		state.energy = statistics::energy(this->complex, state.cochain, this->coefficients, this->dimension);
 		return state;
 	};
 

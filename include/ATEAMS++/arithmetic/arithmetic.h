@@ -14,6 +14,15 @@ namespace ATEAMS {
 	 */
 	namespace arithmetic {
 
+		template <typename RingLike>
+		inline typename RingLike::dtype SparseVectorDot(
+			SparseVector<RingLike>& u,
+			const SparseVector<RingLike>& v,
+			Ring* R
+		) {
+			return sparse_vec_dot<INDEX, typename RingLike::dtype>(u, v, R->ring);
+		};
+
 		/**
 		 * @brief Sparse vector addition \f$ \vec u + \vec v \f$ for vectors over a
 		 * @ref ATEAMS::Ring

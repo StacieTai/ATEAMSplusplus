@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 		PARAMETERS.coefficients = &RR;
 		PARAMETERS.dimension = dimension/2;
 		PARAMETERS.temperatureFunction = statistics::selfdual(PARAMETERS.coefficients);
-		PARAMETERS.DEBUG = true;
+		// PARAMETERS.DEBUG = true;
 
 		Model MODEL(&CUBICAL, PARAMETERS);
 		Chain CHAIN(&MODEL, ITERATIONS);
