@@ -50,7 +50,7 @@ namespace ATEAMS::arithmetic {
 		/**
 		 * @brief Flushes the containers for reuse.
 		 */
-		void flush() {
+		inline void flush() {
 			this->marked.clear();
 			std::fill(this->lookup.begin(), this->lookup.end(), 0);
 			// for (int t=0; t < this->lookup.size(); t++) this->lookup[t] = 0;
@@ -98,7 +98,7 @@ namespace ATEAMS::arithmetic {
 			/**
 			 * @brief Flushes data structures for reuse.
 			 */
-			void flush() {
+			inline void flush() {
 				for (int t=0; t < this->marked.size(); t++) this->marked[t].clear();
 				std::fill(this->lookup.begin(), this->lookup.end(), 0);
 				std::fill(this->zeroed.begin(), this->zeroed.end(), false);
@@ -137,7 +137,7 @@ namespace ATEAMS::arithmetic {
 				negation[a] = (typename RingLike::dtype)((c-a)%c);
 			}
 
-			// Create inversion table.
+			// Create inversion table. Fermat's little theorem!
 			std::vector<typename RingLike::dtype> inversion(c, 0);
 			for (int a=0; a < c; a++) {
 				inversion[a] = (typename RingLike::dtype)(((int)pow(a, c-2))%c);
