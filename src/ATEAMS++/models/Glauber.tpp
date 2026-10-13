@@ -47,6 +47,7 @@ namespace ATEAMS::models {
 		SparseVector<RingLike> coboundary = this->complex->Boundary.Matrices[this->dimension][flippedIndex];
 		int originalNonzero = 0, flippedNonzero = 0;
 
+		// #pragma omp parallel for
 		for (int i=0; i < coboundary.size(); i++) {
 			int index = coboundary(i);
 			SparseVector<RingLike> boundary = this->complex->Coboundary.Matrices[this->dimension][index];
