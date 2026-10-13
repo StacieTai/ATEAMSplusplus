@@ -45,7 +45,6 @@ namespace ATEAMS::models {
 		// the chosen (d-1)-cell as a face; we only need to compute the difference
 		// in the energy on those cells.
 		SparseVector<RingLike> coboundary = this->complex->Boundary.Matrices[this->dimension][flippedIndex];
-
 		int originalNonzero = 0, flippedNonzero = 0;
 
 		for (int i=0; i < coboundary.size(); i++) {
@@ -67,6 +66,8 @@ namespace ATEAMS::models {
 		if (random < diff) {
 			state.cochain = flipped;
 			state.energy = updated;
+		} else {
+			state.energy = original;
 		}
 
 		state.t = t;
@@ -121,7 +122,7 @@ namespace ATEAMS::models {
 		std::random_device rd;
 		this->RNG = std::mt19937(rd());
 		this->unituniform = std::uniform_real_distribution<double>(0,1);
-		this->indexuniform = std::uniform_int_distribution<int>(0, this->complex->Cells[this->dimension-1]);
+		this->indexuniform = std::uniform_int_distribution<int>(0, this->complex->Cells[this->dimension-1]-1);
 
 		this->intuniform = std::uniform_int_distribution<int>(
 			0,
@@ -146,7 +147,7 @@ namespace ATEAMS::models {
 		std::random_device rd;
 		this->RNG = std::mt19937(rd());
 		this->unituniform = std::uniform_real_distribution<double>(0,1);
-		this->indexuniform = std::uniform_int_distribution<int>(0, this->complex->Cells[this->dimension-1]);
+		this->indexuniform = std::uniform_int_distribution<int>(0, this->complex->Cells[this->dimension-1]-1);
 
 		this->intuniform = std::uniform_int_distribution<int>(
 			0,
@@ -174,7 +175,7 @@ namespace ATEAMS::models {
 		std::random_device rd;
 		this->RNG = std::mt19937(rd());
 		this->unituniform = std::uniform_real_distribution<double>(0,1);
-		this->indexuniform = std::uniform_int_distribution<int>(0, this->complex->Cells[this->dimension-1]);
+		this->indexuniform = std::uniform_int_distribution<int>(0, this->complex->Cells[this->dimension-1]-1);
 
 		this->intuniform = std::uniform_int_distribution<int>(
 			0,
