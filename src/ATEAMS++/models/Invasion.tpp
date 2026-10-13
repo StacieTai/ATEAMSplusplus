@@ -84,10 +84,10 @@ namespace ATEAMS::models {
 		// Set up the arithmetic depending on the coefficient field. Currently,
 		// we use Z/2Z arithmetic when computing over the rationals.
 		if (this->coefficients->characteristic > 2) {
-			this->intuniform = std::uniform_int_distribution<int>(0, this->coefficients->characteristic);
+			this->intuniform = std::uniform_int_distribution<int>(0, this->coefficients->characteristic-1);
 			this->complex->constructFullBoundaryMatrix(this->coefficients);
 		} else {
-			this->intuniform = std::uniform_int_distribution<int>(0, 2);
+			this->intuniform = std::uniform_int_distribution<int>(0, 1);
 			this->complex->constructFlatBoundaryMatrix();
 		}
 
@@ -124,10 +124,10 @@ namespace ATEAMS::models {
 		// Set up the arithmetic depending on the coefficient field. Currently,
 		// we use Z/2Z arithmetic when computing over the rationals.
 		if (this->coefficients->characteristic > 2) {
-			this->intuniform = std::uniform_int_distribution<int>(0, this->coefficients->characteristic);
+			this->intuniform = std::uniform_int_distribution<int>(0, this->coefficients->characteristic-1);
 			this->complex->constructFullBoundaryMatrix(this->coefficients);
 		} else {
-			this->intuniform = std::uniform_int_distribution<int>(0, 2);
+			this->intuniform = std::uniform_int_distribution<int>(0, 1);
 			this->complex->constructFlatBoundaryMatrix();
 		}
 

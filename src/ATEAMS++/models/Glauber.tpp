@@ -20,6 +20,21 @@
 #include <cassert>
 
 namespace ATEAMS::models {
+
+	template <typename RingLike>
+	INDEX entryExistsAtIndex(SparseVector<RingLike> &u, INDEX index) {
+		int L = 0, R = u.size()-1, m;
+
+		while (L <= R) {
+			m = L + (R-L)/2;
+
+			if (u.indices[m] == index) return (INDEX)m;
+			else if (u.indices[m] < index) L = m+1;
+			else R = m-1;
+		}
+
+		return (INDEX)(u.size() + 1);
+	}
 		
 	template <typename RingLike>
 	Glauber<RingLike>::State Glauber<RingLike>::sample(
@@ -34,11 +49,17 @@ namespace ATEAMS::models {
 		INDEX flippedIndex = this->indexuniform(this->RNG);
 		SparseVector<RingLike> flipped(state.cochain);
 
-		// Overwrite the entry? Not sure if this actually overwrites it or not.
-		flipped.push_back(
-			(INDEX)flippedIndex,
-			(typename RingLike::dtype)this->intuniform(this->RNG)
-		);
+		INDEX exists = entryExistsAtIndex<RingLike>(flipped, flippedIndex);
+
+		if (exists < flipped.size()) {
+			flipped[exists] = (typename RingLike::dtype)this->intuniform(this->RNG);
+		} else {
+			flipped.push_back(
+				(INDEX)flippedIndex,
+				(typename RingLike::dtype)this->intuniform(this->RNG)
+			);
+		}
+
 		flipped.compress();
 
 		// From the boundary matrix, check the indices of the d-cells that have
@@ -127,7 +148,7 @@ namespace ATEAMS::models {
 
 		this->intuniform = std::uniform_int_distribution<int>(
 			0,
-			this->coefficients->characteristic > 0 ? this->coefficients->characteristic : 2
+			this->coefficients->characteristic > 0 ? this->coefficients->characteristic-1 : 1
 		);
 	};
 
@@ -152,7 +173,7 @@ namespace ATEAMS::models {
 
 		this->intuniform = std::uniform_int_distribution<int>(
 			0,
-			this->coefficients->characteristic > 0 ? this->coefficients->characteristic : 2
+			this->coefficients->characteristic > 0 ? this->coefficients->characteristic-1 : 1
 		);
 	};
 
@@ -180,7 +201,7 @@ namespace ATEAMS::models {
 
 		this->intuniform = std::uniform_int_distribution<int>(
 			0,
-			this->coefficients->characteristic > 0 ? this->coefficients->characteristic : 2
+			this->coefficients->characteristic > 0 ? this->coefficients->characteristic-1 : 1
 		);
 	};
 }

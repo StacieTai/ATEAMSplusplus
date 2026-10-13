@@ -163,7 +163,7 @@ namespace ATEAMS {
 
 			this->intuniform = std::uniform_int_distribution<int>(
 				0,
-				this->coefficients->characteristic > 0 ? this->coefficients->characteristic : 2
+				this->coefficients->characteristic > 0 ? this->coefficients->characteristic-1 : 1
 			);
 		};
 
@@ -194,7 +194,7 @@ namespace ATEAMS {
 
 			this->intuniform = std::uniform_int_distribution<int>(
 				0,
-				this->coefficients->characteristic > 0 ? this->coefficients->characteristic : 2
+				this->coefficients->characteristic > 0 ? this->coefficients->characteristic-1 : 1
 			);
 		};
 
@@ -226,7 +226,7 @@ namespace ATEAMS {
 
 			this->intuniform = std::uniform_int_distribution<int>(
 				0,
-				this->coefficients->characteristic > 0 ? this->coefficients->characteristic : 2
+				this->coefficients->characteristic > 0 ? this->coefficients->characteristic-1 : 1
 			);
 		}
 	}
