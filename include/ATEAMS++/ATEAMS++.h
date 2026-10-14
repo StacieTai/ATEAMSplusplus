@@ -14,4 +14,6 @@
 #include "ATEAMS++/statistics/statistics.h"
 #include "ATEAMS++/models/models.h"
 
+#define ATEAMS_VERSION "2.0"
+
 #endif
