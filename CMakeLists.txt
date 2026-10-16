@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 4.2)
 
 project(ATEAMS++
-	VERSION 1.8
+	VERSION 1.0.0
 	LANGUAGES C CXX
 	DESCRIPTION "Algebraic topology-enabled algorithms for spin systems."
 )
