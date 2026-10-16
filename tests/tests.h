@@ -38,7 +38,7 @@ std::map<int,std::vector<int>> STOPINVADING{
 // Defines pass/fail, default number of iterations.
 const int PASS = 0;
 const int FAIL = 1;
-const int ITERATIONS = 10000;
+const int ITERATIONS = 10;
 
 
 

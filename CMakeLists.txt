@@ -260,8 +260,8 @@ list(APPEND MODELS.TESTING
 	# "Bernoulli"
 	# "InvadedCluster"
 	# "Invasion"
-	# "SwendsenWang"
-	"Glauber"
+	"SwendsenWang"
+	# "Glauber"
 )
 
 list(APPEND TYPES

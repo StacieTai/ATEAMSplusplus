@@ -127,6 +127,9 @@ namespace ATEAMS {
 			state.cochain = sample;
 			state.includes = included;
 			state.essential = essential;
+			state.satisfied = N-satisfiable.size();
+			state.occupied = included.size();
+			state.energy = -satisfiable.size();
 			state.t = t;
 
 			return state;

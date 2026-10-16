@@ -153,6 +153,8 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a07fe4a6d18195cf882792dcc5d22e6f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Percolation subcomplex \( P_t \). Used by <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_bernoulli.html" title="Bernoulli">Bernoulli</a>, <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a>, <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invasion.html" title="Invasion">Invasion</a>, <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a>.  <br /></td></tr>
 <tr class="memitem:affb9db935dc3e09600f19267b9593b9d" id="r_affb9db935dc3e09600f19267b9593b9d"><td class="memItemLeft">std::vector&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#affb9db935dc3e09600f19267b9593b9d">essential</a></td></tr>
 <tr class="memdesc:affb9db935dc3e09600f19267b9593b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Times at which essential cycles of \( P_t \) were born. Used by <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_bernoulli.html" title="Bernoulli">Bernoulli</a>, <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invasion.html" title="Invasion">Invasion</a>.  <br /></td></tr>
+<tr class="memitem:a4dba9f3407ce154dcd9548a843756488" id="r_a4dba9f3407ce154dcd9548a843756488"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4dba9f3407ce154dcd9548a843756488">satisfied</a></td></tr>
+<tr class="memitem:ae3966afc4a03e5e7db07a5dd4cfa4c52" id="r_ae3966afc4a03e5e7db07a5dd4cfa4c52"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ae3966afc4a03e5e7db07a5dd4cfa4c52">occupied</a></td></tr>
 <tr class="memitem:a6cfd95afd0afebd625b889fb6e58371c" id="r_a6cfd95afd0afebd625b889fb6e58371c"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6cfd95afd0afebd625b889fb6e58371c">rank</a></td></tr>
 <tr class="memdesc:a6cfd95afd0afebd625b889fb6e58371c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rank of the \(d\)th persistent homology group \(PH_d(P_t)\). Used by <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_bernoulli.html" title="Bernoulli">Bernoulli</a>.  <br /></td></tr>
 <tr class="memitem:a4ec8c7cb48771b844a6d50e2150e3f63" id="r_a4ec8c7cb48771b844a6d50e2150e3f63"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a4ec8c7cb48771b844a6d50e2150e3f63">energy</a></td></tr>
@@ -211,7 +213,7 @@ template&lt;typename RingLike, template&lt; typename &gt; typename VectorLike&gt
 
 <p>Energy of the current cochain, i.e. \(\H(f_t)\). Used by <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_glauber.html" title="Glauber">Glauber</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_model_state_8h_source.html#l00056">56</a> of file <a class="el" href="_model_state_8h_source.html">ModelState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_model_state_8h_source.html#l00062">62</a> of file <a class="el" href="_model_state_8h_source.html">ModelState.h</a>.</p>
 
 </div>
 </div>
@@ -255,6 +257,24 @@ template&lt;typename RingLike, template&lt; typename &gt; typename VectorLike&gt
 
 </div>
 </div>
+<a id="ae3966afc4a03e5e7db07a5dd4cfa4c52" name="ae3966afc4a03e5e7db07a5dd4cfa4c52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3966afc4a03e5e7db07a5dd4cfa4c52">&#9670;&#160;</a></span>occupied</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RingLike, template&lt; typename &gt; typename VectorLike&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int occupied</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_model_state_8h_source.html#l00056">56</a> of file <a class="el" href="_model_state_8h_source.html">ModelState.h</a>.</p>
+
+</div>
+</div>
 <a id="a6cfd95afd0afebd625b889fb6e58371c" name="a6cfd95afd0afebd625b889fb6e58371c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6cfd95afd0afebd625b889fb6e58371c">&#9670;&#160;</a></span>rank</h2>
 
@@ -270,6 +290,24 @@ template&lt;typename RingLike, template&lt; typename &gt; typename VectorLike&gt
 </div><div class="memdoc">
 
 <p>Rank of the \(d\)th persistent homology group \(PH_d(P_t)\). Used by <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_bernoulli.html" title="Bernoulli">Bernoulli</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="_model_state_8h_source.html#l00059">59</a> of file <a class="el" href="_model_state_8h_source.html">ModelState.h</a>.</p>
+
+</div>
+</div>
+<a id="a4dba9f3407ce154dcd9548a843756488" name="a4dba9f3407ce154dcd9548a843756488"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dba9f3407ce154dcd9548a843756488">&#9670;&#160;</a></span>satisfied</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RingLike, template&lt; typename &gt; typename VectorLike&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int satisfied</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_model_state_8h_source.html#l00053">53</a> of file <a class="el" href="_model_state_8h_source.html">ModelState.h</a>.</p>
 
@@ -291,7 +329,7 @@ template&lt;typename RingLike, template&lt; typename &gt; typename VectorLike&gt
 
 <p>Current time-step. Used by every <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_model.html" title="Model">Model</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="_model_state_8h_source.html#l00059">59</a> of file <a class="el" href="_model_state_8h_source.html">ModelState.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_model_state_8h_source.html#l00065">65</a> of file <a class="el" href="_model_state_8h_source.html">ModelState.h</a>.</p>
 
 </div>
 </div>

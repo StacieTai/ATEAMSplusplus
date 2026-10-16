@@ -104,6 +104,9 @@ namespace ATEAMS {
 
 			state.cochain = sample;
 			state.includes = std::vector<int>(includeHere.begin(), includeHere.end());
+			state.satisfied = N-coeffs.size();
+			state.occupied = state.includes.size();
+			state.energy = -coeffs.size();
 			state.t = t;
 
 			return state;

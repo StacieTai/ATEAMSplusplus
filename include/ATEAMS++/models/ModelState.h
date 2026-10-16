@@ -49,6 +49,12 @@ namespace ATEAMS::models {
 		// Used by: Bernoulli, Invasion
 		std::vector<int> essential;
 
+		// Used by: SwendsenWang, InvadedCluster, Invasion
+		int satisfied;
+
+		// Used by: SwendsenWang, InvadedCluster, Invasion, Bernoulli
+		int occupied;
+
 		// Used by: Bernoulli
 		int rank;
 

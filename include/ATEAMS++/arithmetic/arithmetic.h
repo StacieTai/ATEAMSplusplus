@@ -14,6 +14,17 @@ namespace ATEAMS {
 	 */
 	namespace arithmetic {
 
+		/**
+		 * @brief Sparse vector dot product \f$u \cdot v\f$ for vectors over a
+		 * @ref ATEAMS::Ring.
+		 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
+		 * 
+		 * @param u Vector.
+		 * @param v Vector.
+		 * @param R (Pointer to) a coefficient @ref Ring \f$R\f$, like @ref Zp or @ref Q.
+		 * 
+		 * @returns \f$(u \cdot v) \in R\f$.
+		 */
 		template <typename RingLike>
 		inline typename RingLike::dtype SparseVectorDot(
 			SparseVector<RingLike>& u,
@@ -30,7 +41,7 @@ namespace ATEAMS {
 		 * 
 		 * @param u Vector.
 		 * @param v Vector.
-		 * @param R (Pointer to) the coefficient ring @ref Q.
+		 * @param R (Pointer to) a coefficient @ref Ring, like @ref Zp or @ref Q.
 		 * @param resources Computing resources with cached arithmetic tables.
 		 */
 		template <typename RingLike>
