@@ -37,6 +37,19 @@ namespace ATEAMS {
 				this->coefficients
 			);
 
+			// If we're debugging, verify that the cells corresponding to indices
+			// reported here are actually not sent to 0.
+			if (this->DEBUG) {
+				for (auto& e : exclude) {
+					typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(
+						this->complex->Coboundary.Matrices[d][e],
+						state.cochain,
+						this->coefficients
+					);
+					assert(r > 0);
+				}
+			}
+
 			// The cells to include are the ones not excluded.
 			vector<int> include;
 

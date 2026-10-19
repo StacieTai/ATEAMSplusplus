@@ -62,6 +62,19 @@ namespace ATEAMS {
 				this->coefficients
 			);
 
+			// If we're debugging, verify that the cells corresponding to indices
+			// reported here are actually not sent to 0.
+			if (this->DEBUG) {
+				for (auto& e : exclude) {
+					typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(
+						this->complex->Coboundary.Matrices[d][e],
+						state.cochain,
+						this->coefficients
+					);
+					assert(r > 0);
+				}
+			}
+
 			int nonzero = exclude.size();
 
 			// We then iterate over all cells and flip a density-p coin (i.e.
@@ -106,7 +119,7 @@ namespace ATEAMS {
 
 				// Multiply, and check whether there's anything in the resulting vector;
 				// there shouldn't be (i.e. it should have size 0).
-				SparseVector<RingLike> outcome = arithmetic::SparseRightMultiplication<RingLike>(
+				SparseVector<RingLike> outcome = arithmetic::ParallelSparseRightMultiplication<RingLike>(
 					cbd,
 					sample,
 					this->coefficients
@@ -117,9 +130,9 @@ namespace ATEAMS {
 
 			state.cochain = sample;
 			state.includes = std::vector<int>(includeHere.begin(), includeHere.end());
-			state.satisfied = N-nonzero;
+			state.satisfied = N-nonzero;				// TODO this computation is wrong
 			state.occupied = state.includes.size();
-			state.energy = -nonzero;
+			state.energy = -nonzero;					// TODO this computation is wrong
 			state.t = t;
 
 			return state;

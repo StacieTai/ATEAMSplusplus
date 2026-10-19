@@ -13,7 +13,7 @@ colors = CONFIG.colors
 
 # Specify available data.
 persistence.trials = 64
-persistence.fields = [3, 5, 7, 11]
+persistence.fields = [3, 5]
 persistence.dimensions = [2, 3]
 
 sizes = {
