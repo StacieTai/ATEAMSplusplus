@@ -11,6 +11,8 @@
 #include "ATEAMS++/models/SwendsenWang.h"
 #include "ATEAMS++/arithmetic/arithmetic.h"
 
+#include <SparseRREF/sparse_vec.h>
+
 #include <random>
 #include <algorithm>
 #include <cassert>
@@ -18,6 +20,26 @@
 
 namespace ATEAMS {
 	namespace models {
+
+		template <typename RingLike>
+		inline std::vector<int> excludedCells(
+			SparseMatrix<RingLike>& A,
+			SparseVector<RingLike>& x,
+			Ring* R
+		) {
+			std::vector<int> exclude(A.rows.size(), -1);
+
+			// Parallelizing the matrix-vector product so we spend less time
+			// doing it.
+			#pragma omp parallel for
+			for (int i=0; i < A.rows.size(); i++) {
+				typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+				if (r > 0) exclude[i] = i;
+			}
+
+			std::erase(exclude, -1);
+			return exclude;
+		}
 
 		template <typename RingLike>
 		SwendsenWang<RingLike>::State SwendsenWang<RingLike>::sample(
@@ -37,30 +59,37 @@ namespace ATEAMS {
 			}
 
 			// Perform independent Bernoulli trials over each (d-1)-cell to decide whether
-			// it gets included in the computation. We do this by performing a (sparse!) matrix
-			// multiplication, then checking which of the entries are zero.
+			// it gets included in the computation. We do this in steps: given a
+			// cochain f and the dth coboundary matrix B,
+			//
+			//		1.	perform the multiplication Bf (by performing the dot
+			//			products B(k)•f, where B(k) is the kth row of B, in
+			//			parallel) and check which entries of Bf are nonzero;
+			//		2.	iterate over all cells and flip a density-p coin (i.e.
+			//			a coin that shows "heads" with probability p) and exclude
+			//			each cell for which the coin shows "tails." (For any cell
+			//			already excluded, this does nothing; for any cell not yet
+			//			excluded, this excludes it.)
 			size_t d = this->dimension;
-			SparseVector<RingLike> coeffs = arithmetic::SparseRightMultiplication<RingLike>(
+
+			// The zero entries are those that don't show up in the indices, so we
+			// automatically exclude these.
+			int N = this->complex->Cells[d];
+
+			std::vector<int> exclude = excludedCells<RingLike>(
 				this->complex->Coboundary.Matrices[d],
 				state.cochain,
 				this->coefficients
 			);
 
-			// The zero entries are those that don't show up in the indices, so we
-			// automatically exclude these.
-			int N = this->complex->Cells[d];
-			std::set<size_t> exclude;
-			
-			if (coeffs.size() > 0) {
-				for (int e=0; e < coeffs.size(); e++) exclude.insert((size_t)e);
-			}
+			int nonzero = exclude.size();
 
-			// We then iterate over the remaining indices and flip a weighted coin (i.e.
-			// perform a density-p Bernoulli trial) to decide whether to keep that
-			// particular row (corresponding to a d-cell on which the current cochain
-			// evaluates to 0).
+			// We then iterate over all cells and flip a density-p coin (i.e.
+			// a coin that shows "heads" with probability p) and exclude each cell
+			// for which the coin shows "tails." (For any cell already excluded,
+			// this does nothing; for any cell not yet excluded, this excludes it.)
 			for (int i=0; i<N; i++) {
-				if (this->unituniform(this->RNG) > p) exclude.insert(i);
+				if (this->unituniform(this->RNG) > p) exclude.push_back(i);
 			}
 
 			// Figure out which indices we're *in*cluding.
@@ -104,9 +133,9 @@ namespace ATEAMS {
 
 			state.cochain = sample;
 			state.includes = std::vector<int>(includeHere.begin(), includeHere.end());
-			state.satisfied = N-coeffs.size();
+			state.satisfied = N-nonzero;
 			state.occupied = state.includes.size();
-			state.energy = -coeffs.size();
+			state.energy = -nonzero;
 			state.t = t;
 
 			return state;

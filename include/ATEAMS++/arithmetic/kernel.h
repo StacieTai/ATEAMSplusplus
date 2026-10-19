@@ -55,7 +55,7 @@ namespace ATEAMS::arithmetic {
 	SparseVector<RingLike> submatrixKernelSample(
 		SparseMatrix<RingLike> coboundary,
 		Ring* R,
-		std::set<size_t> exclude,
+		std::vector<int> exclude,
 		std::uniform_int_distribution<int>& intuniform,
 		std::mt19937& RNG,
 		ComputeResources<RingLike>& resources,
