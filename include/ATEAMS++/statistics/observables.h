@@ -30,10 +30,10 @@ namespace ATEAMS::statistics {
 		int dimension
 	) {
 		// Perform the matrix multiplication.
-		SparseVector<RingLike> coefficients = arithmetic::SparseRightMultiplication<RingLike>(
+		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
 			complex->Coboundary.Matrices[dimension], f, R
 		);
-		coefficients.compress();
+		// coefficients.compress();
 
 		return -coefficients.size();
 	};
@@ -60,10 +60,10 @@ namespace ATEAMS::statistics {
 		int dimension
 	) {
 		// Perform the matrix multiplication.
-		SparseVector<RingLike> coefficients = arithmetic::SparseRightMultiplication<RingLike>(
+		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
 			complex->Coboundary.Matrices[dimension], f, R
 		);
-		coefficients.compress();
+		// coefficients.compress();
 
 		return complex->Cells[dimension]-coefficients.size();
 	};
@@ -90,10 +90,10 @@ namespace ATEAMS::statistics {
 		int dimension
 	) {
 		// Perform the matrix multiplication.
-		SparseVector<RingLike> coefficients = arithmetic::SparseRightMultiplication<RingLike>(
+		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
 			complex->Coboundary.Matrices[dimension], f, R
 		);
-		coefficients.compress();
+		// coefficients.compress();
 
 		// Create a vector containing the indices of nonzero entries.
 		std::vector<int> unsatisfied(coefficients.size());
@@ -136,10 +136,10 @@ namespace ATEAMS::statistics {
 		int dimension
 	) {
 		// Perform the matrix multiplication.
-		SparseVector<RingLike> coefficients = arithmetic::SparseRightMultiplication<RingLike>(
+		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
 			complex->Coboundary.Matrices[dimension], f, R
 		);
-		coefficients.compress();
+		// coefficients.compress();
 
 		// Create a vector containing the indices of nonzero entries.
 		std::vector<int> unsatisfied(coefficients.size());
