@@ -44,7 +44,7 @@ pull: FORCE
 
 
 samples: FORCE
-	./performance/performance.samples.sh
+	screen -dmS profiling.timing.samples ./performance/performance.samples.sh
 
 
 profiling: FORCE
@@ -52,6 +52,7 @@ profiling: FORCE
 
 
 timing: FORCE
+	rm -f performance/timing.persistence.log
 	screen -L -Logfile performance/timing.persistence.log -dmS timing.persistence ./performance/timing.persistence.sh
 
 

@@ -28,3 +28,11 @@ std::vector<std::vector<int>> filtrationData(int size, int SCALE, int DIMENSION,
 
 	return filtrations;
 }
+
+bool shouldQuit(int SCALE, int DIMENSION) {
+	if (DIMENSION == 6 && SCALE >= 11) return true;
+	if (DIMENSION == 4 && SCALE >= 45) return true;
+	if (DIMENSION == 3 && SCALE >= 128) return true;
+
+	return false;
+}

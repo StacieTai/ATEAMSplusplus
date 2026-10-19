@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
 	int TRIALS = stoi(argv[5]);
 	string STRATEGY = argv[6];
 
-	if (DIMENSION >= 6 && SCALE >= 11) return 1;
+	if (shouldQuit(SCALE, DIMENSION)) return 0;
 	
 	// Construct a cubical complex.
 	Zp R(FIELD);

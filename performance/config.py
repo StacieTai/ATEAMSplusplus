@@ -12,7 +12,7 @@ CONFIG.topics = Bunch()
 ################################################################################
 metadata = Bunch()
 
-metadata.hosts = ["pangolin", "meglTower"]
+metadata.hosts = ["meglTower"]
 metadata.computing = ["serial", "parallel"]
 
 metadata.initialize = lambda p: p.rcParams.update({
@@ -24,70 +24,102 @@ metadata.initialize = lambda p: p.rcParams.update({
 # Cell counts by dimension and scale.
 metadata.cells = {
 	2: {
-		2: 16,
-		4: 64,
-		5: 100,
-		8: 256,
-		11: 484,
-		16: 1024,
-		23: 1936,
-		32: 4096,
-		45: 8100,
-		64: 16384,
-		90: 32400,
-		128: 65536,
-		181: 131044,
-		256: 262144,
-		362: 524176,
-		512: 1048576
+		3:         36,
+		4:         64,
+		5:        100,
+		8:        256,
+		11:        484,
+		16:       1024,
+		22:       1936,
+		32:       4096,
+		45:       8100,
+		64:      16384,
+		90:      32400,
+		128:      65536,
+		181:     131044,
+		256:     262144,
+		362:     524176,
+		512:    1048576
+	},
+	3: {
+		3:        216,
+		4:        512,
+		5:       1000,
+		8:       4096,
+		11:      10648,
+		16:      32768,
+		22:      85184,
+		32:     262144,
+		45:     729000,
+		64:    2097152,
+		90:    5832000,
 	},
 	4: {
-		2: 256,
-		4: 4096,
-		5: 10000,
-		8: 65536,
-		11: 234256,
-		16: 1048576,
-		23: 3748096,
-		32: 16777216
+		3:       1296,
+		4:       4096,
+		5:      10000,
+		8:      65536,
+		11:     234256,
+		16:    1048576,
+		22:    3748096,
+		32:   16777216,
 	},
 	6: {
-		2: 4096,
-		4: 262144,
-		5: 1000000,
-		8: 16777216
+		3:      46656,
+		4:     262144,
+		5:    1000000,
+		8:   16777216,
 	}
 }
 
 # Boundary matrix density by dimension and scale.
 metadata.density = {
 	2: {
-		2: 0.222222,
-		4: 0.0555556,
-		5: 0.0355556,
-		8: 0.0138889,
-		11: 0.00734619,
-		16: 0.00347222,
-		22: 0.00183655,
-		32: 0.000868056,
-		45: 0.000438957,
-		64: 0.000217014,
-		90: 0.000109739,
-		128: 5.42535e-05,
-		181: 2.71325e-05,
-		256: 1.35634e-05,
-		362: 6.78313e-06,
-		512: 3.39084e-06
+		3: 5.555556e-02,
+		4: 3.125000e-02,
+		5: 2.000000e-02,
+		8: 7.812500e-03,
+		11: 4.132231e-03,
+		16: 1.953125e-03,
+		22: 1.033058e-03,
+		32: 4.882812e-04,
+		45: 2.469136e-04,
+		64: 1.220703e-04,
+		90: 6.172840e-05,
+		128: 3.051758e-05,
+		181: 1.526205e-05,
+		256: 7.629395e-06,
+		362: 3.815512e-06,
+		512: 1.907349e-06,
+	},
+	3: {
+		3:    1.388889e-02,
+		4:    5.859375e-03,
+		5:    3.000000e-03,
+		8:    7.324219e-04,
+		11:    2.817431e-04,
+		16:    9.155273e-05,
+		22:    3.521788e-05,
+		32:    1.144409e-05,
+		45:    4.115226e-06,
+		64:    1.430511e-06,
+		90:    5.144033e-07,
 	},
 	4: {
-		2: 0.0177778,
-		4: 0.00111111,
-		5: 0.000455111,
-		8: 6.94444e-05,
-		11: 1.94279e-05,
-		16: 4.34028e-06,
-		22: 1.21425e-06,
-		32: 2.71267e-07
+		3:  3.086420e-03,
+		4:  9.765625e-04,
+		5:  4.000000e-04,
+		8:  6.103516e-05,
+		11:  1.707534e-05,
+		16:  3.814697e-06,
+		22:  1.067209e-06,
+		32:  2.384186e-07,
+	},
+	6: {
+		3:   1.286008e-04,
+		4:   2.288818e-05,
+		5:   6.000000e-06,
+		8:   3.576279e-07,
 	}
 }
 
@@ -147,7 +179,7 @@ tol.vibrant = Bunch(
 
 tol.muted = Bunch(
 	indigo="#332288",
-	cyan="#88CC33",
+	cyan="#33BBEE",
 	teal="#44AA99",
 	green="#117733",
 	olive="#999933",
@@ -354,14 +386,15 @@ CONFIG.topics.addition.plots.timeByOverlapOverlaid.savefig = CONFIG._defaults.sa
 CONFIG.topics.persistence = Bunch()
 
 CONFIG.topics.persistence.exec = "persistence"
-# CONFIG.topics.persistence.computing = ["twist", "split", "JIT", "stagger", "parallel", "standard"]
-CONFIG.topics.persistence.computing = ["JIT", "stagger", "twist", "split"]
-CONFIG.topics.persistence.fields = [2,3]
-CONFIG.topics.persistence.dimensions = [4]
+CONFIG.topics.persistence.computing = ["twist", "split", "JIT", "stagger", "parallel", "standard"]
+# CONFIG.topics.persistence.computing = ["JIT", "stagger", "twist", "split", "standard"]
+CONFIG.topics.persistence.fields = [3]
+CONFIG.topics.persistence.dimensions = [2]
 CONFIG.topics.persistence.hosts = ["meglTower"]
 CONFIG.topics.persistence.trials = 64
 CONFIG.topics.persistence.sep = ","
 CONFIG.topics.persistence.prefix = lambda host, computing: f"{host}.{CONFIG.topics.persistence.exec}.{computing}.{CONFIG.topics.persistence.trials}"
+CONFIG.topics.persistence.minimumsize = 3
 
 CONFIG.topics.persistence.columns = [
 	"SCALE",
@@ -448,6 +481,8 @@ CONFIG.topics.persistence.plots.defaults.boxplot.props = lambda color: dict(
 	capprops=CONFIG.topics.persistence.plots.defaults.boxplot.capprops
 )
 
+CONFIG.topics.persistence.plots.defaults.boxplot.pinstripes = lambda boxes, ax, color="black", alpha=1/20: _boxplotPinstripes(boxes, ax, color, alpha)
+
 
 
 
@@ -530,4 +565,10 @@ def _boxplotSpacing(k, width=0.1):
 		right = [unit*r-unit/2 for r in range(1, lrcount+1)]
 		left = [-r for r in right]
 		return left + right
+
+
+def _boxplotPinstripes(k, ax, color, alpha):
+	for i in range(1, k+1, 2):
+		ax.axvspan(i-1/2, i+1/2, facecolor=color, edgecolor="none", alpha=alpha, zorder=0)
+
 

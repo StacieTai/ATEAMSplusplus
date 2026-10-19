@@ -1,5 +1,6 @@
 
 #include <ATEAMS++/ATEAMS++.h>
+#include "helpers.h"
 
 using namespace ATEAMS;
 using namespace ATEAMS::topology;
@@ -31,6 +32,8 @@ int main(int argc, char* argv[]) {
 	int SCALE = stoi(argv[1]);
 	int DIMENSION = stoi(argv[2]);
 	int TRIALS = stoi(argv[3]);
+
+	if (shouldQuit(SCALE, DIMENSION)) return 0;
 
 	// Construct a cubical complex and the ingredients for a filtration.
 	Zp R(2);

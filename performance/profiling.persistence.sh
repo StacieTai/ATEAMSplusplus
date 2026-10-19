@@ -1,12 +1,11 @@
 #!/bin/zsh
 
 EXECS=("persistence")
-SCALES=(8 11 16)
-DIMENSIONS=(4 6)
-FIELDS=(2)
+SCALES=(3 4 5 8 11 16 22 32 45 64 90 128 181 256 362 512)
+DIMENSIONS=(2 3 4 6)
+FIELDS=(3 5 7 11 13)
 TRIALS=${1:-10}
-# STRATEGIES=("twist" "JIT" "split" "stagger" "parallel" "standard")
-STRATEGIES=("JIT" "split")
+STRATEGIES=("twist" "JIT" "split" "stagger" "parallel" "standard")
 
 HOST=$(hostname -f)
 
