@@ -61,6 +61,14 @@ namespace ATEAMS::arithmetic {
 		ComputeResources<RingLike>& resources,
 		bool DEBUG=false
 	);
+
+
+	template <typename RingLike>
+	std::vector<int> excludedCells(
+		SparseMatrix<RingLike>& coboundary,
+		SparseVector<RingLike>& cochain,
+		Ring* R
+	);
 }
 
 #include "ATEAMS++/arithmetic/kernel.tpp"

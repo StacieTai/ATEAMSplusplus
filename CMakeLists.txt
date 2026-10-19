@@ -249,7 +249,7 @@ list(APPEND ARITHMETIC.TESTING
 list(APPEND TOPOLOGY.TESTING
 	# "JIT"
 	# "parallel"
-	# "PHAT"
+	# # "PHAT"
 	# "split"
 	# "stagger"
 	# "standard"
@@ -258,7 +258,7 @@ list(APPEND TOPOLOGY.TESTING
 
 list(APPEND MODELS.TESTING
 	# "Bernoulli"
-	# "InvadedCluster"
+	"InvadedCluster"
 	# "Invasion"
 	"SwendsenWang"
 	# "Glauber"

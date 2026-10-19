@@ -11,6 +11,7 @@
 #include "ATEAMS++/arithmetic/kernel.h"
 
 #include <SparseRREF/sparse_mat.h>
+#include <SparseRREF/sparse_vec.h>
 
 using namespace std;
 
@@ -62,6 +63,25 @@ namespace ATEAMS::arithmetic {
 
 		// Return a random linear combination of the columns.
 		return randomLinearCombination<RingLike>(kernel, R, intuniform, RNG);
+	}
+
+	template <typename RingLike>
+	std::vector<int> excludedCells(
+		SparseMatrix<RingLike>& coboundary,
+		SparseVector<RingLike>& cochain,
+		Ring* R
+	) {
+		std::vector<int> exclude;
+
+		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
+			coboundary, cochain, R
+		);
+
+		// The cells we *ex*clude are the ones with (nonzero!) entries in
+		// the coefficients vector.
+		for (int i=0; i < coefficients.size(); i++) exclude.push_back((int)coefficients(i));
+
+		return exclude;
 	}
 }
 

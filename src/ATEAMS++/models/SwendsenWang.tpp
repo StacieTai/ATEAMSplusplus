@@ -22,26 +22,6 @@ namespace ATEAMS {
 	namespace models {
 
 		template <typename RingLike>
-		inline std::vector<int> excludedCells(
-			SparseMatrix<RingLike>& A,
-			SparseVector<RingLike>& x,
-			Ring* R
-		) {
-			std::vector<int> exclude(A.rows.size(), -1);
-
-			// Parallelizing the matrix-vector product so we spend less time
-			// doing it.
-			#pragma omp parallel for
-			for (int i=0; i < A.rows.size(); i++) {
-				typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
-				if (r > 0) exclude[i] = i;
-			}
-
-			std::erase(exclude, -1);
-			return exclude;
-		}
-
-		template <typename RingLike>
 		SwendsenWang<RingLike>::State SwendsenWang<RingLike>::sample(
 			int t,
 			SwendsenWang<RingLike>::State& state,
@@ -76,7 +56,7 @@ namespace ATEAMS {
 			// automatically exclude these.
 			int N = this->complex->Cells[d];
 
-			std::vector<int> exclude = excludedCells<RingLike>(
+			vector<int> exclude = arithmetic::excludedCells<RingLike>(
 				this->complex->Coboundary.Matrices[d],
 				state.cochain,
 				this->coefficients
@@ -91,6 +71,10 @@ namespace ATEAMS {
 			for (int i=0; i<N; i++) {
 				if (this->unituniform(this->RNG) > p) exclude.push_back(i);
 			}
+
+			// Delete duplicates.
+			std::sort(exclude.begin(), exclude.end());
+			exclude.erase(std::unique(exclude.begin(), exclude.end()), exclude.end());
 
 			// Figure out which indices we're *in*cluding.
 			std::set<int> includeHere;

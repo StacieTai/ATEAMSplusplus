@@ -28,29 +28,23 @@ namespace ATEAMS {
 			InvadedCluster<RingLike>::State& state,
 			arithmetic::ComputeResources<RingLike>& resources
 		) {
-			int d = this->dimension;
+			int d = this->dimension, N = this->complex->Cells[d];
 
-			// Determine which (d-1)-cells are "satisfiable" (i.e. those on which the
-			// current (d-1)-cochain vanishes).
-			SparseVector<RingLike> satisfiable = arithmetic::SparseRightMultiplication<RingLike>(
+			// These are the cells on which the cochain does not vanish.
+			vector<int> exclude = arithmetic::excludedCells<RingLike>(
 				this->complex->Coboundary.Matrices[d],
 				state.cochain,
 				this->coefficients
 			);
 
-			// The zero entries are those that don't show up in the indices, so we
-			// automatically exclude these.
-			int N = this->complex->Cells[d];
-			std::set<size_t> exclude;
-			std::vector<size_t> include;
-			
-			if (satisfiable.size() > 0) {
-				for (int e=0; e < satisfiable.size(); e++) exclude.insert((size_t)e);
-			}
+			// The cells to include are the ones not excluded.
+			vector<int> include;
 
-			for (int i=0; i < N; i++) {
-				if (!exclude.contains(i)) include.push_back(i);
-			}
+			set_difference(
+				this->include.begin(), this->include.end(),
+				exclude.begin(), exclude.end(),
+				inserter(include, include.begin())
+			);
 
 			std::shuffle(include.begin(), include.end(), this->RNG);
 
@@ -90,10 +84,10 @@ namespace ATEAMS {
 			// corresponding to cells included *after* percolating.
 			int stopat = essential[this->stoppingFunction(t)];
 			
-			std::set<size_t> leaveout;
+			std::vector<int> leaveout;
 			std::vector<int> included(stopat-start, 0);
 
-			for (int i=stopat; i < stop; i++) leaveout.insert(this->filtration[i]-start);
+			for (int i=stopat; i < stop; i++) leaveout.push_back(this->filtration[i]-start);
 			for (int i=start; i < stopat; i++) included[i-start] = this->filtration[i]-start;
 
 			SparseVector<RingLike> sample = arithmetic::submatrixKernelSample<RingLike>(
@@ -127,9 +121,9 @@ namespace ATEAMS {
 			state.cochain = sample;
 			state.includes = included;
 			state.essential = essential;
-			state.satisfied = N-satisfiable.size();
+			state.satisfied = include.size();
 			state.occupied = included.size();
-			state.energy = -satisfiable.size();
+			state.energy = -exclude.size();
 			state.t = t;
 
 			return state;
@@ -193,6 +187,11 @@ namespace ATEAMS {
 			std::iota(filtration.begin(), filtration.end(), 0);
 			this->filtration = filtration;
 
+			// Default set of indices to compare against.
+			std::vector<int> include(this->complex->Cells[this->dimension]);
+			std::iota(include.begin(), include.end(), 0);
+			this->include = include;
+
 			// Initialize a random number generator.
 			std::random_device rd;
 			this->RNG = std::mt19937(rd());
@@ -225,6 +224,11 @@ namespace ATEAMS {
 			std::vector<int> filtration(this->complex->size());
 			std::iota(filtration.begin(), filtration.end(), 0);
 			this->filtration = filtration;
+
+			// Default set of indices to compare against.
+			std::vector<int> include(this->complex->Cells[this->dimension]);
+			std::iota(include.begin(), include.end(), 0);
+			this->include = include;
 
 			// Initialize a random number generator.
 			std::random_device rd;
