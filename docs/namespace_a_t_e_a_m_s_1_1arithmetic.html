@@ -171,6 +171,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0030f1b3f6243a3f8094596eef404c5f" id="r_a0030f1b3f6243a3f8094596eef404c5f"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
 <tr class="memitem:a0030f1b3f6243a3f8094596eef404c5f template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0030f1b3f6243a3f8094596eef404c5f">SparseRightMultiplication</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
 <tr class="memdesc:a0030f1b3f6243a3f8094596eef404c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse (right) matrix multiplication \( A \vec x \).  <br /></td></tr>
+<tr class="memitem:a3d2982d2b0fb712cd76a48c77f4ba912" id="r_a3d2982d2b0fb712cd76a48c77f4ba912"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
+<tr class="memitem:a3d2982d2b0fb712cd76a48c77f4ba912 template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3d2982d2b0fb712cd76a48c77f4ba912">ParallelSparseRightMultiplication</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
+<tr class="memdesc:a3d2982d2b0fb712cd76a48c77f4ba912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel.  <br /></td></tr>
 <tr class="memitem:ab7087fa033516694f6d702122ea7143e" id="r_ab7087fa033516694f6d702122ea7143e"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
 <tr class="memitem:ab7087fa033516694f6d702122ea7143e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab7087fa033516694f6d702122ea7143e">SparseVectorRescaling</a> (typename RingLike::dtype a, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;resources)</td></tr>
 <tr class="memitem:a41c0fe25f857de33869baf10247269fc" id="r_a41c0fe25f857de33869baf10247269fc"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
@@ -184,10 +187,12 @@ Functions</h2></td></tr>
 <tr class="memdesc:a07fc26c96eb141fb48f44b0cb5ee5389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes \( \ker(\RREF(A)) \).  <br /></td></tr>
 <tr class="memitem:abffbe7b96444e63af12b3814385506f6" id="r_abffbe7b96444e63af12b3814385506f6"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
 <tr class="memitem:abffbe7b96444e63af12b3814385506f6 template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#abffbe7b96444e63af12b3814385506f6">randomLinearCombination</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; K, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, std::uniform_int_distribution&lt; int &gt; &amp;intuniform, std::mt19937 &amp;RNG)</td></tr>
-<tr class="memdesc:abffbe7b96444e63af12b3814385506f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">A uniform random linear combination of the rows of \(K\), typically the kernel of a reduced coboundary matrix \(\delta^{d-1}\). See the implementation of <a class="el" href="#a19880b3c424103032ae8150f0cc66301" title="submatrixKernelSample">submatrixKernelSample</a>.  <br /></td></tr>
-<tr class="memitem:a19880b3c424103032ae8150f0cc66301" id="r_a19880b3c424103032ae8150f0cc66301"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
-<tr class="memitem:a19880b3c424103032ae8150f0cc66301 template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a19880b3c424103032ae8150f0cc66301">submatrixKernelSample</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; coboundary, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, std::set&lt; size_t &gt; exclude, std::uniform_int_distribution&lt; int &gt; &amp;intuniform, std::mt19937 &amp;RNG, <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;resources, bool DEBUG=false)</td></tr>
-<tr class="memdesc:a19880b3c424103032ae8150f0cc66301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a cochain \(f\) at uniform random from \(\delta^{d-1}\) such that \(f\) is a cocycle on the \(d\)-cells corresponding to the rows not in <span class="tt">exclude</span>. See the implementations of <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage.  <br /></td></tr>
+<tr class="memdesc:abffbe7b96444e63af12b3814385506f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">A uniform random linear combination of the rows of \(K\), typically the kernel of a reduced coboundary matrix \(\delta^{d-1}\). See the implementation of <a class="el" href="#ac2a7f129add7fdd44d3162f4560ccc52" title="submatrixKernelSample">submatrixKernelSample</a>.  <br /></td></tr>
+<tr class="memitem:ac2a7f129add7fdd44d3162f4560ccc52" id="r_ac2a7f129add7fdd44d3162f4560ccc52"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
+<tr class="memitem:ac2a7f129add7fdd44d3162f4560ccc52 template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac2a7f129add7fdd44d3162f4560ccc52">submatrixKernelSample</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; coboundary, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, std::vector&lt; int &gt; exclude, std::uniform_int_distribution&lt; int &gt; &amp;intuniform, std::mt19937 &amp;RNG, <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;resources, bool DEBUG=false)</td></tr>
+<tr class="memdesc:ac2a7f129add7fdd44d3162f4560ccc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a cochain \(f\) at uniform random from \(\delta^{d-1}\) such that \(f\) is a cocycle on the \(d\)-cells corresponding to the rows not in <span class="tt">exclude</span>. See the implementations of <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage.  <br /></td></tr>
+<tr class="memitem:a09c0380c730fd06d21a19fb0a1d79096" id="r_a09c0380c730fd06d21a19fb0a1d79096"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
+<tr class="memitem:a09c0380c730fd06d21a19fb0a1d79096 template"><td class="memItemLeft">std::vector&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a09c0380c730fd06d21a19fb0a1d79096">excludedCells</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;coboundary, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;cochain, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sparse, finite-field linear algebra and support routines. </p>
@@ -229,6 +234,149 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a09c0380c730fd06d21a19fb0a1d79096" name="a09c0380c730fd06d21a19fb0a1d79096"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c0380c730fd06d21a19fb0a1d79096">&#9670;&#160;</a></span>excludedCells()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RingLike&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int &gt; excludedCells </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>coboundary</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>cochain</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *</td>          <td class="paramname"><span class="paramname"><em>R</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph">
+<area shape="rect" title=" " alt="" coords="5,29,109,55"/>
+<area shape="poly" title=" " alt="" coords="38,29,35,21,37,11,45,5,57,3,70,5,78,14,73,14,68,10,57,8,47,10,42,14,40,20,43,29"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph">
+<area shape="rect" title=" " alt="" coords="5,29,109,55"/>
+<area shape="poly" title=" " alt="" coords="73,14,68,10,57,8,47,10,42,14,40,20,43,29,38,29,35,21,37,11,45,5,57,3,70,5,78,14"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3d2982d2b0fb712cd76a48c77f4ba912" name="a3d2982d2b0fb712cd76a48c77f4ba912"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d2982d2b0fb712cd76a48c77f4ba912">&#9670;&#160;</a></span>ParallelSparseRightMultiplication()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RingLike&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; ParallelSparseRightMultiplication </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *</td>          <td class="paramname"><span class="paramname"><em>R</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">RingLike</td><td>A coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>Matrix. </td></tr>
+    <tr><td class="paramname">x</td><td>Vector. </td></tr>
+    <tr><td class="paramname">R</td><td>(Pointer to) a coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\( \vec y = A \vec x \). </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00216">216</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph">
+<area shape="rect" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel." alt="" coords="5,29,218,55"/>
+<area shape="poly" title=" " alt="" coords="75,29,69,21,73,11,88,5,112,3,138,5,153,15,147,15,136,10,111,8,89,10,77,15,74,20,81,29"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#acaca566eef40bba411fc8f778016fa7c" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="266,29,387,55"/>
+<area shape="poly" title=" " alt="" coords="218,40,253,42,248,42,218,45"/>
+<area shape="poly" title=" " alt="" coords="290,28,284,21,288,11,302,5,326,3,353,5,367,15,362,14,351,10,326,8,304,10,291,15,289,20,295,30"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph">
+<area shape="rect" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel." alt="" coords="374,156,586,181"/>
+<area shape="poly" title=" " alt="" coords="517,141,506,137,480,134,457,136,444,141,441,146,448,156,443,154,436,147,440,137,455,131,480,129,507,132,523,141"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#a84057b52565f61ccb4a02ec1dd01796e" title="Computes the total energy of the given configuration." alt="" coords="190,29,326,70"/>
+<area shape="poly" title=" " alt="" coords="440,148,325,85,302,73,302,68,327,81,445,147"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#abb392f63461f412585f1864b963ac02a" title="Computes the number of satisfied &#45;cells in the complex with respect to : that is, the number of &#45;cell..." alt="" coords="190,119,326,159"/>
+<area shape="poly" title=" " alt="" coords="361,153,326,151,326,145,366,152"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ad65f2bb1f9628f12f8a86326d991702f" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,217,142,258"/>
+<area shape="poly" title=" " alt="" coords="385,187,143,229,142,223,386,182"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="190,257,326,298"/>
+<area shape="poly" title=" " alt="" coords="441,188,302,259,300,254,436,189"/>
+<area shape="poly" title=" " alt="" coords="286,14,276,10,258,8,240,10,230,14,226,20,228,29,223,28,221,19,227,10,239,5,258,3,278,5,291,13"/>
+<area shape="poly" title=" " alt="" coords="286,103,276,100,258,97,240,99,230,104,226,110,228,119,223,117,221,109,227,100,239,94,258,92,278,94,291,103"/>
+<area shape="poly" title=" " alt="" coords="102,202,92,198,73,196,56,198,46,202,42,208,43,217,38,217,37,207,42,198,55,193,74,191,94,193,107,201"/>
+<area shape="poly" title=" " alt="" coords="172,260,142,255,142,250,177,259"/>
+<area shape="poly" title=" " alt="" coords="286,241,276,238,258,236,240,238,230,242,226,248,227,258,223,255,221,247,227,238,239,233,258,231,278,233,291,242"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="abffbe7b96444e63af12b3814385506f6" name="abffbe7b96444e63af12b3814385506f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abffbe7b96444e63af12b3814385506f6">&#9670;&#160;</a></span>randomLinearCombination()</h2>
 
@@ -236,6 +384,9 @@ Functions</h2></td></tr>
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename RingLike&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; randomLinearCombination </td>
@@ -258,9 +409,14 @@ template&lt;typename RingLike&gt; </div>
           <td class="paramtype">std::mt19937 &amp;</td>          <td class="paramname"><span class="paramname"><em>RNG</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>A uniform random linear combination of the rows of \(K\), typically the kernel of a reduced coboundary matrix \(\delta^{d-1}\). See the implementation of <a class="el" href="#a19880b3c424103032ae8150f0cc66301" title="submatrixKernelSample">submatrixKernelSample</a>. </p>
+<p>A uniform random linear combination of the rows of \(K\), typically the kernel of a reduced coboundary matrix \(\delta^{d-1}\). See the implementation of <a class="el" href="#ac2a7f129add7fdd44d3162f4560ccc52" title="submatrixKernelSample">submatrixKernelSample</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">RingLike</td><td>A coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
@@ -349,7 +505,7 @@ template&lt;typename RingLike&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( \ker(\RREF(A)) \). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00288">288</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00318">318</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -425,7 +581,7 @@ template&lt;typename RingLike&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( \RREF(A) \). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00246">246</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00276">276</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -507,7 +663,7 @@ template&lt;typename RingLike&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( \ker(A) \). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00267">267</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00297">297</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -595,21 +751,8 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph" loading="lazy" alt=""/></div>
 <map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph">
-<area shape="rect" title="Sparse (right) matrix multiplication ." alt="" coords="374,156,543,181"/>
-<area shape="poly" title=" " alt="" coords="492,141,482,137,459,134,438,136,426,141,424,146,430,156,425,154,418,147,422,137,436,131,459,129,483,132,497,141"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#a84057b52565f61ccb4a02ec1dd01796e" title="Computes the total energy of the given configuration." alt="" coords="190,29,326,70"/>
-<area shape="poly" title=" " alt="" coords="423,147,325,85,303,73,303,68,327,81,428,146"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#abb392f63461f412585f1864b963ac02a" title="Computes the number of satisfied &#45;cells in the complex with respect to : that is, the number of &#45;cell..." alt="" coords="190,119,326,159"/>
-<area shape="poly" title=" " alt="" coords="356,154,327,152,326,146,362,153"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ad65f2bb1f9628f12f8a86326d991702f" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,217,142,258"/>
-<area shape="poly" title=" " alt="" coords="368,187,142,228,141,223,369,182"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="190,257,326,298"/>
-<area shape="poly" title=" " alt="" coords="423,188,298,259,296,254,417,189"/>
-<area shape="poly" title=" " alt="" coords="286,14,276,10,258,8,240,10,230,14,226,20,228,29,223,28,221,19,227,10,239,5,258,3,278,5,291,13"/>
-<area shape="poly" title=" " alt="" coords="286,103,276,100,258,97,240,99,230,104,226,110,228,119,223,117,221,109,227,100,239,94,258,92,278,94,291,103"/>
-<area shape="poly" title=" " alt="" coords="102,202,92,198,73,196,56,198,46,202,42,208,43,217,38,217,37,207,42,198,55,193,74,191,94,193,107,201"/>
-<area shape="poly" title=" " alt="" coords="172,260,142,255,142,250,177,259"/>
-<area shape="poly" title=" " alt="" coords="286,241,276,238,258,236,240,238,230,242,226,248,227,258,223,255,221,247,227,238,239,233,258,231,278,233,291,242"/>
+<area shape="rect" title="Sparse (right) matrix multiplication ." alt="" coords="5,29,175,55"/>
+<area shape="poly" title=" " alt="" coords="117,14,109,10,90,8,72,10,63,15,61,20,66,29,61,29,56,21,59,11,71,5,90,3,111,5,123,14"/>
 </map>
 </div>
 
@@ -759,8 +902,24 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph" loading="lazy" alt=""/></div>
 <map name="anamespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph">
-<area shape="rect" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="5,29,127,55"/>
-<area shape="poly" title=" " alt="" coords="85,14,79,10,66,8,54,10,47,14,46,20,50,29,44,29,41,21,43,11,52,5,66,3,81,5,90,14"/>
+<area shape="rect" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="634,156,756,181"/>
+<area shape="poly" title=" " alt="" coords="731,140,720,137,695,134,672,136,660,141,657,146,664,156,659,154,652,147,656,137,671,131,695,129,721,132,736,141"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#a3d2982d2b0fb712cd76a48c77f4ba912" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel." alt="" coords="374,156,586,181"/>
+<area shape="poly" title=" " alt="" coords="616,169,587,171,587,166,621,168"/>
+<area shape="poly" title=" " alt="" coords="516,141,505,137,480,134,457,136,445,141,443,146,449,156,444,154,437,147,442,137,456,131,480,129,506,132,521,141"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#a84057b52565f61ccb4a02ec1dd01796e" title="Computes the total energy of the given configuration." alt="" coords="190,29,326,70"/>
+<area shape="poly" title=" " alt="" coords="440,148,325,85,302,73,302,68,327,81,445,147"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#abb392f63461f412585f1864b963ac02a" title="Computes the number of satisfied &#45;cells in the complex with respect to : that is, the number of &#45;cell..." alt="" coords="190,119,326,159"/>
+<area shape="poly" title=" " alt="" coords="361,153,326,151,326,145,366,152"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ad65f2bb1f9628f12f8a86326d991702f" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,217,142,258"/>
+<area shape="poly" title=" " alt="" coords="385,187,143,229,142,223,386,182"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="190,257,326,298"/>
+<area shape="poly" title=" " alt="" coords="441,188,302,259,300,254,436,189"/>
+<area shape="poly" title=" " alt="" coords="286,14,276,10,258,8,240,10,230,14,226,20,228,29,223,28,221,19,227,10,239,5,258,3,278,5,291,13"/>
+<area shape="poly" title=" " alt="" coords="286,103,276,100,258,97,240,99,230,104,226,110,228,119,223,117,221,109,227,100,239,94,258,92,278,94,291,103"/>
+<area shape="poly" title=" " alt="" coords="102,202,92,198,73,196,56,198,46,202,42,208,43,217,38,217,37,207,42,198,55,193,74,191,94,193,107,201"/>
+<area shape="poly" title=" " alt="" coords="172,260,142,255,142,250,177,259"/>
+<area shape="poly" title=" " alt="" coords="286,241,276,238,258,236,240,238,230,242,226,248,227,258,223,255,221,247,227,238,239,233,258,231,278,233,291,242"/>
 </map>
 </div>
 
@@ -805,7 +964,7 @@ template&lt;typename RingLike&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00223">223</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00253">253</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -827,13 +986,16 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a19880b3c424103032ae8150f0cc66301" name="a19880b3c424103032ae8150f0cc66301"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19880b3c424103032ae8150f0cc66301">&#9670;&#160;</a></span>submatrixKernelSample()</h2>
+<a id="ac2a7f129add7fdd44d3162f4560ccc52" name="ac2a7f129add7fdd44d3162f4560ccc52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2a7f129add7fdd44d3162f4560ccc52">&#9670;&#160;</a></span>submatrixKernelSample()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename RingLike&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; submatrixKernelSample </td>
@@ -848,7 +1010,7 @@ template&lt;typename RingLike&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::set&lt; size_t &gt;</td>          <td class="paramname"><span class="paramname"><em>exclude</em></span>, </td>
+          <td class="paramtype">std::vector&lt; int &gt;</td>          <td class="paramname"><span class="paramname"><em>exclude</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -871,6 +1033,11 @@ template&lt;typename RingLike&gt; </div>
           <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>DEBUG</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Draws a cochain \(f\) at uniform random from \(\delta^{d-1}\) such that \(f\) is a cocycle on the \(d\)-cells corresponding to the rows not in <span class="tt">exclude</span>. See the implementations of <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage. </p>
@@ -896,8 +1063,8 @@ template&lt;typename RingLike&gt; </div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_cgraph" loading="lazy" alt=""/></div>
-<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_cgraph">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_cgraph">
 <area shape="rect" title="Draws a cochain &#160;at uniform random from &#160;such that &#160;is a cocycle on the &#45;cells corresponding to the r..." alt="" coords="5,29,165,55"/>
 <area shape="poly" title=" " alt="" coords="57,29,53,21,56,11,67,5,85,3,104,5,116,14,111,14,103,10,85,8,68,10,60,15,58,20,63,29"/>
 </map>
@@ -905,8 +1072,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_icgraph" loading="lazy" alt=""/></div>
-<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a19880b3c424103032ae8150f0cc66301_icgraph">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_ac2a7f129add7fdd44d3162f4560ccc52_icgraph">
 <area shape="rect" title="Draws a cochain &#160;at uniform random from &#160;such that &#160;is a cocycle on the &#45;cells corresponding to the r..." alt="" coords="5,29,165,55"/>
 <area shape="poly" title=" " alt="" coords="111,14,103,10,85,8,68,10,60,15,58,20,63,29,57,29,53,21,56,11,67,5,85,3,104,5,116,14"/>
 </map>

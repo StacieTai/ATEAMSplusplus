@@ -6,6 +6,8 @@ var namespace_a_t_e_a_m_s_1_1arithmetic =
     [ "ComputeResources", "class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html", "class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources" ],
     [ "RREFOptions", "namespace_a_t_e_a_m_s_1_1arithmetic.html#ae370df06acaa97cb91ed16ac49666800", null ],
     [ "RREFOptionType", "namespace_a_t_e_a_m_s_1_1arithmetic.html#aa5a44f2e02e38845a5772a388a574ba0", null ],
+    [ "excludedCells", "namespace_a_t_e_a_m_s_1_1arithmetic.html#a09c0380c730fd06d21a19fb0a1d79096", null ],
+    [ "ParallelSparseRightMultiplication", "namespace_a_t_e_a_m_s_1_1arithmetic.html#a3d2982d2b0fb712cd76a48c77f4ba912", null ],
     [ "randomLinearCombination", "namespace_a_t_e_a_m_s_1_1arithmetic.html#abffbe7b96444e63af12b3814385506f6", null ],
     [ "SparseMatrixKernel", "namespace_a_t_e_a_m_s_1_1arithmetic.html#a07fc26c96eb141fb48f44b0cb5ee5389", null ],
     [ "SparseMatrixRREF", "namespace_a_t_e_a_m_s_1_1arithmetic.html#a41c0fe25f857de33869baf10247269fc", null ],
@@ -14,5 +16,5 @@ var namespace_a_t_e_a_m_s_1_1arithmetic =
     [ "SparseVectorAddition", "namespace_a_t_e_a_m_s_1_1arithmetic.html#a284905922b53cfb737b58e60c100ec30", null ],
     [ "SparseVectorDot", "namespace_a_t_e_a_m_s_1_1arithmetic.html#acaca566eef40bba411fc8f778016fa7c", null ],
     [ "SparseVectorRescaling", "namespace_a_t_e_a_m_s_1_1arithmetic.html#ab7087fa033516694f6d702122ea7143e", null ],
-    [ "submatrixKernelSample", "namespace_a_t_e_a_m_s_1_1arithmetic.html#a19880b3c424103032ae8150f0cc66301", null ]
+    [ "submatrixKernelSample", "namespace_a_t_e_a_m_s_1_1arithmetic.html#ac2a7f129add7fdd44d3162f4560ccc52", null ]
 ];

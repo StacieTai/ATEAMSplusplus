@@ -127,57 +127,6 @@ namespace ATEAMS {
 			u.canonicalize();
 		}
 
-		// /**
-		//  * @brief Sparse vector addition \f$ \vec u + \vec v \f$ for vectors over @ref Z2.
-		//  * 
-		//  * @param u Vector.
-		//  * @param v Vector.
-		//  * @param R (Pointer to) the coefficient ring @ref Q.
-		//  */
-		// template <>
-		// inline void SparseVectorAddition<Z2>(
-		// 	SparseVector<Z2>& u,
-		// 	SparseVector<Z2>& v,
-		// 	Ring* R,
-		// 	ComputeResources<Z2>& resources
-		// ) {
-		// 	SparseVectorAddition<Zp>(u, v, R, resources);
-		// };
-
-		// /**
-		//  * @brief Sparse vector addition \f$ \vec u + \vec v \f$ for vectors over @ref Zp.
-		//  * 
-		//  * @param u Vector.
-		//  * @param v Vector.
-		//  * @param R (Pointer to) the coefficient ring @ref Q.
-		//  */
-		// template <>
-		// inline void SparseVectorAddition<Zp>(
-		// 	SparseVector<Zp>& u,
-		// 	SparseVector<Zp>& v,
-		// 	Ring* R,
-		// 	ComputeResources<Zp>& resources
-		// ) {
-			// sparse_vec_add<INDEX>(u, v, R->ring);
-		// };
-
-		// /**
-		//  * @brief Sparse vector addition \f$ \vec u + \vec v \f$ for vectors over @ref Q.
-		//  * 
-		//  * @param u Vector.
-		//  * @param v Vector.
-		//  * @param R (Pointer to) the coefficient ring @ref Q.
-		//  */
-		// template <>
-		// inline void SparseVectorAddition<Q>(
-		// 	SparseVector<Q>& u,
-		// 	SparseVector<Q>& v,
-		// 	Ring* R,
-		// 	ComputeResources<Q>& resources
-		// ) {
-		// 	sfmpq_vec_addsub_mul<INDEX,false>(u, v, (Q::dtype)1);
-		// }
-
 		/**
 		 * @brief Sparse (right) matrix multiplication \f$ A \vec x \f$.
 		 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
@@ -201,7 +150,17 @@ namespace ATEAMS {
 			return y;
 		};
 
-
+		/**
+		 * @brief Sparse (right) matrix multiplication \f$ A \vec x \f$, performed
+		 * 	by computing dot products \f$A_i \cdot \vec x\f$ in parallel.
+		 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
+		 * 
+		 * @param A Matrix.
+		 * @param x Vector.
+		 * @param R (Pointer to) a coefficient @ref Ring, like @ref Zp or @ref Q.
+		 * 
+		 * @returns \f$ \vec y = A \vec x \f$.
+		 */
 		template <typename RingLike>
 		inline SparseVector<RingLike> ParallelSparseRightMultiplication(
 			SparseMatrix<RingLike>& A,
