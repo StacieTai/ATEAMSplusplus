@@ -67,7 +67,7 @@ namespace ATEAMS {
 			while (left > 0 && right > 0) {
 				// If we're pointing to the same index...
 				if (u(left-1) == v(right-1)) {
-					auto entry = resources.arithmetic->add[(int)u[left-1]][(int)v[right-1]];
+					auto entry = resources.arithmetic->add[u[left-1]][v[right-1]];
 
 					// ... and we get a nonzero entry, then the index of this entry
 					// is the same as in the original vector, and the entry is the
