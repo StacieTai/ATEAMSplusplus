@@ -47,7 +47,7 @@ set(PROFILE FALSE)
 set(TIMING FALSE)
 set(DEBUG FALSE)
 
-if (NOT(PROFILE OR TIMING OR DEBUG))
+if (NOT(PROFILE OR DEBUG))
 	add_compile_options(
 		-Ofast
 		-march=native
@@ -249,7 +249,7 @@ list(APPEND ARITHMETIC.TESTING
 list(APPEND TOPOLOGY.TESTING
 	# "JIT"
 	# "parallel"
-	# "PHAT"
+	# # "PHAT"
 	# "split"
 	# "stagger"
 	# "standard"
@@ -258,7 +258,7 @@ list(APPEND TOPOLOGY.TESTING
 
 list(APPEND MODELS.TESTING
 	# "Bernoulli"
-	# "InvadedCluster"
+	"InvadedCluster"
 	# "Invasion"
 	# "SwendsenWang"
 	# "Glauber"

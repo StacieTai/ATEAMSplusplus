@@ -202,22 +202,42 @@ namespace ATEAMS {
 		};
 
 
-		// /**
-		//  * @brief Sparse vector rescaling \f$ a \vec x \f$.
-		//  * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
-		//  * 
-		//  * @param a Scalar.
-		//  * @param x Vector.
-		//  * @param R (Pointer to) a coefficient @ref Ring, like @ref Zp or @ref Q.
-		//  */
-		// template <typename RingLike>
-		// inline void SparseVectorRescaling(
-		// 	typename RingLike::dtype a,
-		// 	SparseVector<RingLike>& x,
-		// 	Ring* R
-		// ) {
-		// 	sparse_vec_rescale<INDEX,typename RingLike::dtype>(x, a, R->ring);
-		// };
+		template <typename RingLike>
+		inline SparseVector<RingLike> ParallelSparseRightMultiplication(
+			SparseMatrix<RingLike>& A,
+			SparseVector<RingLike>& x,
+			Ring* R
+		) {
+			std::vector<SparseVector<RingLike>> chunks(omp_get_max_threads(), SparseVector<RingLike>());
+
+			// Compute the dot products in parallel.
+			#pragma omp parallel for
+			for (int i=0; i < A.rows.size(); i++) {
+				int tid = omp_get_thread_num();
+				typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+
+				if (r > 0) {
+					chunks[tid].push_back(
+						(INDEX)i,
+						arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R)
+					);
+				}
+			}
+
+			// Reconstitute the vector.
+			SparseVector<RingLike> r;
+
+			for (int j=0; j < chunks.size(); j++) {
+				// Skip this row if there's nothing in it.
+				if (chunks[j].size() < 1) continue;
+
+				for (int k=0; k < chunks[j].size(); k++) {
+					r.push_back(chunks[j](k), chunks[j][k]);
+				}
+			}
+
+			return r;
+		}
 
 		template <typename RingLike>
 		inline void SparseVectorRescaling(

@@ -11,12 +11,13 @@
 #include "ATEAMS++/arithmetic/kernel.h"
 
 #include <SparseRREF/sparse_mat.h>
+#include <SparseRREF/sparse_vec.h>
 
 using namespace std;
 
 namespace ATEAMS::arithmetic {
 	template <typename RingLike>
-	SparseVector<RingLike> randomLinearCombination(
+	inline SparseVector<RingLike> randomLinearCombination(
 		SparseMatrix<RingLike> K,
 		Ring* R,
 		std::uniform_int_distribution<int>& intuniform,
@@ -32,10 +33,10 @@ namespace ATEAMS::arithmetic {
 
 
 	template <typename RingLike>
-	SparseVector<RingLike> submatrixKernelSample(
+	inline SparseVector<RingLike> submatrixKernelSample(
 		SparseMatrix<RingLike> coboundary,
 		Ring* R,
-		set<size_t> exclude,
+		vector<int> exclude,
 		std::uniform_int_distribution<int>& intuniform,
 		std::mt19937& RNG,
 		ComputeResources<RingLike>& resources,
@@ -62,6 +63,25 @@ namespace ATEAMS::arithmetic {
 
 		// Return a random linear combination of the columns.
 		return randomLinearCombination<RingLike>(kernel, R, intuniform, RNG);
+	}
+
+	template <typename RingLike>
+	inline std::vector<int> excludedCells(
+		SparseMatrix<RingLike>& coboundary,
+		SparseVector<RingLike>& cochain,
+		Ring* R
+	) {
+		std::vector<int> exclude;
+
+		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
+			coboundary, cochain, R
+		);
+
+		// The cells we *ex*clude are the ones with (nonzero!) entries in
+		// the coefficients vector.
+		for (int i=0; i < coefficients.size(); i++) exclude.push_back((int)coefficients(i));
+
+		return exclude;
 	}
 }
 

@@ -25,7 +25,7 @@ namespace ATEAMS::arithmetic {
 	 * @return (Sparse) uniform vector in \f$\ker(\delta^{d-1})\f$.
 	 */
 	template <typename RingLike>
-	SparseVector<RingLike> randomLinearCombination(
+	inline SparseVector<RingLike> randomLinearCombination(
 		SparseMatrix<RingLike> K,
 		Ring* R,
 		std::uniform_int_distribution<int>& intuniform,
@@ -52,14 +52,22 @@ namespace ATEAMS::arithmetic {
 	 * @return (Sparse) uniform vector in \f$\ker(\delta^{d-1})\f$.
 	 */
 	template <typename RingLike>
-	SparseVector<RingLike> submatrixKernelSample(
+	inline SparseVector<RingLike> submatrixKernelSample(
 		SparseMatrix<RingLike> coboundary,
 		Ring* R,
-		std::set<size_t> exclude,
+		std::vector<int> exclude,
 		std::uniform_int_distribution<int>& intuniform,
 		std::mt19937& RNG,
 		ComputeResources<RingLike>& resources,
 		bool DEBUG=false
+	);
+
+
+	template <typename RingLike>
+	inline std::vector<int> excludedCells(
+		SparseMatrix<RingLike>& coboundary,
+		SparseVector<RingLike>& cochain,
+		Ring* R
 	);
 }
 

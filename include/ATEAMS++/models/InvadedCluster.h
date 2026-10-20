@@ -146,6 +146,7 @@ namespace ATEAMS::models {
 			std::mt19937 RNG;
 			std::uniform_int_distribution<int> intuniform;
 			std::vector<int> filtration;
+			std::vector<int> include;
 	};
 }
 

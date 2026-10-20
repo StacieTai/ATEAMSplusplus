@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
 		// Create the filtration.
 		vector<int> K = filtrations[t];
 
-		auto start = chrono::high_resolution_clock::now();
+		auto start = chrono::steady_clock::now();
 
 		// ik it's lazy but whatever
 		if (STRATEGY == "JIT") persistence::JIT<Zp>(&plex, K, &R, resources);
@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 		else if (STRATEGY == "split") persistence::split<Zp>(&plex, K, &R, resources);
 		else persistence::parallel<Zp>(&plex, K, &R, resources);
 
-		auto end = chrono::high_resolution_clock::now();
+		auto end = chrono::steady_clock::now();
 		auto duration = chrono::duration_cast<chrono::microseconds>(end-start);
 
 		// Write data to storage.
