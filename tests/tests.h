@@ -394,4 +394,26 @@ inline int persistenceDispatcher(
 		return RESULT;
 }
 
+
+
+
+
+
+
+
+
+// ################################################################################
+// ## MODEL TESTS #################################################################
+// ################################################################################
+
+template <typename RingLike>
+bool allEntriesIn(int low, int high, ATEAMS::SparseVector<RingLike>& x) {
+	for (int i=0; i < x.size(); i++) {
+		if ((int)x[i] < low || high <= (int)x[i]) return false;
+	}
+
+	return true;
+}
+
+
 #endif

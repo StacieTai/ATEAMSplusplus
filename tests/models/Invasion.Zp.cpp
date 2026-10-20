@@ -21,10 +21,10 @@ int main(int argc, char *argv[]) {
 		vector<int> corners(dimension, 3);
 		Structure COMPLEX(corners);
 
-		Model::RingType R(FIELD);
+		Model::RingType RR(FIELD);
 
 		Parameters PARAMETERS;
-		PARAMETERS.coefficients = &R;
+		PARAMETERS.coefficients = &RR;
 		PARAMETERS.dimension = dimension/2;
 		PARAMETERS.stoppingFunction = statistics::stopInvadingAt(STOPINVADING[dimension]);
 		PARAMETERS.DEBUG = true;
@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
 		Model MODEL(&COMPLEX, PARAMETERS);
 		Chain CHAIN(&MODEL, ITERATIONS);
 
-		for (State state : CHAIN.simulate()) {
-			if (state.essential.size() != HOMOLOGICALRANK[dimension]) RESULT = FAIL;
+		for (State STATE : CHAIN.simulate()) {
+			if (STATE.essential.size() != HOMOLOGICALRANK[dimension]) RESULT = FAIL;
 		}
 	}
 

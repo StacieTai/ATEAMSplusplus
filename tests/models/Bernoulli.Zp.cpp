@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
 		Chain CHAIN(&MODEL, ITERATIONS);
 
 		for (State STATE : CHAIN.simulate()) {
+			// Check that we have an appropriate number of giant cycles.
 			if (STATE.rank > HOMOLOGICALRANK[dimension]) RESULT = FAIL;
 		}
 	}

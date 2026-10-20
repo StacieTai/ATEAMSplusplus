@@ -22,23 +22,23 @@ int main(int argc, char *argv[]) {
 		vector<int> corners(dimension, 3);
 		Structure CUBICAL(corners);
 
-		Model::RingType R(FIELD);
+		Model::RingType RR(FIELD);
 
 		Parameters PARAMETERS;
-		PARAMETERS.coefficients = &R;
+		PARAMETERS.coefficients = &RR;
 		PARAMETERS.dimension = dimension/2;
-		PARAMETERS.temperatureFunction = statistics::selfdual(&R);
+		PARAMETERS.temperatureFunction = statistics::selfdual(&RR);
 		PARAMETERS.DEBUG = true;
 
 		Model MODEL(&CUBICAL, PARAMETERS);
 		Chain CHAIN(&MODEL, ITERATIONS);
 
-		for (State state : CHAIN.simulate()) {
+		for (State STATE : CHAIN.simulate()) {
 			// Figure out which cells were excluded; on these cells, the cochain
 			// can evaluate to anything. We just want the ones that evaluate to
 			// 0.
 			vector<int> unsatisfied = statistics::unsatisfied<Zp>(
-				&CUBICAL, state.cochain, MODEL.coefficients, PARAMETERS.dimension
+				&CUBICAL, STATE.cochain, MODEL.coefficients, PARAMETERS.dimension
 			);
 
 			SparseMatrix<Zp> REDUCED = MODEL.complex->Coboundary.Matrices[PARAMETERS.dimension];
@@ -46,9 +46,12 @@ int main(int argc, char *argv[]) {
 			REDUCED.clear_zero_row();
 			REDUCED.compress();
 
-			if (!inKernel<Zp>(REDUCED, state.cochain, MODEL.coefficients)) {
-				RESULT = FAIL;
-			}
+			// Verify that the sampled cochain is in the kernel of the reduced
+			// coboundary matrix.
+			if (!inKernel<Model::RingType>(REDUCED, STATE.cochain, MODEL.coefficients, PARAMETERS.DEBUG)) RESULT = FAIL;
+
+			// Verify that the cochain maps to the right ring.
+			if (!allEntriesIn<Model::RingType>(0, RR.characteristic, STATE.cochain)) RESULT = FAIL;
 		}
 	}
 

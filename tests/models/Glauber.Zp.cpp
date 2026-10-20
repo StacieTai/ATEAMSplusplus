@@ -26,27 +26,14 @@ int main(int argc, char *argv[]) {
 		PARAMETERS.coefficients = &RR;
 		PARAMETERS.dimension = dimension/2;
 		PARAMETERS.temperatureFunction = statistics::selfdual(PARAMETERS.coefficients);
-		// PARAMETERS.DEBUG = true;
+		PARAMETERS.DEBUG = true;
 
 		Model MODEL(&CUBICAL, PARAMETERS);
 		Chain CHAIN(&MODEL, ITERATIONS);
 
-		for (State state : CHAIN.simulate()) {
-			// Figure out which cells were excluded; on these cells, the cochain
-			// can evaluate to anything. We just want the ones that evaluate to
-			// 0.
-			vector<int> unsatisfied = statistics::unsatisfied<Model::RingType>(
-				&CUBICAL, state.cochain, MODEL.coefficients, PARAMETERS.dimension
-			);
-
-			SparseMatrix<Model::RingType> REDUCED = MODEL.complex->Coboundary.Matrices[PARAMETERS.dimension];
-			for (auto u : unsatisfied) REDUCED[u].zero();
-			REDUCED.clear_zero_row();
-			REDUCED.compress();
-
-			if (!inKernel<Model::RingType>(REDUCED, state.cochain, MODEL.coefficients, PARAMETERS.DEBUG)) {
-				RESULT = FAIL;
-			}
+		for (State STATE : CHAIN.simulate()) {
+			// Check that the cochain maps to the right ring.
+			if (!allEntriesIn<Model::RingType>(0, RR.characteristic, STATE.cochain)) RESULT = FAIL;
 		}
 	}
 

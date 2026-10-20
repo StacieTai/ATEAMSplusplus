@@ -37,13 +37,13 @@ int main() {
 
 	auto end = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::milliseconds>(end-start);
-	std::cout << (double)duration.count()/(double)1000 << endl;
+	std::cerr << (double)duration.count()/(double)1000 << endl;
 
 	// Compute the expected rank of the 2nd homology group.
 	int T = std::accumulate(ranks.begin(), ranks.end(), 0);
 	double e = (double)T/(double)iterations;
 
-	std::cout << "expected rank is " << std::format("{:.2f}", e) << std::endl;
+	std::cerr << "expected rank is " << std::format("{:.2f}", e) << std::endl;
 	
 	return 0;
 }

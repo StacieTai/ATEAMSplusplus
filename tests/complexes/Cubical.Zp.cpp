@@ -19,8 +19,7 @@ vector<int> homologySizes(
 	vector<int> sizes;
 
 	for (int d=0; d < COMPLEX->Breaks.size(); d++) {
-		vector<int> times = topology::persistence<Zp>(COMPLEX, FILTRATION, QQ, d, resources);
-		printvector<int>(times);
+		vector<int> times = topology::persistence::persistence<Zp>(COMPLEX, FILTRATION, QQ, d, resources);
 
 		sizes.push_back(
 			std::count_if(times.begin(), times.end(), [=](int t) {
@@ -63,6 +62,10 @@ int main() {
 		CUBICAL.constructBoundaryMatrices(&QQ);
 		CUBICAL.constructFlatBoundaryMatrix();
 		CUBICAL.constructFullBoundaryMatrix(&QQ);
+
+		resources.arithmetize(&QQ);
+		resources.parallel->build(CUBICAL.size(), CUBICAL.Cells.size());
+		resources.serial->build(CUBICAL.size());
 
 		vector<int> sizes = homologySizes(&CUBICAL, &QQ, dimension, resources);
 

@@ -239,30 +239,30 @@ install(
 ################################################################################
 
 list(APPEND COMPLEXES.TESTING
-	# "Cubical"
+	"Cubical"
 )
 
 list(APPEND ARITHMETIC.TESTING
-	# "matmul"
-	# "kernel"
+	"matmul"
+	"kernel"
 )
 
 list(APPEND TOPOLOGY.TESTING
-	# "JIT"
-	# "parallel"
+	"JIT"
+	"parallel"
 	"PHAT"
-	# "split"
-	# "stagger"
-	# "standard"
-	# "twist"
+	"split"
+	"stagger"
+	"standard"
+	"twist"
 )
 
 list(APPEND MODELS.TESTING
-	# "Bernoulli"
-	# "InvadedCluster"
-	# "Invasion"
-	# "SwendsenWang"
-	# "Glauber"
+	"Bernoulli"
+	"InvadedCluster"
+	"Invasion"
+	"SwendsenWang"
+	"Glauber"
 )
 
 list(APPEND TYPES
