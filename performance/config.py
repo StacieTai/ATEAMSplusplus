@@ -386,8 +386,8 @@ CONFIG.topics.addition.plots.timeByOverlapOverlaid.savefig = CONFIG._defaults.sa
 CONFIG.topics.persistence = Bunch()
 
 CONFIG.topics.persistence.exec = "persistence"
-CONFIG.topics.persistence.computing = ["twist", "split", "JIT", "stagger", "parallel", "standard"]
-# CONFIG.topics.persistence.computing = ["JIT", "stagger", "twist", "split", "standard"]
+CONFIG.topics.persistence.variants = ["twist", "split", "JIT", "stagger", "parallel", "standard"]
+# CONFIG.topics.persistence.variants = ["JIT", "stagger", "twist", "split", "standard"]
 CONFIG.topics.persistence.fields = [3]
 CONFIG.topics.persistence.dimensions = [2]
 CONFIG.topics.persistence.hosts = ["meglTower"]
@@ -440,8 +440,9 @@ CONFIG.topics.persistence.plots.defaults.scatter = CONFIG._defaults.scatter
 CONFIG.topics.persistence.plots.defaults.boxplot = Bunch()
 CONFIG.topics.persistence.plots.defaults.boxplot.lw = 1/2
 CONFIG.topics.persistence.plots.defaults.boxplot.boxwidths = 0.1
+CONFIG.topics.persistence.plots.defaults.boxplot.boxspacing = 1.25
 
-CONFIG.topics.persistence.plots.defaults.boxplot.positions = lambda k, width=CONFIG.topics.persistence.plots.defaults.boxplot.boxwidths: _boxplotSpacing(k, width)
+CONFIG.topics.persistence.plots.defaults.boxplot.positions = lambda k, width=CONFIG.topics.persistence.plots.defaults.boxplot.boxwidths, spacing=CONFIG.topics.persistence.plots.defaults.boxplot.boxspacing: _boxplotSpacing(k, width, spacing)
 
 CONFIG.topics.persistence.plots.defaults.boxplot.medianprops = dict(
 	lw=0,
@@ -473,7 +474,7 @@ CONFIG.topics.persistence.plots.defaults.boxplot.medians = lambda color: dict(
 CONFIG.topics.persistence.plots.defaults.boxplot.props = lambda color: dict(
 	showfliers=False,
 	widths=CONFIG.topics.persistence.plots.defaults.boxplot.boxwidths,
-	whis=(1,99),
+	whis=(0,100),
 	patch_artist=True,
 	boxprops=CONFIG.topics.persistence.plots.defaults.boxplot.boxprops(color),
 	medianprops=CONFIG.topics.persistence.plots.defaults.boxplot.medianprops,
@@ -550,10 +551,10 @@ def _timeByOverlapHaxis(ax, lo, hi):
 	])
 
 
-def _boxplotSpacing(k, width=0.1):
+def _boxplotSpacing(k, width=0.1, spacing=1.25):
 	# If there are an odd number of boxes, center at 0 and add 1.25x the width
 	# for (k-1)/2 repetitions on each side.
-	unit = 1.25*width
+	unit = spacing*width
 
 	if k % 2:
 		lrcount = int((k-1)/2)

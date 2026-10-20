@@ -12,9 +12,11 @@ persistence = CONFIG.topics.persistence
 colors = CONFIG.colors
 
 # Specify available data.
-persistence.trials = 64
-persistence.fields = [3, 5]
-persistence.dimensions = [2, 3]
+persistence.trials = 100
+persistence.fields = [3]
+persistence.dimensions = [2, 3, 4, 6]
+persistence.hosts = ["pangolin"]
+persistence.variants = ["JIT", "stagger", "twist", "split"]
 
 sizes = {
 	2: 3,
@@ -31,15 +33,15 @@ for host in persistence.hosts:
 		for dimension in persistence.dimensions:
 
 			fig, ax = plt.subplots(**persistence.plots.defaults.subplots)
-			positions = persistence.plots.defaults.boxplot.positions(len(persistence.computing))
+			positions = persistence.plots.defaults.boxplot.positions(len(persistence.variants), spacing=1.5)
 
 			xticks = np.array([])
 			Boxes = []
 
-			for i, (color, pos, name) in enumerate(zip(persistence.colors, positions, persistence.computing)):
+			for i, (color, pos, name) in enumerate(zip(persistence.colors, positions, persistence.variants)):
 				try: data = persistence.data(host, name)
 				except: break
-
+ 
 				subset = data[(data.DIMENSION == dimension) & (data.FIELD == field)]
 				scales = subset.SCALE.unique()
 				scales = [L for L in scales if L >= sizes[dimension]]
@@ -66,9 +68,10 @@ for host in persistence.hosts:
 
 			# Get the 100th percentile over all boxes, then label at that point.
 			if not len(Boxes[0]): continue
-			pt = max([np.percentile(Boxes[k][0], 99, axis=None) for k in range(len(Boxes))])
+			pt = max([np.percentile(Boxes[k][0], 100) for k in range(len(Boxes))])
+			pt *= 1.1
 
-			for posn, name in zip(positions, persistence.computing):
+			for posn, name in zip(positions, persistence.variants):
 				ax.text(
 					1+posn, pt,
 					name,
