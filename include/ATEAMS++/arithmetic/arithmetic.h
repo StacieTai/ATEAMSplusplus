@@ -218,9 +218,9 @@ namespace ATEAMS {
 
 				if (r > 0) {
 					chunks[tid].push_back(
-					(INDEX)i,
-					arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R)
-				);
+						(INDEX)i,
+						arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R)
+					);
 				}
 			}
 

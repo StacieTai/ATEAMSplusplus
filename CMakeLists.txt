@@ -42,12 +42,12 @@ endif()
 ################################################################################
 ## TESTING/PROFILING?                                                         ##
 ################################################################################
-set(TEST TRUE)
+set(TEST FALSE)
 set(PROFILE FALSE)
 set(TIMING FALSE)
 set(DEBUG FALSE)
 
-if (NOT(PROFILE OR TIMING OR DEBUG))
+if (NOT(PROFILE OR DEBUG))
 	add_compile_options(
 		-Ofast
 		-march=native
