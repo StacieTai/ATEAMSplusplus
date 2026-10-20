@@ -170,17 +170,12 @@ namespace ATEAMS {
 			std::vector<SparseVector<RingLike>> chunks(omp_get_max_threads(), SparseVector<RingLike>());
 
 			// Compute the dot products in parallel.
-			#pragma omp parallel for
+			#pragma omp parallel for default(shared) schedule(guided)
 			for (int i=0; i < A.rows.size(); i++) {
 				int tid = omp_get_thread_num();
 				typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
 
-				if (r > 0) {
-					chunks[tid].push_back(
-						(INDEX)i,
-						arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R)
-					);
-				}
+				if (r > 0) chunks[tid].push_back((INDEX)i, r);
 			}
 
 			// Reconstitute the vector.
@@ -194,6 +189,7 @@ namespace ATEAMS {
 					r.push_back(chunks[j](k), chunks[j][k]);
 				}
 			}
+			r.sort_indices();
 
 			return r;
 		}
