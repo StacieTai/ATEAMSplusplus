@@ -239,11 +239,11 @@ install(
 ################################################################################
 
 list(APPEND COMPLEXES.TESTING
-	# "Cubical"
+	"Cubical"
 )
 
 list(APPEND ARITHMETIC.TESTING
-	# "addition"
+	"addition"
 )
 
 list(APPEND TOPOLOGY.TESTING
@@ -260,7 +260,7 @@ list(APPEND MODELS.TESTING
 	# "Bernoulli"
 	# "InvadedCluster"
 	# "Invasion"
-	"SwendsenWang"
+	# "SwendsenWang"
 	# "Glauber"
 )
 

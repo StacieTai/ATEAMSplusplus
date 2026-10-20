@@ -61,6 +61,46 @@ const int ITERATIONS = 10;
 // ## ARITHMETIC TESTS ############################################################
 // ################################################################################
 
+ATEAMS::SparseVector<Zp> randomizedVector(
+	int N,
+	std::uniform_int_distribution<int>& uniformValues,
+	std::mt19937& RNG
+) {
+	std::vector<int> _random(N, 0);
+
+	for (int t=0; t < N; t++) _random[t] = uniformValues(RNG);
+	std::shuffle(_random.begin(), _random.end(), RNG);
+
+	// Populate the SparseVector.
+	ATEAMS::SparseVector<Zp> random;
+	
+	for (int t=0; t < N; t++) {
+		if (_random[t] > 0) {
+			random.push_back((INDEX)t, (typename Zp::dtype)_random[t]);
+		}
+	}
+
+	return random;
+}
+
+ATEAMS::SparseMatrix<Zp> randomizedMatrix(
+	int M,
+	int N,
+	std::uniform_int_distribution<int>& uniformValues,
+	std::mt19937& RNG
+) {
+	ATEAMS::SparseMatrix<Zp> A(M, N);
+
+	for (int i=0; i < M; i++) {
+		A.rows[i] = randomizedVector(N, uniformValues, RNG);
+	}
+
+	A.compress();
+
+	return M;
+}
+
+
 // Checks whether a vector is in the kernel of a matrix.
 template <typename RingLike>
 inline bool inKernel(ATEAMS::SparseMatrix<RingLike> K, ATEAMS::SparseVector<RingLike> v, ATEAMS::Ring* R, bool DEBUG=true) {
