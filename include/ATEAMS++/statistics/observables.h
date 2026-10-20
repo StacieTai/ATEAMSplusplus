@@ -33,7 +33,6 @@ namespace ATEAMS::statistics {
 		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
 			complex->Coboundary.Matrices[dimension], f, R
 		);
-		// coefficients.compress();
 
 		return -coefficients.size();
 	};

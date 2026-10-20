@@ -28,7 +28,8 @@ namespace ATEAMS {
 			InvadedCluster<RingLike>::State& state,
 			arithmetic::ComputeResources<RingLike>& resources
 		) {
-			int d = this->dimension, N = this->complex->Cells[d];
+			int d = this->dimension,
+				N = this->complex->Cells[d];
 
 			// These are the cells on which the cochain does not vanish.
 			vector<int> exclude = arithmetic::excludedCells<RingLike>(
@@ -134,9 +135,9 @@ namespace ATEAMS {
 			state.cochain = sample;
 			state.includes = included;
 			state.essential = essential;
-			state.satisfied = include.size();
+			state.satisfied = include.size();	// TODO satisfied of the previous cochain
 			state.occupied = included.size();
-			state.energy = -exclude.size();
+			state.energy = -exclude.size();		// TODO energy of the previous cochain
 			state.t = t;
 
 			return state;

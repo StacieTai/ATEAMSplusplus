@@ -17,7 +17,7 @@ using namespace std;
 
 namespace ATEAMS::arithmetic {
 	template <typename RingLike>
-	SparseVector<RingLike> randomLinearCombination(
+	inline SparseVector<RingLike> randomLinearCombination(
 		SparseMatrix<RingLike> K,
 		Ring* R,
 		std::uniform_int_distribution<int>& intuniform,
@@ -33,7 +33,7 @@ namespace ATEAMS::arithmetic {
 
 
 	template <typename RingLike>
-	SparseVector<RingLike> submatrixKernelSample(
+	inline SparseVector<RingLike> submatrixKernelSample(
 		SparseMatrix<RingLike> coboundary,
 		Ring* R,
 		vector<int> exclude,
@@ -66,7 +66,7 @@ namespace ATEAMS::arithmetic {
 	}
 
 	template <typename RingLike>
-	std::vector<int> excludedCells(
+	inline std::vector<int> excludedCells(
 		SparseMatrix<RingLike>& coboundary,
 		SparseVector<RingLike>& cochain,
 		Ring* R

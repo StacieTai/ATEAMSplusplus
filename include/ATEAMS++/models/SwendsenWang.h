@@ -163,7 +163,7 @@ namespace ATEAMS::models {
 			std::mt19937 RNG;
 			std::uniform_real_distribution<double> unituniform;
 			std::uniform_int_distribution<int> intuniform;
-			std::set<int> include;
+			std::vector<int> include;
 	};
 }
 

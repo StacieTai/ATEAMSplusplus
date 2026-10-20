@@ -28,8 +28,8 @@ namespace ATEAMS {
 			arithmetic::ComputeResources<RingLike>& resources
 		) {
 			// Compute the temperature and probability of including particular (d-1)-cells.
-			double temp = this->temperatureFunction(t);
-			double p = 1-exp(temp);
+			double temp = this->temperatureFunction(t),
+				p = 1-exp(temp);
 
 			// If we're debugging, check that the inclusion probability is actually within
 			// acceptable parameters.
@@ -37,6 +37,10 @@ namespace ATEAMS {
 				cerr << std::format("verifying 0 ≤ {} ≤ 1", p) << endl;
 				assert((0 <= p) && (p <= 1));
 			}
+
+			int d = this->dimension,
+				N = this->complex->Cells[d],
+				satisfied;
 
 			// Perform independent Bernoulli trials over each (d-1)-cell to decide whether
 			// it gets included in the computation. We do this in steps: given a
@@ -50,17 +54,14 @@ namespace ATEAMS {
 			//			each cell for which the coin shows "tails." (For any cell
 			//			already excluded, this does nothing; for any cell not yet
 			//			excluded, this excludes it.)
-			size_t d = this->dimension;
-
-			// The zero entries are those that don't show up in the indices, so we
-			// automatically exclude these.
-			int N = this->complex->Cells[d];
 
 			vector<int> exclude = arithmetic::excludedCells<RingLike>(
 				this->complex->Coboundary.Matrices[d],
 				state.cochain,
 				this->coefficients
 			);
+
+			satisfied = N-exclude.size();
 
 			// If we're debugging, verify that the cells corresponding to indices
 			// reported here are actually not sent to 0.
@@ -75,8 +76,6 @@ namespace ATEAMS {
 				}
 			}
 
-			int nonzero = exclude.size();
-
 			// We then iterate over all cells and flip a density-p coin (i.e.
 			// a coin that shows "heads" with probability p) and exclude each cell
 			// for which the coin shows "tails." (For any cell already excluded,
@@ -89,19 +88,10 @@ namespace ATEAMS {
 			std::sort(exclude.begin(), exclude.end());
 			exclude.erase(std::unique(exclude.begin(), exclude.end()), exclude.end());
 
-			// Figure out which indices we're *in*cluding.
-			std::set<int> includeHere;
-			
-			set_difference(
-				this->include.begin(), this->include.end(),
-				exclude.begin(), exclude.end(),
-				inserter(includeHere, includeHere.begin())
-			);
-
-			// Now, sample from the kernel.
+			// Sample from the kernel.
 			SparseVector<RingLike> sample = arithmetic::submatrixKernelSample<RingLike>(
 				this->complex->Coboundary.Matrices[d],	// complete dth coboundary matrix
-				this->coefficients,								// ring
+				this->coefficients,						// ring
 				exclude,								// rows to exclude
 				this->intuniform,						// uniform random over field
 				this->RNG,								// RNG
@@ -128,11 +118,20 @@ namespace ATEAMS {
 				assert(outcome.size() < 1);
 			}
 
+			// Figure out which indices we're *in*cluding. (Is this necessary?)
+			std::vector<int> included;
+			
+			set_difference(
+				this->include.begin(), this->include.end(),
+				exclude.begin(), exclude.end(),
+				inserter(included, included.begin())
+			);
+
 			state.cochain = sample;
-			state.includes = std::vector<int>(includeHere.begin(), includeHere.end());
-			state.satisfied = N-nonzero;				// TODO this computation is wrong
-			state.occupied = state.includes.size();
-			state.energy = -nonzero;					// TODO this computation is wrong
+			state.includes = included;
+			state.satisfied = satisfied;				// TODO satisfied of the previous cochain
+			state.occupied = N-exclude.size();
+			state.energy = -exclude.size();				// TODO energy of the previous cochain
 			state.t = t;
 
 			return state;
@@ -180,10 +179,9 @@ namespace ATEAMS {
 			this->complex->constructBoundaryMatrices(this->coefficients);
 
 			// Default set of indices to compare against.
-			std::set<int> _include;
-			for (int t=0; t < this->complex->Cells[this->dimension]; t++) _include.insert(t);
-
-			this->include = _include;
+			std::vector<int> include(this->complex->Cells[this->dimension]);
+			std::iota(include.begin(), include.end(), 0);
+			this->include = include;
 
 			// Initialize a random number generator.
 			std::random_device rd;
@@ -211,10 +209,9 @@ namespace ATEAMS {
 			this->complex->constructBoundaryMatrices(this->coefficients);
 
 			// Default set of indices to compare against.
-			std::set<int> _include;
-			for (int t=0; t < this->complex->Cells[this->dimension]; t++) _include.insert(t);
-
-			this->include = _include;
+			std::vector<int> include(this->complex->Cells[this->dimension]);
+			std::iota(include.begin(), include.end(), 0);
+			this->include = include;
 
 			// Initialize a random number generator.
 			std::random_device rd;
@@ -243,10 +240,9 @@ namespace ATEAMS {
 			this->complex->constructBoundaryMatrices(this->coefficients);
 
 			// Default set of indices to compare against.
-			std::set<int> _include;
-			for (int t=0; t < this->complex->Cells[this->dimension]; t++) _include.insert(t);
-
-			this->include = _include;
+			std::vector<int> include(this->complex->Cells[this->dimension]);
+			std::iota(include.begin(), include.end(), 0);
+			this->include = include;
 
 			// Initialize a random number generator.
 			std::random_device rd;
