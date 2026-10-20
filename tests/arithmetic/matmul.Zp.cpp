@@ -25,27 +25,21 @@ int main(int argc, char* argv[]) {
 		SparseVector<Zp> x = randomizedVector(N, uniformValues, RNG);
 		SparseMatrix<Zp> A = randomizedMatrix(M, N, uniformValues, RNG);
 
-		SparseVector<Zp> sy = arithmetic::SparseRightMultiplication(A, x, &R);
-		SparseVector<Zp> py = arithmetic::
+		SparseVector<Zp> sy = arithmetic::SparseRightMultiplication<Zp>(A, x, &R);
+		SparseVector<Zp> py = arithmetic::ParallelSparseRightMultiplication<Zp>(A, x, &R);
 
-		if (lr != rr) {
+		if (sy != py) {
 			RESULT = FAIL;
-			print_vec_info<INDEX,typename Zp::dtype>(lu);
-			print_vec_info<INDEX,typename Zp::dtype>(lv);
-			print_vec_info<INDEX,typename Zp::dtype>(lr);
+			print_vec_info<INDEX,typename Zp::dtype>(sy);
 
-			cout << endl;
+			cerr << endl;
 
-			print_vec_info<INDEX,typename Zp::dtype>(ru);
-			print_vec_info<INDEX,typename Zp::dtype>(rv);
-			print_vec_info<INDEX,typename Zp::dtype>(rr);
+			print_vec_info<INDEX,typename Zp::dtype>(py);
 
-			cout << endl << endl << endl;
+			cerr << endl;
 			break;
 		}
 	}
-
-	resources.spinDown(&listener);
 
 	return RESULT;
 }

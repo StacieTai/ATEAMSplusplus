@@ -61,7 +61,7 @@ const int ITERATIONS = 10;
 // ## ARITHMETIC TESTS ############################################################
 // ################################################################################
 
-ATEAMS::SparseVector<Zp> randomizedVector(
+ATEAMS::SparseVector<ATEAMS::Zp> randomizedVector(
 	int N,
 	std::uniform_int_distribution<int>& uniformValues,
 	std::mt19937& RNG
@@ -72,24 +72,24 @@ ATEAMS::SparseVector<Zp> randomizedVector(
 	std::shuffle(_random.begin(), _random.end(), RNG);
 
 	// Populate the SparseVector.
-	ATEAMS::SparseVector<Zp> random;
+	ATEAMS::SparseVector<ATEAMS::Zp> random;
 	
 	for (int t=0; t < N; t++) {
 		if (_random[t] > 0) {
-			random.push_back((INDEX)t, (typename Zp::dtype)_random[t]);
+			random.push_back((ATEAMS::INDEX)t, (typename ATEAMS::Zp::dtype)_random[t]);
 		}
 	}
 
 	return random;
 }
 
-ATEAMS::SparseMatrix<Zp> randomizedMatrix(
+ATEAMS::SparseMatrix<ATEAMS::Zp> randomizedMatrix(
 	int M,
 	int N,
 	std::uniform_int_distribution<int>& uniformValues,
 	std::mt19937& RNG
 ) {
-	ATEAMS::SparseMatrix<Zp> A(M, N);
+	ATEAMS::SparseMatrix<ATEAMS::Zp> A(M, N);
 
 	for (int i=0; i < M; i++) {
 		A.rows[i] = randomizedVector(N, uniformValues, RNG);
@@ -97,7 +97,7 @@ ATEAMS::SparseMatrix<Zp> randomizedMatrix(
 
 	A.compress();
 
-	return M;
+	return A;
 }
 
 

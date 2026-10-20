@@ -24,11 +24,11 @@ int main(int argc, char *argv[]) {
 	C.constructBoundaryMatrices(&QQ);
 
 	// Construct arithmetic resources.
-	arithmetic::ComputeResources resources;
+	arithmetic::ComputeResources<Q> resources;
 	std::thread listener = resources.spinUp();
 
 	// Include all the rows and perform the computation.
-	set<size_t> exclude;
+	std::vector<int> exclude;
 
 	SparseVector<Q> sample = arithmetic::submatrixKernelSample<Q>(
 		C.Coboundary.Matrices[2],

@@ -239,17 +239,18 @@ install(
 ################################################################################
 
 list(APPEND COMPLEXES.TESTING
-	"Cubical"
+	# "Cubical"
 )
 
 list(APPEND ARITHMETIC.TESTING
-	"addition"
+	# "matmul"
+	# "kernel"
 )
 
 list(APPEND TOPOLOGY.TESTING
 	# "JIT"
 	# "parallel"
-	# # "PHAT"
+	"PHAT"
 	# "split"
 	# "stagger"
 	# "standard"
@@ -258,7 +259,7 @@ list(APPEND TOPOLOGY.TESTING
 
 list(APPEND MODELS.TESTING
 	# "Bernoulli"
-	"InvadedCluster"
+	# "InvadedCluster"
 	# "Invasion"
 	# "SwendsenWang"
 	# "Glauber"
@@ -303,13 +304,15 @@ if (TEST)
 			if("${TYPE}" STREQUAL "Q")
 				add_test(NAME ${FUNCTION}.${TYPE} COMMAND tests.${FUNCTION}.${TYPE} 0)
 			else()
-				# Test at 1,000,000 entries over 100 trials.
-				add_test(NAME ${FUNCTION}.${TYPE}.2.e6.100 COMMAND tests.${FUNCTION}.${TYPE} 2 1000000 100)
-				add_test(NAME ${FUNCTION}.${TYPE}.3.e6.100 COMMAND tests.${FUNCTION}.${TYPE} 3 1000000 100)
+				# Test for Z/2Z
+				add_test(NAME ${FUNCTION}.${TYPE}.2.100x100 COMMAND tests.${FUNCTION}.${TYPE} 2 100 100 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.2.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 2 100 1000 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.2.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 2 1000 100 1000)
 
-				# Test at 10,000,000 entries over 10 trials.
-				add_test(NAME ${FUNCTION}.${TYPE}.2.e7.10 COMMAND tests.${FUNCTION}.${TYPE} 2 10000000 10)
-				add_test(NAME ${FUNCTION}.${TYPE}.3.e7.10 COMMAND tests.${FUNCTION}.${TYPE} 3 10000000 10)
+				# Test for Z/3Z
+				add_test(NAME ${FUNCTION}.${TYPE}.3.100x100 COMMAND tests.${FUNCTION}.${TYPE} 3 100 100 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.3.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 3 100 1000 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.3.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 3 1000 100 1000)
 			endif()
 		endforeach()
 
