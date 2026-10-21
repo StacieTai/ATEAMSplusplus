@@ -44,7 +44,7 @@ endif()
 ################################################################################
 set(TEST TRUE)
 set(PROFILE FALSE)
-set(TIMING FALSE)
+set(TIMING TRUE)
 set(DEBUG FALSE)
 
 if (NOT(PROFILE OR DEBUG))

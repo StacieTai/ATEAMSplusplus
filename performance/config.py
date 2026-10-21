@@ -221,14 +221,14 @@ CONFIG._defaults.yaxis.logTime = Bunch()
 CONFIG._defaults.yaxis.logTime.textprops = dict(
 	fontsize=6,
 	ha="left",
-	alpha=1/8,
-	va="bottom"
+	va="bottom",
+	color="#D3D3D3",
+	zorder=-1000
 )
 
 CONFIG._defaults.yaxis.logTime.lineprops = dict(
-	color="k",
-	alpha=1/8,
-	zorder=-1000
+	color="#D3D3D3",
+	zorder=-1001
 )
 
 CONFIG._defaults.yaxis.logTime = \
@@ -462,25 +462,28 @@ CONFIG.topics.persistence.plots.defaults.boxplot.capprops = dict(
 	lw=CONFIG.topics.persistence.plots.defaults.boxplot.lw
 )
 
-CONFIG.topics.persistence.plots.defaults.boxplot.medians = lambda color: dict(
+CONFIG.topics.persistence.plots.defaults.boxplot.medians = lambda color, size=4: dict(
 	zorder=1000,
 	marker="D",
 	facecolor=color,
 	edgecolor="k",
-	s=4,
+	s=size,
 	lw=CONFIG.topics.persistence.plots.defaults.boxplot.lw
 )
 
-CONFIG.topics.persistence.plots.defaults.boxplot.props = lambda color: dict(
-	showfliers=False,
-	widths=CONFIG.topics.persistence.plots.defaults.boxplot.boxwidths,
-	whis=(0,100),
-	patch_artist=True,
-	boxprops=CONFIG.topics.persistence.plots.defaults.boxplot.boxprops(color),
-	medianprops=CONFIG.topics.persistence.plots.defaults.boxplot.medianprops,
-	whiskerprops=CONFIG.topics.persistence.plots.defaults.boxplot.whiskerprops,
-	capprops=CONFIG.topics.persistence.plots.defaults.boxplot.capprops
-)
+CONFIG.topics.persistence.plots.defaults.boxplot.props = \
+	lambda color, \
+	widths=CONFIG.topics.persistence.plots.defaults.boxplot.boxwidths \
+	: dict(
+		showfliers=False,
+		widths=widths,
+		whis=(1,99),
+		patch_artist=True,
+		boxprops=CONFIG.topics.persistence.plots.defaults.boxplot.boxprops(color),
+		medianprops=CONFIG.topics.persistence.plots.defaults.boxplot.medianprops,
+		whiskerprops=CONFIG.topics.persistence.plots.defaults.boxplot.whiskerprops,
+		capprops=CONFIG.topics.persistence.plots.defaults.boxplot.capprops
+	)
 
 CONFIG.topics.persistence.plots.defaults.boxplot.pinstripes = lambda boxes, ax, color="black", alpha=1/20: _boxplotPinstripes(boxes, ax, color, alpha)
 
@@ -560,12 +563,12 @@ def _boxplotSpacing(k, width=0.1, spacing=1.25):
 		lrcount = int((k-1)/2)
 		right = [unit*r for r in range(1, lrcount+1)]
 		left = [-unit*l for l in range(1, lrcount+1)]
-		return left + [0] + right
+		return list(sorted(left + [0] + right))
 	else:
 		lrcount = int(k/2)
 		right = [unit*r-unit/2 for r in range(1, lrcount+1)]
 		left = [-r for r in right]
-		return left + right
+		return list(sorted(left + right))
 
 
 def _boxplotPinstripes(k, ax, color, alpha):

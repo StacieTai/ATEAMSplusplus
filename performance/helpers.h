@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 
+#include <map>
+
 // Read in the sample filtrations.
 std::vector<std::vector<int>> filtrationData(int size, int SCALE, int DIMENSION, int TRIALS) {
 	std::vector<std::vector<int>> filtrations(TRIALS);
