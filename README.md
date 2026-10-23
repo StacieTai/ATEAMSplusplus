@@ -7,16 +7,49 @@
 # Algebraic Topology-Enabled AlgorithMs for Spin systems, in C++
 
 ATEAMS++ is a high-performance C++ library for simulating
-[generalized Potts, random-cluster, and percolation models](https://arxiv.org/abs/2507.13503) at scale. It depends directly on [SparseRREF](https://github.com/munuxi/SparseRREF) and PHAT [[1](https://www.sciencedirect.com/science/article/pii/S0747717116300098),[2](https://bitbucket.org/phat-code/phat/src/master/)] for fast linear algebra over finite fields. It is a C++ port of the original [ATEAMS](https://github.com/apizzimenti/ATEAMS) library, which is now deprecated in favor of this software.
+[generalized Potts, random-cluster, and percolation models](https://arxiv.org/abs/2507.13503) at scale. It depends directly on [SparseRREF](https://github.com/munuxi/SparseRREF) and PHAT [[1](https://www.sciencedirect.com/science/article/pii/S0747717116300098),[2](https://bitbucket.org/phat-code/phat/src/master/)] for fast linear algebra over finite fields. It is a C++ port of the original [ATEAMS](https://github.com/apizzimenti/ATEAMS) library, now deprecated in favor of this software.
+
+
+## Prerequisites
+
+**Note:** The [Homebrew](https://brew.sh/) package manager is strongly recommended for users running macOS, any flavor of Linux, or Windows Subsystem for Linux (WSL).
+
+The only real prerequisite is **a compiler that supports the C++23 standard.** GCC 15 is the oldest cross-compatible compiler that supports all ATEAMS++'s features. Newer versions of GCC (e.g. 16) work as well.
+* **On macOS**, install [GCC 15](https://formulae.brew.sh/formula/gcc@15) [(or 16)](https://formulae.brew.sh/formula/gcc) through Homebrew. After installation, test that you have the correct version by running
+	```bash
+	$ g++-15 --version
+
+	g++-15 (Homebrew GCC 15.3.0) 15.3.0
+	Copyright (C) 2025 Free Software Foundation, Inc.
+	This is free software; see the source for copying conditions.  There is NO
+	warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	
+	```
+	You can set `gcc-15` and `g++-15` to be your user's default C/C++ compilers by running
+	```bash
+	$ echo "alias gcc=gcc-15\nalias g++=g++-15" >> ~/.zshrc
+	```
+	which appends aliases to your zsh configuration file (and creates the file if it doesn't already exist, which it should). You can verify that the aliases were correctly installed by running
+	```bash
+	$ cat ~/.zshrc
+
+	# ... whatever else is in your .zshrc... 
+	alias gcc=gcc-15
+	alias g++=g++-15
+	```
+
+* **On Linux (Ubuntu 22.04/24.04)** use the same installation steps as on macOS (adjusting your shell if you're using bash), or by following [these instructions](https://askubuntu.com/a/1518433) (adjusting the version from 14 to 15).
+
+* **On Windows,** [try MinGW](https://www.mingw-w64.org/getting-started/msys2/); it should come with a recent version of GCC.
+		
 
 
 ## Installation
 
-1. **Clone the repository.** Run
+1. **Clone the repository.** In your favorite shell, navigate to a sensible directory and run
 	```bash
 	$ git clone --recursive https://github.com/apizzimenti/ATEAMSplusplus.git
 	```
-	in your favorite shell. The `--recursive` flag ensures that SparseRREF is actually cloned, not just referenced.
+	The `--recursive` flag ensures that SparseRREF is actually cloned, not just referenced.
 
 2. **Install dependencies.** ATEAMS++ requires
 

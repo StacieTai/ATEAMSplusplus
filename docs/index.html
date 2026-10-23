@@ -143,12 +143,32 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 <p><a href="https://arxiv.org/abs/2507.13503"><img src="https://img.shields.io/badge/arXiv-2507.13503-green.svg" alt="arXiv" style="pointer-events: none;" class="inline"/></a> <a href="https://doi.org/10.5281/zenodo.20817889"><img src="https://img.shields.io/badge/DOI-10.5281/zenodo.20817889-blue" alt="DOI" class="inline"/></a> <a href="https://apizzimenti.github.io/ATEAMSplusplus/"><img src="https://img.shields.io/badge/%E2%93%98-Documentation-red" alt="docs" class="inline"/></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License:MIT" style="pointer-events: none;" class="inline"/></a></p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md0"></a>
 Algebraic Topology-Enabled AlgorithMs for Spin systems, in C++</h1>
-<p>ATEAMS++ is a high-performance C++ library for simulating <a href="https://arxiv.org/abs/2507.13503">generalized Potts, random-cluster, and percolation models</a> at scale. It depends directly on <a href="https://github.com/munuxi/SparseRREF">SparseRREF</a> and PHAT [<a href="https://www.sciencedirect.com/science/article/pii/S0747717116300098">1</a>,<a href="https://bitbucket.org/phat-code/phat/src/master/">2</a>] for fast linear algebra over finite fields. It is a C++ port of the original <a href="https://github.com/apizzimenti/ATEAMS">ATEAMS</a> library, which is now deprecated in favor of this software.</p>
+<p>ATEAMS++ is a high-performance C++ library for simulating <a href="https://arxiv.org/abs/2507.13503">generalized Potts, random-cluster, and percolation models</a> at scale. It depends directly on <a href="https://github.com/munuxi/SparseRREF">SparseRREF</a> and PHAT [<a href="https://www.sciencedirect.com/science/article/pii/S0747717116300098">1</a>,<a href="https://bitbucket.org/phat-code/phat/src/master/">2</a>] for fast linear algebra over finite fields. It is a C++ port of the original <a href="https://github.com/apizzimenti/ATEAMS">ATEAMS</a> library, now deprecated in favor of this software.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Prerequisites</h2>
+<p><b>Note:</b> The <a href="https://brew.sh/">Homebrew</a> package manager is strongly recommended for users running macOS, any flavor of Linux, or Windows Subsystem for Linux (WSL).</p>
+<p>The only real prerequisite is <b>a compiler that supports the C++23 standard.</b> GCC 15 is the oldest cross-compatible compiler that supports all ATEAMS++'s features. Newer versions of GCC (e.g. 16) work as well.</p><ul>
+<li><b>On macOS</b>, install <a href="https://formulae.brew.sh/formula/gcc@15">GCC 15</a> <a href="https://formulae.brew.sh/formula/gcc">(or 16)</a> through Homebrew. After installation, test that you have the correct version by running <div class="fragment"><div class="line">$ g++-15 --version</div>
+<div class="line"> </div>
+<div class="line">g++-15 (Homebrew GCC 15.3.0) 15.3.0</div>
+<div class="line">Copyright (C) 2025 Free Software Foundation, Inc.</div>
+<div class="line">This is free software; see the source for copying conditions.  There is NO</div>
+<div class="line">warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. </div>
+</div><!-- fragment --> You can set <span class="tt">gcc-15</span> and <span class="tt">g++-15</span> to be your user's default C/C++ compilers by running <div class="fragment"><div class="line">$ echo &quot;alias gcc=gcc-15\nalias g++=g++-15&quot; &gt;&gt; ~/.zshrc</div>
+</div><!-- fragment --> which appends aliases to your zsh configuration file (and creates the file if it doesn't already exist, which it should). You can verify that the aliases were correctly installed by running <div class="fragment"><div class="line">$ cat ~/.zshrc</div>
+<div class="line"> </div>
+<div class="line"># ... whatever else is in your .zshrc... </div>
+<div class="line">alias gcc=gcc-15</div>
+<div class="line">alias g++=g++-15</div>
+</div><!-- fragment --></li>
+<li><b>On Linux (Ubuntu 22.04/24.04)</b> use the same installation steps as on macOS (adjusting your shell if you're using bash), or by following <a href="https://askubuntu.com/a/1518433">these instructions</a> (adjusting the version from 14 to 15).</li>
+<li><b>On Windows,</b> <a href="https://www.mingw-w64.org/getting-started/msys2/">try MinGW</a>; it should come with a recent version of GCC.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 Installation</h2>
 <ol type="1">
-<li><b>Clone the repository.</b> Run <div class="fragment"><div class="line">$ git clone --recursive https://github.com/apizzimenti/ATEAMSplusplus.git</div>
-</div><!-- fragment --> in your favorite shell. The <span class="tt">--recursive</span> flag ensures that SparseRREF is actually cloned, not just referenced.</li>
+<li><b>Clone the repository.</b> In your favorite shell, navigate to a sensible directory and run <div class="fragment"><div class="line">$ git clone --recursive https://github.com/apizzimenti/ATEAMSplusplus.git</div>
+</div><!-- fragment --> The <span class="tt">--recursive</span> flag ensures that SparseRREF is actually cloned, not just referenced.</li>
 <li><p class="startli"><b>Install dependencies.</b> ATEAMS++ requires</p><ol type="a">
 <li><a href="https://github.com/openmp">OpenMP</a>,</li>
 <li><a href="https://flintlib.org/">FLINT</a>, and</li>
@@ -167,7 +187,7 @@ Installation</h2>
 <li><b>Triple-check.</b> If you want to run pre-built tests, set the <span class="tt">TEST</span> variable in <span class="tt">CMakeLists.txt</span> to <span class="tt">TRUE</span>, á la <div class="fragment"><div class="line">set(TEST TRUE)</div>
 </div><!-- fragment --> then run <span class="tt">make test</span>.</li>
 </ol>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 Usage</h2>
 <p>Most experiments follow a straightforward template:</p>
 <ol type="1">
@@ -208,7 +228,7 @@ Usage</h2>
 <div class="line">$ ./main</div>
 <div class="line">expected rank is 3.09</div>
 </div><!-- fragment --><p>This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor. <b>If you plan to run large-scale simulations on an external machine, the <a href="https://github.com/apizzimenti/magnetizationplusplus"><span class="tt">magnetizationplusplus</span> workflow</a> may be of use to you.</b></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 Known issues</h2>
 <ul>
 <li><p class="startli">On some Linux systems, linking against ATEAMS++ after it's installed may cause some issues. In the event you get a linking error talking about undefined symbols in a <span class="tt">tbb</span> namespace, you may have to recompile your program with</p>
@@ -219,14 +239,14 @@ Known issues</h2>
 <li><span class="tt">InvadedCluster</span> and <span class="tt">Invasion</span> perform \(\mathbb Z/2\mathbb Z\) persistence when using rational coefficients.</li>
 <li>Some models don't have complete debugging information.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 Contributing</h2>
 <p>We welcome contributions. A few housekeeping rules:</p>
 <ol type="1">
 <li><b>Use the fork + branch + PR flow.</b> Fork + clone this repository, then create a new branch for each new feature you add. Once it's camera-ready, open a pull request on the main repository page, and we'll review it.</li>
 <li><b>Test!</b> Please write unit tests (like the ones in <span class="tt">tests/</span>) for any significant features (e.g. new Models, arithmetic functions, parallelization) you add. <em>Pull requests without accompanying unit tests will be automatically closed.</em></li>
 </ol>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Citing</h2>
 <div class="fragment"><div class="line">@software{ATEAMS++,</div>
 <div class="line">    title={{ATEAMS++: Algebraic Topology-Enabled AlgorithMs for Spin systems, in C++}},</div>
