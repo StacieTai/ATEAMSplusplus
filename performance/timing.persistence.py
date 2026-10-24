@@ -20,7 +20,8 @@ persistence.variants = ["JIT", "stagger", "twist", "split"]
 
 sizes = {
 	2: 16,
-	3: 3
+	3: 3,
+	4: 3
 }
 
 defaults = persistence.plots.defaults

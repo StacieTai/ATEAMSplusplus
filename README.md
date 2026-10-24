@@ -15,31 +15,34 @@ ATEAMS++ is a high-performance C++ library for simulating
 **Note:** The [Homebrew](https://brew.sh/) package manager is strongly recommended for users running macOS, any flavor of Linux, or Windows Subsystem for Linux (WSL).
 
 The only real prerequisite is **a compiler that supports the C++23 standard.** GCC 15 is the oldest cross-compatible compiler that supports all ATEAMS++'s features. Newer versions of GCC (e.g. 16) work as well.
-* **On macOS**, install [GCC 15](https://formulae.brew.sh/formula/gcc@15) [(or 16)](https://formulae.brew.sh/formula/gcc) through Homebrew. After installation, test that you have the correct version by running
-	```bash
-	$ g++-15 --version
 
-	g++-15 (Homebrew GCC 15.3.0) 15.3.0
-	Copyright (C) 2025 Free Software Foundation, Inc.
-	This is free software; see the source for copying conditions.  There is NO
-	warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	
-	```
-	You can set `gcc-15` and `g++-15` to be your user's default C/C++ compilers by running
-	```bash
-	$ echo "alias gcc=gcc-15\nalias g++=g++-15" >> ~/.zshrc
-	```
-	which appends aliases to your zsh configuration file (and creates the file if it doesn't already exist, which it should). You can verify that the aliases were correctly installed by running
-	```bash
-	$ cat ~/.zshrc
+### macOS
+Install [GCC 15](https://formulae.brew.sh/formula/gcc@15) [(or 16)](https://formulae.brew.sh/formula/gcc) through Homebrew. After installation, test that you have the correct version by running
+```bash
+$ g++-15 --version
 
-	# ... whatever else is in your .zshrc... 
-	alias gcc=gcc-15
-	alias g++=g++-15
-	```
+g++-15 (Homebrew GCC 15.3.0) 15.3.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	
+```
+You can set `gcc-15` and `g++-15` to be your user's default C/C++ compilers by running
+```bash
+$ echo "alias gcc=gcc-15\nalias g++=g++-15" >> ~/.zshrc
+```
+which appends aliases to your zsh configuration file (and creates the file if it doesn't already exist, which it should). You can verify that the aliases were correctly installed by running
+```bash
+$ cat ~/.zshrc
 
-* **On Linux (Ubuntu 22.04/24.04)** use the same installation steps as on macOS (adjusting your shell if you're using bash), or by following [these instructions](https://askubuntu.com/a/1518433) (adjusting the version from 14 to 15).
+alias gcc=gcc-15
+alias g++=g++-15
+```
 
-* **On Windows,** [try MinGW](https://www.mingw-w64.org/getting-started/msys2/); it should come with a recent version of GCC.
+### Linux
+On Linux (Ubuntu 22.04/24.04)** use the same [installation steps as on macOS](#macOS) (adjusting your shell if you're using bash), or by following [these instructions](https://askubuntu.com/a/1518433) (adjusting the version from 14 to 15).
+
+### Windows
+[Try MinGW](https://www.mingw-w64.org/getting-started/msys2/); it should come with a recent version of GCC.
 		
 
 
@@ -132,7 +135,7 @@ expected rank is 3.09
 This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor. **If you plan to run large-scale simulations on an external machine, the [`magnetizationplusplus` workflow](https://github.com/apizzimenti/magnetizationplusplus) may be of use to you.**
 
 ## Known issues
-* On some Linux systems, linking against ATEAMS++ after it's installed may cause some issues. In the event you get a linking error talking about undefined symbols in a `tbb` namespace, you may have to recompile your program with
+* On some Linux systems, linking against ATEAMS++ may admit a linking error talking about undefined symbols in a `tbb` namespace. Recompile your program with the linking flag `-ltbb`, like
 
 	```bash
 	$ $CXX yourfile.cpp `pkg-config --libs --cflags ATEAMS++` -ltbb -o executable

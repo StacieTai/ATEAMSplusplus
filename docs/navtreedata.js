@@ -26,12 +26,16 @@ var NAVTREE =
 [
   [ "ATEAMS++", "index.html", [
     [ "Algebraic Topology-Enabled AlgorithMs for Spin systems, in C++", "index.html#autotoc_md0", [
-      [ "Prerequisites", "index.html#autotoc_md1", null ],
-      [ "Installation", "index.html#autotoc_md2", null ],
-      [ "Usage", "index.html#autotoc_md3", null ],
-      [ "Known issues", "index.html#autotoc_md4", null ],
-      [ "Contributing", "index.html#autotoc_md5", null ],
-      [ "Citing", "index.html#autotoc_md6", null ]
+      [ "Prerequisites", "index.html#autotoc_md1", [
+        [ "macOS", "index.html#autotoc_md2", null ],
+        [ "Linux", "index.html#autotoc_md3", null ],
+        [ "Windows", "index.html#autotoc_md4", null ]
+      ] ],
+      [ "Installation", "index.html#autotoc_md5", null ],
+      [ "Usage", "index.html#autotoc_md6", null ],
+      [ "Known issues", "index.html#autotoc_md7", null ],
+      [ "Contributing", "index.html#autotoc_md8", null ],
+      [ "Citing", "index.html#autotoc_md9", null ]
     ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -58,7 +62,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"namespace_a_t_e_a_m_s.html#a0e427c93d27bfcbf68a8b90853c7d9fc"
+"index.html#autotoc_md8"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
