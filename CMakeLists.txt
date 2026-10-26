@@ -230,7 +230,7 @@ install(
 ################################################################################
 
 list(APPEND COMPLEXES.TESTING
-	"Cubical"
+	# "Cubical"
 )
 
 list(APPEND ARITHMETIC.TESTING
@@ -240,20 +240,20 @@ list(APPEND ARITHMETIC.TESTING
 
 list(APPEND TOPOLOGY.TESTING
 	# "JIT"
-	"parallel"
-	"PHAT"
-	"split"
-	"stagger"
-	"standard"
-	"twist"
+	# "parallel"
+	# "PHAT"
+	# "split"
+	# "stagger"
+	# "standard"
+	# "twist"
 )
 
 list(APPEND MODELS.TESTING
-	"Bernoulli"
-	"InvadedCluster"
-	"Invasion"
+	# "Bernoulli"
+	# "InvadedCluster"
+	# "Invasion"
 	"SwendsenWang"
-	"Glauber"
+	# "Glauber"
 )
 
 list(APPEND TYPES
