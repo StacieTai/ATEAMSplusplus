@@ -14,11 +14,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(
+	-Ofast
 	-march=native
 	-flto
 	-funroll-loops
 	-fprefetch-loop-arrays
-	-fomit-frame-pointer
 	-fno-rtti
 )
 
@@ -44,18 +44,12 @@ endif()
 ################################################################################
 set(TEST TRUE)
 set(PROFILE FALSE)
-set(TIMING TRUE)
+set(TIMING FALSE)
 set(DEBUG FALSE)
 
 if (NOT(PROFILE OR DEBUG))
 	add_compile_options(
-		-Ofast
-		-march=native
-		-flto
-		-funroll-loops
-		-fprefetch-loop-arrays
 		-fomit-frame-pointer
-		-fno-rtti
 	)
 endif()
 
@@ -71,14 +65,11 @@ if (PROFILE)
 	set(PROFILE_COMPILE_OPTIONS
 		-g2
 		-fno-omit-frame-pointer
-		-fno-inline-functions
 	)
 
 	set(PROFILE_LINK_OPTIONS
 		-g2
 		-fno-omit-frame-pointer
-		-fno-inline-functions
-		-O2
 	)
 else()
 	set(PROFILE_COMPILE_OPTIONS )
@@ -248,7 +239,7 @@ list(APPEND ARITHMETIC.TESTING
 )
 
 list(APPEND TOPOLOGY.TESTING
-	"JIT"
+	# "JIT"
 	"parallel"
 	"PHAT"
 	"split"
@@ -301,18 +292,20 @@ if (TEST)
 			target_include_directories(tests.${FUNCTION}.${TYPE} PUBLIC tests)
 			target_link_libraries(tests.${FUNCTION}.${TYPE} PUBLIC ATEAMS++)
 
+			set(COPIES 10)
+
 			if("${TYPE}" STREQUAL "Q")
 				add_test(NAME ${FUNCTION}.${TYPE} COMMAND tests.${FUNCTION}.${TYPE} 0)
 			else()
 				# Test for Z/2Z
-				add_test(NAME ${FUNCTION}.${TYPE}.2.100x100 COMMAND tests.${FUNCTION}.${TYPE} 2 100 100 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.2.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 2 100 1000 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.2.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 2 1000 100 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.2.100x100 COMMAND tests.${FUNCTION}.${TYPE} 2 100 100 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.2.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 2 100 1000 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.2.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 2 1000 100 ${COPIES})
 
 				# Test for Z/3Z
-				add_test(NAME ${FUNCTION}.${TYPE}.3.100x100 COMMAND tests.${FUNCTION}.${TYPE} 3 100 100 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.3.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 3 100 1000 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.3.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 3 1000 100 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.3.100x100 COMMAND tests.${FUNCTION}.${TYPE} 3 100 100 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.3.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 3 100 1000 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.3.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 3 1000 100 ${COPIES})
 			endif()
 		endforeach()
 
@@ -345,14 +338,14 @@ list(APPEND ARITHMETIC.PROFILING
 
 list(APPEND MODELS.PROFILING
 	# "Bernoulli"
-	# "InvadedCluster"
+	"InvadedCluster"
 	# "Invasion"
-	# "SwendsenWang"
+	"SwendsenWang"
 	# "Glauber"
 )
 
 list(APPEND TOPOLOGY.PROFILING
-	"persistence"
+	# "persistence"
 )
 
 if (PROFILE)

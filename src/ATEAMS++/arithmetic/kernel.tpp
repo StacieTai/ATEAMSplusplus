@@ -66,15 +66,36 @@ namespace ATEAMS::arithmetic {
 	}
 
 	template <typename RingLike>
-	inline std::vector<int> excludedCells(
-		SparseMatrix<RingLike>& coboundary,
-		SparseVector<RingLike>& cochain,
+	inline std::vector<int> nonzeroIndices(
+		SparseMatrix<RingLike>& A,
+		SparseVector<RingLike>& x,
 		Ring* R
 	) {
 		std::vector<int> exclude;
 
-		SparseVector<RingLike> coefficients = arithmetic::ParallelSparseRightMultiplication<RingLike>(
-			coboundary, cochain, R
+		SparseVector<RingLike> coefficients = arithmetic::SparseRightMultiplication<RingLike>(
+			A, x, R
+		);
+
+		// The cells we *ex*clude are the ones with (nonzero!) entries in
+		// the coefficients vector.
+		for (int i=0; i < coefficients.size(); i++) exclude.push_back((int)coefficients(i));
+
+		return exclude;
+	}
+
+
+	template <typename RingLike>
+	inline std::vector<int> nonzeroIndices(
+		SparseMatrix<RingLike>& A,
+		SparseVector<RingLike>& x,
+		Ring* R,
+		ComputeResources<RingLike>& resources
+	) {
+		std::vector<int> exclude;
+
+		SparseVector<RingLike> coefficients = arithmetic::SparseRightMultiplication<RingLike>(
+			A, x, R, resources
 		);
 
 		// The cells we *ex*clude are the ones with (nonzero!) entries in

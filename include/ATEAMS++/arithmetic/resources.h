@@ -81,6 +81,7 @@ namespace ATEAMS::arithmetic {
 			std::vector<std::set<int>> marked;
 			std::vector<int> lookup;
 			std::vector<bool> zeroed;
+			int blocks;
 			bool enabled = true;
 
 			/**
@@ -202,9 +203,50 @@ namespace ATEAMS::arithmetic {
 				Flint::set_memory_functions();
 				this->opt->pool.reset();
 				this->opt->method = 0;
+				
+				// Default number of thread blocks is 2*(number of threads).
+				this->parallel->blocks = this->opt->pool.get_thread_count()*2;
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};
+
+
+			/**
+			 * @brief Initializes a multithreaded computing environment.
+			 * 
+			 * @param schema Sets a recommended number of thread blocks available.
+			 * 
+			 * @returns An execution thread.
+			 */
+			std::thread spinUp(int schema) {
+				Flint::set_memory_functions();
+				this->opt->pool.reset();
+				this->opt->method = 0;
+
+				// Set the number of blocks.
+				int blocks;
+
+				switch (schema) {
+					case 0:
+						blocks = this->opt->pool.get_thread_count()+1;
+						break;
+					case 1:
+						blocks = this->opt->pool.get_thread_count()*2;
+						break;
+					case 2:
+						blocks = this->opt->pool.get_thread_count();
+						blocks *= blocks;
+						break;
+					default:
+						blocks = this->opt->pool.get_thread_count()+1;
+						break;
+				}
+
+				this->parallel->blocks = blocks;
+
+				return std::thread(key_listener, std::ref(this->opt->abort));
+			};
+
 
 			/**
 			 * @brief "Spins down" the multithreaded computing environment.

@@ -19,6 +19,12 @@ int main(int argc, char* argv[]) {
 
 	uniform_int_distribution<int> uniformValues(0, R.characteristic-1);
 
+	// Construct arithmetic resources.
+	ATEAMS::arithmetic::ComputeResources<Zp> resources;
+	resources.arithmetize(&R);
+	resources.parallel->enabled = true;
+	
+	std::thread listener = resources.spinUp();
 
 	for (int t=0; t < TRIALS; t++) {
 		// Create a random vector and a random matrix.
@@ -26,20 +32,22 @@ int main(int argc, char* argv[]) {
 		SparseMatrix<Zp> A = randomizedMatrix(M, N, uniformValues, RNG);
 
 		SparseVector<Zp> sy = arithmetic::SparseRightMultiplication<Zp>(A, x, &R);
-		SparseVector<Zp> py = arithmetic::ParallelSparseRightMultiplication<Zp>(A, x, &R);
+		SparseVector<Zp> py = arithmetic::OpenMPSparseRightMultiplication<Zp>(A, x, &R);
+		SparseVector<Zp> by = arithmetic::SparseRightMultiplication<Zp>(A, x, &R, resources);
 
-		if (sy != py) {
+		if (sy != py || sy != by) {
 			RESULT = FAIL;
 			print_vec_info<INDEX,typename Zp::dtype>(sy);
-
 			cerr << endl;
-
 			print_vec_info<INDEX,typename Zp::dtype>(py);
-
+			cerr << endl;
+			print_vec_info<INDEX,typename Zp::dtype>(by);
 			cerr << endl;
 			break;
 		}
 	}
+
+	resources.spinDown(&listener);
 
 	return RESULT;
 }

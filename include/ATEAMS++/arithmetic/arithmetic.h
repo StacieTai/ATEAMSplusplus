@@ -152,7 +152,8 @@ namespace ATEAMS {
 
 		/**
 		 * @brief Sparse (right) matrix multiplication \f$ A \vec x \f$, performed
-		 * 	by computing dot products \f$A_i \cdot \vec x\f$ in parallel.
+		 * 	by computing dot products \f$A_i \cdot \vec x\f$ in parallel. Uses
+		 *  OpenMP.
 		 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
 		 * 
 		 * @param A Matrix.
@@ -162,7 +163,7 @@ namespace ATEAMS {
 		 * @returns \f$ \vec y = A \vec x \f$.
 		 */
 		template <typename RingLike>
-		inline SparseVector<RingLike> ParallelSparseRightMultiplication(
+		inline SparseVector<RingLike> OpenMPSparseRightMultiplication(
 			SparseMatrix<RingLike>& A,
 			SparseVector<RingLike>& x,
 			Ring* R
@@ -193,6 +194,64 @@ namespace ATEAMS {
 
 			return r;
 		}
+
+
+		/**
+		 * @brief Sparse (right) matrix multiplication \f$ A \vec x \f$, performed
+		 * 	by computing dot products \f$A_i \cdot \vec x\f$ in parallel. Uses
+		 *  `BS::thread_pool`.
+		 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
+		 * 
+		 * @param A Matrix.
+		 * @param x Vector.
+		 * @param R (Pointer to) a coefficient @ref Ring, like @ref Zp or @ref Q.
+		 * @param resources Compute resources.
+		 * 
+		 * @returns \f$ \vec y = A \vec x \f$.
+		 */
+		template <typename RingLike>
+		inline SparseVector<RingLike> SparseRightMultiplication(
+			SparseMatrix<RingLike>& A,
+			SparseVector<RingLike>& x,
+			Ring* R,
+			ComputeResources<RingLike>& resources
+		) {
+			// If parallelism isn't enabled, kick to the other version.
+			if (!resources.parallel->enabled) return SparseRightMultiplication<RingLike>(A, x, R);
+
+			// Get the (pre-computed) number of blocks.
+			int blocks = resources.parallel->blocks;
+			std::vector<SparseVector<RingLike>> chunks(blocks, SparseVector<RingLike>());
+
+			// Compute the dot products in parallel.
+			resources.opt->pool.detach_loop(
+				0,
+				A.rows.size(),
+				[&](int i) {
+					int tid = BS::this_thread::get_index().value();
+					typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+					if (r > 0) chunks[tid].push_back((INDEX)i, r);
+				},
+				blocks
+			);
+			resources.opt->pool.wait();
+
+			// Reconstitute the vector.
+			SparseVector<RingLike> r;
+
+			for (int j=0; j < chunks.size(); j++) {
+				// Skip this row if there's nothing in it.
+				if (chunks[j].size() < 1) continue;
+
+				for (int k=0; k < chunks[j].size(); k++) {
+					r.push_back(chunks[j](k), chunks[j][k]);
+				}
+			}
+			r.sort_indices();
+
+			return r;
+		}
+
 
 		template <typename RingLike>
 		inline void SparseVectorRescaling(

@@ -32,7 +32,7 @@ namespace ATEAMS {
 				N = this->complex->Cells[d];
 
 			// These are the cells on which the cochain does not vanish.
-			vector<int> exclude = arithmetic::excludedCells<RingLike>(
+			vector<int> exclude = arithmetic::nonzeroIndices<RingLike>(
 				this->complex->Coboundary.Matrices[d],
 				state.cochain,
 				this->coefficients

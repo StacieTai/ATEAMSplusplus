@@ -165,6 +165,34 @@ namespace ATEAMS {
 					// Spin down multithreading environment.
 					resources.spinDown(&listener);
 				}
+
+
+				/**
+				 * @brief Model-generic iterator.
+				 * 
+				 * @code
+				 * using Model = models::Bernoulli;
+				 * using State = models::ModelState<Model::RingType,Model::VectorType>;
+				 * 
+				 * for (State state : M.simulate()) {
+				 *     <do whatever>
+				 * }
+				 * @endcode
+				 * 
+				 * @returns A `std::generator`.
+				 */
+				std::generator<State> simulate(int schema) {
+					std::thread listener = resources.spinUp(schema);
+					this->model->initialize(this->state);
+
+					for (int t=0; t < this->steps; t++) {
+						this->model->sample(t, this->state, this->resources);
+						co_yield this->state;
+					}
+
+					// Spin down multithreading environment.
+					resources.spinDown(&listener);
+				}
 		};
 	}
 }
