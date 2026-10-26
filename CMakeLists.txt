@@ -292,7 +292,7 @@ if (TEST)
 			target_include_directories(tests.${FUNCTION}.${TYPE} PUBLIC tests)
 			target_link_libraries(tests.${FUNCTION}.${TYPE} PUBLIC ATEAMS++)
 
-			set(COPIES 10)
+			set(COPIES 1000)
 
 			if("${TYPE}" STREQUAL "Q")
 				add_test(NAME ${FUNCTION}.${TYPE} COMMAND tests.${FUNCTION}.${TYPE} 0)
