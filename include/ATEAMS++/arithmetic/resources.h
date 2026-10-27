@@ -61,19 +61,21 @@ namespace ATEAMS::arithmetic {
 	struct TypedParallelContainers {
 		public:
 			std::vector<SparseVector<RingLike>> parts;
+			int maxBlocks = 0;
+			int preferredBlocks = 0;
+			int threads = 0;
 
+			void build() {
+				this->parts = std::vector<SparseVector<RingLike>>(this->maxBlocks, SparseVector<RingLike>());
+			};
 
-		void build(int blocks) {
-			this->parts = std::vector<SparseVector<RingLike>>(blocks, SparseVector<RingLike>);
-		}
+			void flush() {
+				for (int t=0; t<this->parts.size(); t++) {
+					if (this->parts[t].size() > 0) this->parts[t].zero();
+				}
+			};
 
-		void flush() {
-			for (int t=0; t<this->parts.size(); t++) {
-				if (this->parts[t].size() > 0) this->parts[t].zero();
-			}
-		}
-
-	}
+	};
 
 
 	/**
@@ -206,7 +208,7 @@ namespace ATEAMS::arithmetic {
 				this->parallel = new ParallelContainers;
 				this->parallel->enabled = true;
 
-				this->typedParallel = new TypedParallelContainers;
+				this->typedParallel = new TypedParallelContainers<RingLike>;
 
 				this->serial = new SerialContainers;
 
@@ -227,8 +229,9 @@ namespace ATEAMS::arithmetic {
 				this->opt->method = 0;
 				
 				// Default number of thread blocks is (number of threads)+1.
-				this->parallel->blocks = this->opt->pool.get_thread_count()+1;
-				this->typedParallel->build(this->parallel->blocks);
+				this->typedParallel->maxBlocks = this->opt->pool.get_thread_count()+1;
+				this->typedParallel->threads = this->opt->pool.get_thread_count();
+				this->typedParallel->build();
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};
@@ -270,8 +273,9 @@ namespace ATEAMS::arithmetic {
 						break;
 				}
 
-				this->parallel->blocks = blocks;
-				this->typedParallel->build(this->parallel->blocks);
+				this->typedParallel->maxBlocks = blocks;
+				this->typedParallel->threads = this->opt->pool.get_thread_count();
+				this->typedParallel->build();
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};
