@@ -573,6 +573,7 @@ SwendsenWang.branches = {
 	"default-updated-SparseRREF-pmatmul-blocks": "uSpb",
 	"default-updated-SparseRREF-pmatmul-blocks-mimalloc": "uSpbm",
 	"default-updated-SparseRREF-pmatmul-blocks-tcmalloc": "uSpbt",
+	"default-updated-SparseRREF-pmatmul-blocks-jemalloc": "uSpbj",
 	"pmatmul": "p",
 	"pmatmul-nomimalloc": "pn",
 	"pmatmul-nomimalloc-openmp": "pno"
