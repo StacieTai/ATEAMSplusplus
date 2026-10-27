@@ -35,7 +35,7 @@ for i in bigs:
 	ax.text(
 		i, -0.075, #-0.075 if i%2 else -0.1,
 		# rf"$(2^{{{int(np.log2(metadata.cells[dimension][xticks[i]]))}}})$",
-		f"{metadata.cells[4][i]:,}",
+		f"{metadata.halfcells[4][i]:,}",
 		transform=ax.get_xaxis_transform(),
 		ha="center",
 		fontsize=4
