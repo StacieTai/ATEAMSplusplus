@@ -12,7 +12,7 @@ colors = CONFIG.colors
 models = CONFIG.topics.models
 SwendsenWang = CONFIG.topics.models.SwendsenWang
 
-data = SwendsenWang.data("pangolin")
+data = SwendsenWang.data("meglTower")
 
 
 fig, ax = plt.subplots(**models.plots.defaults.subplots)
@@ -33,5 +33,5 @@ ax.legend()
 
 CONFIG._defaults.yaxis.logTime(ax)
 
-plt.show()
+plt.savefig(f"profiling/reduction.jpeg", dpi=1200, bbox_inches="tight")
 
