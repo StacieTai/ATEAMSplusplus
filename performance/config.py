@@ -534,9 +534,9 @@ SwendsenWang.branches = {
 
 SwendsenWang.parameters = Bunch()
 SwendsenWang.parameters.fields = [3]
-SwendsenWang.parameters.scales = [3, 4, 5, 8, 11, 16]
+SwendsenWang.parameters.scales = [8, 11, 16]
 SwendsenWang.parameters.dimensions = [4]
-SwendsenWang.parameters.trials = 100
+SwendsenWang.parameters.trials = 25
 
 
 

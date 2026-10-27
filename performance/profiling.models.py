@@ -14,6 +14,7 @@ SwendsenWang = CONFIG.topics.models.SwendsenWang
 
 data = SwendsenWang.data("meglTower")
 
+metadata.initialize(plt)
 
 fig, ax = plt.subplots(**models.plots.defaults.subplots)
 bigs = np.empty(0)
@@ -25,11 +26,23 @@ for branch, shortname in SwendsenWang.branches.items():
 	bigs = dat["scale"] if len(dat["scale"]) > len(bigs) else bigs
 	ax.plot(dat["scale"], dat["ttc"], label=shortname)
 
-# ax.set_xscale("log", base=np.sqrt(2))
+ax.set_xscale("log", base=np.sqrt(2))
 ax.set_xlim(min(bigs)-1/2, max(bigs)+1/2)
 ax.set_xticks(bigs)
 ax.set_xticklabels([f"{int(t)}" for t in bigs])
-ax.legend()
+
+for i in bigs:
+	ax.text(
+		i, -0.075, #-0.075 if i%2 else -0.1,
+		# rf"$(2^{{{int(np.log2(metadata.cells[dimension][xticks[i]]))}}})$",
+		f"{metadata.cells[4][i]:,}",
+		transform=ax.get_xaxis_transform(),
+		ha="center",
+		fontsize=4
+	)
+
+
+ax.legend(loc="lower right")
 
 CONFIG._defaults.yaxis.logTime(ax)
 
