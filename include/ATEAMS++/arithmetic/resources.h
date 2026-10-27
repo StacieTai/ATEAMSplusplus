@@ -205,7 +205,7 @@ namespace ATEAMS::arithmetic {
 				this->opt->method = 0;
 				
 				// Default number of thread blocks is 2*(number of threads).
-				this->parallel->blocks = this->opt->pool.get_thread_count()*2;
+				this->parallel->blocks = this->opt->pool.get_thread_count()+1;
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};
