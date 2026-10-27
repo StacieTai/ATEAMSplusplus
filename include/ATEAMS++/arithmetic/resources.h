@@ -64,7 +64,7 @@ namespace ATEAMS::arithmetic {
 			int blocks = -1;
 			int threads;
 			int squaredThreads;
-			int scaleFactor = 32;
+			int scaleFactor = 20;
 
 			void threading(int threads) {
 				this->threads = threads;
@@ -72,8 +72,8 @@ namespace ATEAMS::arithmetic {
 			}
 
 			void defaultPreferredBlocks(int N) {
-				if (N < this->threads*this->scaleFactor) this->blocks = this->threads+1;
-				else this->blocks = std::min(this->threads*2, N/this->scaleFactor);
+				if (N < this->threads*this->scaleFactor) this->blocks = 0;
+				else this->blocks = N/10;
 			}
 
 			void build() {

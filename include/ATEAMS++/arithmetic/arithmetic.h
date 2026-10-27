@@ -240,7 +240,7 @@ namespace ATEAMS {
 						if (r > 0) resources.typed->parts[tid].push_back((INDEX)i, r);
 					}
 				},
-				resources.typed->blocks;
+				resources.typed->blocks
 			);
 			resources.opt->pool.wait();
 
