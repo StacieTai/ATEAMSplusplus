@@ -222,33 +222,33 @@ namespace ATEAMS {
 			std::vector<SparseVector<RingLike>> chunks(threads, SparseVector<RingLike>());
 
 			// Compute the dot products in parallel.
-			// resources.opt->pool.detach_blocks(
-			// 	0, A.rows.size(),
-			// 	[&](const size_t start, const size_t end) {
-			// 		if (resources.opt->abort) return;
-
-			// 		// Get the thread ID
-			// 		auto tid = SparseRREF::thread_id();
-
-			// 		// Loop over each block.
-			// 		for (size_t i=start; i < end; i++) {
-			// 			typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
-			// 			if (r > 0) chunks[tid].push_back((INDEX)i, r);
-			// 		}
-			// 	},
-			// 	(A.rows.size() < 20 * threads) ? 0 : A.rows.size()/10	// Done in SparseRREF to compute block size.
-			// );
-			// resources.opt->pool.wait();
-
-			resources.opt->pool.detach_loop(
+			resources.opt->pool.detach_blocks(
 				0, A.rows.size(),
-				[&](const size_t i) {
+				[&](const size_t start, const size_t end) {
+					if (resources.opt->abort) return;
+
+					// Get the thread ID
 					auto tid = SparseRREF::thread_id();
-					typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
-					if (r > 0) chunks[tid].push_back((INDEX)i, r);
-				}
+
+					// Loop over each block.
+					for (size_t i=start; i < end; i++) {
+						typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+						if (r > 0) chunks[tid].push_back((INDEX)i, r);
+					}
+				},
+				(A.rows.size() < 20 * threads) ? 0 : A.rows.size()/10	// Done in SparseRREF to compute block size.
 			);
 			resources.opt->pool.wait();
+
+			// resources.opt->pool.detach_loop(
+			// 	0, A.rows.size(),
+			// 	[&](const size_t i) {
+			// 		auto tid = SparseRREF::thread_id();
+			// 		typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+			// 		if (r > 0) chunks[tid].push_back((INDEX)i, r);
+			// 	}
+			// );
+			// resources.opt->pool.wait();
 
 			// Reconstitute the vector.
 			SparseVector<RingLike> r;
