@@ -237,6 +237,11 @@ namespace ATEAMS::arithmetic {
 						blocks = this->opt->pool.get_thread_count();
 						blocks *= blocks;
 						break;
+					case 3:
+						blocks = this->opt->pool.get_thread_count();
+						blocks *= blocks;
+						blocks = blocks/2;
+						break;
 					default:
 						blocks = this->opt->pool.get_thread_count()+1;
 						break;

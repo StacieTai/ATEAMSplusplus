@@ -90,7 +90,7 @@ namespace ATEAMS {
 			}
 
 			// Delete duplicates.
-			std::sort(std::execution::par, exclude.begin(), exclude.end());
+			std::sort(std::execution::par_unseq, exclude.begin(), exclude.end());
 			exclude.erase(std::unique(exclude.begin(), exclude.end()), exclude.end());
 
 			// Sample from the kernel.
