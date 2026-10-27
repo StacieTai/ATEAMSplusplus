@@ -6,7 +6,7 @@ DIMENSIONS=(4)						# Top-level dimension of the discrete lattice.
 FIELDS=(3)							# Finite field.
 TRIALS=${1:-16}					# Number of trials; default to 100.
 SCHEMAS=(1)							# Parallel block allocation schema; default 2*threads.
-PROFILINGCONFIGURATION="default-updated-SparseRREF-pmatmul-blocks"	# Profiling configuration.
+PROFILINGCONFIGURATION="default-updated-SparseRREF-pmatmul-blocks-tcmalloc"	# Profiling configuration.
 
 HOST=$(hostname -f)
 
