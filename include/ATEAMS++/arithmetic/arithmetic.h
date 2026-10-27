@@ -143,11 +143,9 @@ namespace ATEAMS {
 			SparseVector<RingLike>& x,
 			Ring* R
 		) {
-			SparseVector<RingLike> y = sparse_mat_dot_sparse_vec<typename RingLike::dtype,INDEX>(
+			return sparse_mat_dot_sparse_vec<typename RingLike::dtype,INDEX>(
 				A, x, R->ring
 			);
-			
-			return y;
 		};
 
 		/**
@@ -220,19 +218,25 @@ namespace ATEAMS {
 			if (!resources.parallel->enabled) return SparseRightMultiplication<RingLike>(A, x, R);
 
 			// Get the (pre-computed) number of blocks.
-			int blocks = resources.parallel->blocks;
-			std::vector<SparseVector<RingLike>> chunks(blocks, SparseVector<RingLike>());
+			int threads = resources.opt->pool.get_thread_count();
+			std::vector<SparseVector<RingLike>> chunks(threads, SparseVector<RingLike>());
 
 			// Compute the dot products in parallel.
-			resources.opt->pool.detach_loop(
-				0,
-				A.rows.size(),
-				[&](int i) {
-					int tid = BS::this_thread::get_index().value();
-					typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
-					if (r > 0) chunks[tid].push_back((INDEX)i, r);
+			resources.opt->pool.detach_blocks(
+				0, A.rows.size(),
+				[&](const size_t start, const size_t end) {
+					if (resources.opt->abort) return;
+
+					// Get the thread ID
+					auto tid = SparseRREF::thread_id();
+
+					// Loop over each block.
+					for (size_t i=start; i < end; i++) {
+						typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+						if (r > 0) chunks[tid].push_back((INDEX)i, r);
+					}
 				},
-				blocks
+				(A.rows.size() < 20 * threads) ? 0 : A.rows.size()/10	// Done in SparseRREF to compute block size.
 			);
 			resources.opt->pool.wait();
 
