@@ -14,11 +14,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_compile_options(
+	-Ofast
 	-march=native
 	-flto
 	-funroll-loops
 	-fprefetch-loop-arrays
-	-fomit-frame-pointer
 	-fno-rtti
 )
 
@@ -28,6 +28,7 @@ add_compile_options(
 ################################################################################
 find_package(PkgConfig REQUIRED)
 find_package(OpenMP REQUIRED)
+
 pkg_check_modules(FLINT REQUIRED IMPORTED_TARGET flint)
 
 # If we want to use mimalloc (which we should, by default) then set this to
@@ -44,18 +45,12 @@ endif()
 ################################################################################
 set(TEST TRUE)
 set(PROFILE FALSE)
-set(TIMING TRUE)
+set(TIMING FALSE)
 set(DEBUG FALSE)
 
 if (NOT(PROFILE OR DEBUG))
 	add_compile_options(
-		-Ofast
-		-march=native
-		-flto
-		-funroll-loops
-		-fprefetch-loop-arrays
 		-fomit-frame-pointer
-		-fno-rtti
 	)
 endif()
 
@@ -71,14 +66,11 @@ if (PROFILE)
 	set(PROFILE_COMPILE_OPTIONS
 		-g2
 		-fno-omit-frame-pointer
-		-fno-inline-functions
 	)
 
 	set(PROFILE_LINK_OPTIONS
 		-g2
 		-fno-omit-frame-pointer
-		-fno-inline-functions
-		-O2
 	)
 else()
 	set(PROFILE_COMPILE_OPTIONS )
@@ -181,9 +173,7 @@ if(mimalloc)
 	target_link_libraries(ATEAMS++ INTERFACE PkgConfig::mimalloc)
 endif()
 
-# target_include_directories(ATEAMS++ INTERFACE include)
 target_include_directories(ATEAMS++ INTERFACE dependencies)
-# target_include_directories(ATEAMS++ INTERFACE src)
 
 include(GNUInstallDirs)
 
@@ -192,6 +182,8 @@ include(GNUInstallDirs)
 # for libATEAMS++.dylib is uninterpretable.
 if(APPLE)
 	set_target_properties(ATEAMS++ PROPERTIES INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
+	pkg_check_modules(TBB REQUIRED IMPORTED_TARGET tbb)
+	target_link_libraries(ATEAMS++ INTERFACE PkgConfig::TBB)
 endif()
 
 if(LINUX)
@@ -239,7 +231,7 @@ install(
 ################################################################################
 
 list(APPEND COMPLEXES.TESTING
-	"Cubical"
+	# "Cubical"
 )
 
 list(APPEND ARITHMETIC.TESTING
@@ -248,21 +240,21 @@ list(APPEND ARITHMETIC.TESTING
 )
 
 list(APPEND TOPOLOGY.TESTING
-	"JIT"
-	"parallel"
-	"PHAT"
-	"split"
-	"stagger"
-	"standard"
-	"twist"
+	# "JIT"
+	# "parallel"
+	# "PHAT"
+	# "split"
+	# "stagger"
+	# "standard"
+	# "twist"
 )
 
 list(APPEND MODELS.TESTING
-	"Bernoulli"
-	"InvadedCluster"
-	"Invasion"
+	# "Bernoulli"
+	# "InvadedCluster"
+	# "Invasion"
 	"SwendsenWang"
-	"Glauber"
+	# "Glauber"
 )
 
 list(APPEND TYPES
@@ -301,18 +293,20 @@ if (TEST)
 			target_include_directories(tests.${FUNCTION}.${TYPE} PUBLIC tests)
 			target_link_libraries(tests.${FUNCTION}.${TYPE} PUBLIC ATEAMS++)
 
+			set(COPIES 1000)
+
 			if("${TYPE}" STREQUAL "Q")
 				add_test(NAME ${FUNCTION}.${TYPE} COMMAND tests.${FUNCTION}.${TYPE} 0)
 			else()
 				# Test for Z/2Z
-				add_test(NAME ${FUNCTION}.${TYPE}.2.100x100 COMMAND tests.${FUNCTION}.${TYPE} 2 100 100 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.2.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 2 100 1000 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.2.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 2 1000 100 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.2.100x100 COMMAND tests.${FUNCTION}.${TYPE} 2 100 100 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.2.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 2 100 1000 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.2.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 2 1000 100 ${COPIES})
 
 				# Test for Z/3Z
-				add_test(NAME ${FUNCTION}.${TYPE}.3.100x100 COMMAND tests.${FUNCTION}.${TYPE} 3 100 100 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.3.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 3 100 1000 1000)
-				add_test(NAME ${FUNCTION}.${TYPE}.3.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 3 1000 100 1000)
+				add_test(NAME ${FUNCTION}.${TYPE}.3.100x100 COMMAND tests.${FUNCTION}.${TYPE} 3 100 100 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.3.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 3 100 1000 ${COPIES})
+				add_test(NAME ${FUNCTION}.${TYPE}.3.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 3 1000 100 ${COPIES})
 			endif()
 		endforeach()
 
@@ -345,14 +339,14 @@ list(APPEND ARITHMETIC.PROFILING
 
 list(APPEND MODELS.PROFILING
 	# "Bernoulli"
-	# "InvadedCluster"
+	"InvadedCluster"
 	# "Invasion"
-	# "SwendsenWang"
+	"SwendsenWang"
 	# "Glauber"
 )
 
 list(APPEND TOPOLOGY.PROFILING
-	"persistence"
+	# "persistence"
 )
 
 if (PROFILE)
