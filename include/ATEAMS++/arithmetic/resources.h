@@ -57,6 +57,25 @@ namespace ATEAMS::arithmetic {
 		}
 	};
 
+	template <typename RingLike>
+	struct TypedParallelContainers {
+		public:
+			std::vector<SparseVector<RingLike>> parts;
+
+
+		void build(int blocks) {
+			this->parts = std::vector<SparseVector<RingLike>>(blocks, SparseVector<RingLike>);
+		}
+
+		void flush() {
+			for (int t=0; t<this->parts.size(); t++) {
+				if (this->parts[t].size() > 0) this->parts[t].zero();
+			}
+		}
+
+	}
+
+
 	/**
 	 * @struct ParallelContainers
 	 * @brief Reusable containers for parallel persistence computation. See
@@ -174,6 +193,7 @@ namespace ATEAMS::arithmetic {
 			RREFOptions* opt;
 			SerialContainers* serial;
 			ParallelContainers* parallel;
+			TypedParallelContainers<RingLike>* typedParallel;
 			FiniteArithmetic<RingLike>* arithmetic;
 
 
@@ -185,6 +205,8 @@ namespace ATEAMS::arithmetic {
 
 				this->parallel = new ParallelContainers;
 				this->parallel->enabled = true;
+
+				this->typedParallel = new TypedParallelContainers;
 
 				this->serial = new SerialContainers;
 
@@ -204,8 +226,9 @@ namespace ATEAMS::arithmetic {
 				this->opt->pool.reset();
 				this->opt->method = 0;
 				
-				// Default number of thread blocks is 2*(number of threads).
+				// Default number of thread blocks is (number of threads)+1.
 				this->parallel->blocks = this->opt->pool.get_thread_count()+1;
+				this->typedParallel->build(this->parallel->blocks);
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};
@@ -248,6 +271,7 @@ namespace ATEAMS::arithmetic {
 				}
 
 				this->parallel->blocks = blocks;
+				this->typedParallel->build(this->parallel->blocks);
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};

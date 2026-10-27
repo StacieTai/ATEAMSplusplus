@@ -217,10 +217,7 @@ namespace ATEAMS {
 			// If parallelism isn't enabled, kick to the other version.
 			if (!resources.parallel->enabled) return SparseRightMultiplication<RingLike>(A, x, R);
 
-			// Get the (pre-computed) number of blocks.
-			int threads = resources.opt->pool.get_thread_count();
-			std::vector<SparseVector<RingLike>> chunks(threads, SparseVector<RingLike>());
-
+			int blocks = A.rows.size() < 
 			// Compute the dot products in parallel.
 			resources.opt->pool.detach_blocks(
 				0, A.rows.size(),
@@ -236,19 +233,9 @@ namespace ATEAMS {
 						if (r > 0) chunks[tid].push_back((INDEX)i, r);
 					}
 				},
-				resources.parallel->blocks
+				A.rows.size() < resources.parallel->blocks
 			);
 			resources.opt->pool.wait();
-
-			// resources.opt->pool.detach_loop(
-			// 	0, A.rows.size(),
-			// 	[&](const size_t i) {
-			// 		auto tid = SparseRREF::thread_id();
-			// 		typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
-			// 		if (r > 0) chunks[tid].push_back((INDEX)i, r);
-			// 	}
-			// );
-			// resources.opt->pool.wait();
 
 			// Reconstitute the vector.
 			SparseVector<RingLike> r;
@@ -262,6 +249,8 @@ namespace ATEAMS {
 				}
 			}
 			r.sort_indices();
+
+
 
 			return r;
 		}
