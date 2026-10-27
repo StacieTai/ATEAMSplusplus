@@ -498,10 +498,51 @@ CONFIG.topics.persistence.plots.defaults.boxplot.pinstripes = lambda boxes, ax, 
 
 
 
+################################################################################
+## TOPIC: MODELS ###############################################################
+################################################################################
+
+CONFIG.topic.models = Bunch()
+
+
+
+################################################################################
+## SUBTOPIC: MODELS: SWENDSEN–WANG #############################################
+################################################################################
+CONFIG.topic.models.SwendsenWang = Bunch()
+SwendsenWang = Bunch()
+
+SwendsenWang.computing = ["meglTower", "pangolin"]
+
+SwendsenWang.branches = [
+	"default",
+	"default-updated-SparseRREF",
+	"default-updated-SparseRREF-pmatmul",
+	"pmatmul",
+	"pmatmul-nomimalloc",
+	"pmatmul-nomimalloc-openmp"
+]
+
+
+SwendsenWang.parameters = Bunch()
+SwendsenWang.parameters.fields = [3]
+SwendsenWang.parameters.scales = [3, 4, 5, 8, 11, 16]
+SwendsenWang.parameters.dimensions = [4]
+SwendsenWang.parameters.trials = 100
 
 
 
 
+
+
+
+
+
+def _readStats(computing, model, branches, parameters, root):
+	record = {}
+
+	for branch in branches:
+		with open(f"{root}/{computing}.{model}.{parameters.}")
 
 
 
