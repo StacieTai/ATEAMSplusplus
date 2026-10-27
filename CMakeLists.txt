@@ -43,8 +43,8 @@ endif()
 ################################################################################
 ## TESTING/PROFILING?                                                         ##
 ################################################################################
-set(TEST FALSE)
-set(PROFILE TRUE)
+set(TEST TRUE)
+set(PROFILE FALSE)
 set(TIMING FALSE)
 set(DEBUG FALSE)
 

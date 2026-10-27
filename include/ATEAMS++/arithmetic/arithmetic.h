@@ -236,7 +236,7 @@ namespace ATEAMS {
 						if (r > 0) chunks[tid].push_back((INDEX)i, r);
 					}
 				},
-				(A.rows.size() < 20 * threads) ? 0 : A.rows.size()/10	// Done in SparseRREF to compute block size.
+				resources.parallel->blocks
 			);
 			resources.opt->pool.wait();
 
