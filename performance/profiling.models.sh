@@ -4,7 +4,7 @@ MODELS=("SwendsenWang")				# Models to test.
 SCALES=(8 11 16 22)				# Linear scale of the discrete lattice.
 DIMENSIONS=(4)						# Top-level dimension of the discrete lattice.
 FIELDS=(3)							# Finite field.
-TRIALS=${1:-25}					# Number of trials; default to 100.
+TRIALS=${1:-16}					# Number of trials; default to 100.
 SCHEMAS=(1)							# Parallel block allocation schema; default 2*threads.
 PROFILINGCONFIGURATION="default-updated-SparseRREF-pmatmul"	# Profiling configuration.
 
