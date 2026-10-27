@@ -69,19 +69,18 @@ namespace ATEAMS::arithmetic {
 			void threading(int threads) {
 				this->threads = threads;
 				this->squaredThreads = threads*threads;
-				this->blocks = this->threads+1;
 			}
 
 			void defaultPreferredBlocks(int N) {
 				if (N < this->threads*this->scaleFactor) this->blocks = this->threads+1;
-				else this->blocks = std::min(this->squaredThreads, N/this->scaleFactor);
+				else this->blocks = std::min(this->threads*2, N/this->scaleFactor);
 			}
 
 			void build() {
 				this->parts = std::vector<SparseVector<RingLike>>(this->blocks, SparseVector<RingLike>());
 			};
 
-			void flush() {
+			inline void flush() {
 				for (int t=0; t<this->parts.size(); t++) {
 					if (this->parts[t].size() > 0) this->parts[t].zero();
 				}
@@ -241,7 +240,6 @@ namespace ATEAMS::arithmetic {
 				this->opt->method = 0;
 
 				this->typed->threading(this->opt->pool.get_thread_count());
-				this->typed->build();
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};

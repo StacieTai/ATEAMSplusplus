@@ -219,8 +219,15 @@ namespace ATEAMS {
 
 			// If we haven't yet decided on a preferred number of blocks, let's
 			// compute that now.
-			if (resources.typed->blocks < 0) resources.typed->defaultPreferredBlocks(A.rows.size());
+			if (resources.typed->blocks < 0) {
+				resources.typed->defaultPreferredBlocks(A.rows.size());
+				resources.typed->build();
+			}
+
 			int blocks = resources.typed->blocks;
+			std::cout << resources.opt->pool.get_thread_count() << std::endl;
+			std::cout << A.rows.size() << std::endl;
+			std::cout << blocks << std::endl << std::endl;
 
 
 			// Compute the dot products in parallel.
