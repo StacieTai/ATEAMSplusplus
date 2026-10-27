@@ -224,11 +224,6 @@ namespace ATEAMS {
 				resources.typed->build();
 			}
 
-			int blocks = resources.typed->blocks;
-			std::cout << resources.opt->pool.get_thread_count() << std::endl;
-			std::cout << A.rows.size() << std::endl;
-			std::cout << blocks << std::endl << std::endl;
-
 
 			// Compute the dot products in parallel.
 			resources.opt->pool.detach_blocks(
@@ -245,7 +240,7 @@ namespace ATEAMS {
 						if (r > 0) resources.typed->parts[tid].push_back((INDEX)i, r);
 					}
 				},
-				blocks
+				resources.typed->blocks;
 			);
 			resources.opt->pool.wait();
 
@@ -261,7 +256,6 @@ namespace ATEAMS {
 				}
 			}
 			r.sort_indices();
-
 			resources.typed->flush();
 
 			return r;

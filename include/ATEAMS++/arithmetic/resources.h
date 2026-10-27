@@ -64,7 +64,7 @@ namespace ATEAMS::arithmetic {
 			int blocks = -1;
 			int threads;
 			int squaredThreads;
-			int scaleFactor = 64;
+			int scaleFactor = 32;
 
 			void threading(int threads) {
 				this->threads = threads;
