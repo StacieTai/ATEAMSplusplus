@@ -217,7 +217,11 @@ namespace ATEAMS {
 			// If parallelism isn't enabled, kick to the other version.
 			if (!resources.parallel->enabled) return SparseRightMultiplication<RingLike>(A, x, R);
 
-			int blocks = A.rows.size() < resources.typedParallel->maxBlocks*16 ? 0 : A.rows.size()/32;
+			// If we haven't yet decided on a preferred number of blocks, let's
+			// compute that now.
+			if (resources.typed->blocks < 0) resources.typed->defaultPreferredBlocks(A.rows.size());
+			int blocks = resources.typed->blocks;
+
 
 			// Compute the dot products in parallel.
 			resources.opt->pool.detach_blocks(
@@ -231,7 +235,7 @@ namespace ATEAMS {
 					// Loop over each block.
 					for (size_t i=start; i < end; i++) {
 						typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
-						if (r > 0) resources.typedParallel->parts[tid].push_back((INDEX)i, r);
+						if (r > 0) resources.typed->parts[tid].push_back((INDEX)i, r);
 					}
 				},
 				blocks
@@ -241,17 +245,17 @@ namespace ATEAMS {
 			// Reconstitute the vector.
 			SparseVector<RingLike> r;
 
-			for (int j=0; j < resources.typedParallel->parts.size(); j++) {
+			for (int j=0; j < resources.typed->parts.size(); j++) {
 				// Skip this row if there's nothing in it.
-				if (resources.typedParallel->parts[j].size() < 1) continue;
+				if (resources.typed->parts[j].size() < 1) continue;
 
-				for (int k=0; k < resources.typedParallel->parts[j].size(); k++) {
-					r.push_back(resources.typedParallel->parts[j](k), resources.typedParallel->parts[j][k]);
+				for (int k=0; k < resources.typed->parts[j].size(); k++) {
+					r.push_back(resources.typed->parts[j](k), resources.typed->parts[j][k]);
 				}
 			}
 			r.sort_indices();
 
-			resources.typedParallel->flush();
+			resources.typed->flush();
 
 			return r;
 		}

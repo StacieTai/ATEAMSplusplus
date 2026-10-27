@@ -36,6 +36,6 @@ int main(int argc, char* argv[]) {
 	Model MODEL(&COMPLEX, PARAMETERS);
 	Chain CHAIN(&MODEL, TRIALS);
 
-	for (State STATE : CHAIN.simulate(3)) { }
+	for (State STATE : CHAIN.simulate()) { }
 	return 0;
 }

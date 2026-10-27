@@ -61,12 +61,24 @@ namespace ATEAMS::arithmetic {
 	struct TypedParallelContainers {
 		public:
 			std::vector<SparseVector<RingLike>> parts;
-			int maxBlocks = 0;
-			int preferredBlocks = 0;
-			int threads = 0;
+			int blocks = -1;
+			int threads;
+			int squaredThreads;
+			int scaleFactor = 64;
+
+			void threading(int threads) {
+				this->threads = threads;
+				this->squaredThreads = threads*threads;
+				this->blocks = this->threads+1;
+			}
+
+			void defaultPreferredBlocks(int N) {
+				if (N < this->threads*this->scaleFactor) this->blocks = this->threads+1;
+				else this->blocks = std::min(this->squaredThreads, N/this->scaleFactor);
+			}
 
 			void build() {
-				this->parts = std::vector<SparseVector<RingLike>>(this->maxBlocks, SparseVector<RingLike>());
+				this->parts = std::vector<SparseVector<RingLike>>(this->blocks, SparseVector<RingLike>());
 			};
 
 			void flush() {
@@ -195,7 +207,7 @@ namespace ATEAMS::arithmetic {
 			RREFOptions* opt;
 			SerialContainers* serial;
 			ParallelContainers* parallel;
-			TypedParallelContainers<RingLike>* typedParallel;
+			TypedParallelContainers<RingLike>* typed;
 			FiniteArithmetic<RingLike>* arithmetic;
 
 
@@ -208,7 +220,7 @@ namespace ATEAMS::arithmetic {
 				this->parallel = new ParallelContainers;
 				this->parallel->enabled = true;
 
-				this->typedParallel = new TypedParallelContainers<RingLike>;
+				this->typed = new TypedParallelContainers<RingLike>;
 
 				this->serial = new SerialContainers;
 
@@ -227,59 +239,12 @@ namespace ATEAMS::arithmetic {
 				Flint::set_memory_functions();
 				this->opt->pool.reset();
 				this->opt->method = 0;
-				
-				// Default number of thread blocks is (number of threads)+1.
-				this->typedParallel->maxBlocks = this->opt->pool.get_thread_count()+1;
-				this->typedParallel->threads = this->opt->pool.get_thread_count();
-				this->typedParallel->build();
+
+				this->typed->threading(this->opt->pool.get_thread_count());
+				this->typed->build();
 
 				return std::thread(key_listener, std::ref(this->opt->abort));
 			};
-
-
-			/**
-			 * @brief Initializes a multithreaded computing environment.
-			 * 
-			 * @param schema Sets a recommended number of thread blocks available.
-			 * 
-			 * @returns An execution thread.
-			 */
-			std::thread spinUp(int schema) {
-				Flint::set_memory_functions();
-				this->opt->pool.reset();
-				this->opt->method = 0;
-
-				// Set the number of blocks.
-				int blocks;
-
-				switch (schema) {
-					case 0:
-						blocks = this->opt->pool.get_thread_count()+1;
-						break;
-					case 1:
-						blocks = this->opt->pool.get_thread_count()*2;
-						break;
-					case 2:
-						blocks = this->opt->pool.get_thread_count();
-						blocks *= blocks;
-						break;
-					case 3:
-						blocks = this->opt->pool.get_thread_count();
-						blocks *= blocks;
-						blocks = blocks/2;
-						break;
-					default:
-						blocks = this->opt->pool.get_thread_count()+1;
-						break;
-				}
-
-				this->typedParallel->maxBlocks = blocks;
-				this->typedParallel->threads = this->opt->pool.get_thread_count();
-				this->typedParallel->build();
-
-				return std::thread(key_listener, std::ref(this->opt->abort));
-			};
-
 
 			/**
 			 * @brief "Spins down" the multithreaded computing environment.
