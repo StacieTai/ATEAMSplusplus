@@ -28,6 +28,9 @@ add_compile_options(
 ################################################################################
 find_package(PkgConfig REQUIRED)
 find_package(OpenMP REQUIRED)
+find_package(TBB REQUIRED)
+
+pkg_check_modules(TBB REQUIRED IMPORTED_TARGET tbb)
 pkg_check_modules(FLINT REQUIRED IMPORTED_TARGET flint)
 
 # If we want to use mimalloc (which we should, by default) then set this to
@@ -167,6 +170,7 @@ target_sources(ATEAMS++
 set_target_properties(ATEAMS++ PROPERTIES PUBLIC_HEADER include/ATEAMS++/ATEAMS++.h)
 target_link_libraries(ATEAMS++ INTERFACE PkgConfig::FLINT)
 target_link_libraries(ATEAMS++ INTERFACE OpenMP::OpenMP_CXX)
+target_link_libraries(ATEAMS++ INTERFACE PkgConfig::TBB)
 
 if(mimalloc)
 	target_link_libraries(ATEAMS++ INTERFACE PkgConfig::mimalloc)
@@ -183,11 +187,6 @@ include(GNUInstallDirs)
 # for libATEAMS++.dylib is uninterpretable.
 if(APPLE)
 	set_target_properties(ATEAMS++ PROPERTIES INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
-endif()
-
-if(LINUX)
-	find_package(TBB REQUIRED)
-	link_libraries(tbb)
 endif()
 
 

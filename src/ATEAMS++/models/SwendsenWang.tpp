@@ -16,6 +16,7 @@
 #include <random>
 #include <algorithm>
 #include <cassert>
+#include <execution>
 
 
 namespace ATEAMS {
@@ -89,7 +90,7 @@ namespace ATEAMS {
 			}
 
 			// Delete duplicates.
-			std::sort(exclude.begin(), exclude.end());
+			std::sort(std::execution::par, exclude.begin(), exclude.end());
 			exclude.erase(std::unique(exclude.begin(), exclude.end()), exclude.end());
 
 			// Sample from the kernel.
