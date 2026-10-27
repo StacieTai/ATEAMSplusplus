@@ -34,15 +34,20 @@ pkg_check_modules(FLINT REQUIRED IMPORTED_TARGET flint)
 # If we want to use mimalloc (which we should, by default) then set this to
 # TRUE. Otherwise, set it to FALSE.
 set(mimalloc FALSE)
-set(tcmalloc TRUE)
+set(tcmalloc FALSE)
+set(jemalloc TRUE)
 
-if(mimalloc AND NOT tcmalloc)
+if(mimalloc AND NOT tcmalloc AND NOT jemalloc)
 	find_package(mimalloc REQUIRED)
 	pkg_check_modules(mimalloc REQUIRED IMPORTED_TARGET mimalloc)
 endif()
 
-if(tcmalloc AND NOT mimalloc)
+if(tcmalloc AND NOT mimalloc AND NOT jemalloc)
 	find_library(TCMALLOC_LIB NAMES tcmalloc tcmalloc_minimal REQUIRED)
+endif()
+
+if(jemalloc AND NOT mimalloc AND NOT tcmalloc)
+	find_library(JEMALLOC_LIB NAMES jemalloc jemalloc_minimal REQUIRED)
 endif()
 
 ################################################################################
@@ -195,9 +200,14 @@ if(LINUX)
 	find_package(TBB REQUIRED)
 	link_libraries(tbb)
 
-	if(tcmalloc AND NOT mimalloc)
+	if(tcmalloc AND NOT mimalloc AND NOT jemalloc)
 		find_library(TCMALLOC_LIBRARY NAMES tcmalloc_minimal tcmalloc)
 		target_link_libraries(ATEAMS++ INTERFACE ${TCMALLOC_LIBRARY})
+	endif()
+
+	if(jemalloc AND NOT mimalloc AND NOT tcmalloc)
+		find_library(JEMALLOC_LIBRARY NAMES jemalloc_minimal jemalloc)
+		target_link_libraries(ATEAMS++ INTERFACE ${JEMALLOC_LIBRARY})
 	endif()
 endif()
 
