@@ -9,7 +9,29 @@ from config import CONFIG
 
 metadata = CONFIG.metadata
 colors = CONFIG.colors
+models = CONFIG.topics.models
+SwendsenWang = CONFIG.topics.models.SwendsenWang
+
+data = SwendsenWang.data("pangolin")
 
 
+fig, ax = plt.subplots(**models.plots.defaults.subplots)
+bigs = np.empty(0)
 
+for branch, shortname in SwendsenWang.branches.items():
+	dat = data[branch]
+	if dat.empty: continue
+
+	bigs = dat["scale"] if len(dat["scale"]) > len(bigs) else bigs
+	ax.plot(dat["scale"], dat["ttc"], label=shortname)
+
+# ax.set_xscale("log", base=np.sqrt(2))
+ax.set_xlim(min(bigs)-1/2, max(bigs)+1/2)
+ax.set_xticks(bigs)
+ax.set_xticklabels([f"{int(t)}" for t in bigs])
+ax.legend()
+
+CONFIG._defaults.yaxis.logTime(ax)
+
+plt.show()
 

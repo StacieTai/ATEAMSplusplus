@@ -1,6 +1,7 @@
 
 from sklearn.utils import Bunch
 from scipy.optimize import curve_fit
+from pathlib import Path
 import pandas as pd
 import numpy as np
 
@@ -14,6 +15,7 @@ metadata = Bunch()
 
 metadata.hosts = ["meglTower"]
 metadata.computing = ["serial", "parallel"]
+metadata.statroot = Path("profiling/stat")
 
 metadata.initialize = lambda p: p.rcParams.update({
 	"text.usetex": True,
@@ -502,26 +504,32 @@ CONFIG.topics.persistence.plots.defaults.boxplot.pinstripes = lambda boxes, ax, 
 ## TOPIC: MODELS ###############################################################
 ################################################################################
 
-CONFIG.topic.models = Bunch()
+CONFIG.topics.models = Bunch()
+CONFIG.topics.models.plots = Bunch()
+CONFIG.topics.models.plots.defaults = Bunch()
+
+CONFIG.topics.models.plots.defaults.subplots = dict(
+	figsize=(4,5)
+)
 
 
 
 ################################################################################
 ## SUBTOPIC: MODELS: SWENDSEN–WANG #############################################
 ################################################################################
-CONFIG.topic.models.SwendsenWang = Bunch()
-SwendsenWang = Bunch()
+CONFIG.topics.models.SwendsenWang = Bunch()
+SwendsenWang = CONFIG.topics.models.SwendsenWang
 
 SwendsenWang.computing = ["meglTower", "pangolin"]
 
-SwendsenWang.branches = [
-	"default",
-	"default-updated-SparseRREF",
-	"default-updated-SparseRREF-pmatmul",
-	"pmatmul",
-	"pmatmul-nomimalloc",
-	"pmatmul-nomimalloc-openmp"
-]
+SwendsenWang.branches = {
+	"default": "default",
+	"default-updated-SparseRREF": "uS",
+	"default-updated-SparseRREF-pmatmul": "uSp",
+	"pmatmul": "p",
+	"pmatmul-nomimalloc": "pn",
+	"pmatmul-nomimalloc-openmp": "pno"
+}
 
 
 SwendsenWang.parameters = Bunch()
@@ -534,18 +542,43 @@ SwendsenWang.parameters.trials = 100
 
 
 
+SwendsenWang.data = lambda remote: _readSWStats(remote, "SwendsenWang", SwendsenWang.branches, SwendsenWang.parameters, CONFIG.metadata.statroot)
 
 
 
-
-def _readStats(computing, model, branches, parameters, root):
-	record = {}
+def _readSWStats(computing, model, branches, parameters, root):
+	allBranches = {}
 
 	for branch in branches:
-		with open(f"{root}/{computing}.{model}.{parameters.}")
+		records = []
 
+		for field in parameters.fields:
+			for scale in parameters.scales:
+				for dimension in parameters.dimensions:
+					try:
+						with open(f"{root}/{computing}.{model}.{scale:02}.{dimension}.{field}.1.{branch}.stat") as f:
+							content = f.read()
+							splitt = content.split("\n")
+							splitt = [s.strip() for s in splitt]
+							
+							_elapsed = [e for e in splitt if "seconds time elapsed" in e][0]
+							if not _elapsed: continue
 
+							elapsed = float(_elapsed.split("seconds")[0])
+							records.append({
+								"field": field,
+								"scale": scale,
+								"dimension": dimension,
+								"ttc": elapsed*1000000	# convert to microseconds
+							})
+					except:
+						pass
 
+		# Create a dataframe from the records.
+		data = pd.DataFrame.from_records(records)
+		allBranches[branch] = data
+
+	return allBranches
 
 
 
