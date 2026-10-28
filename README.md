@@ -71,7 +71,7 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 	3. [TBB](https://github.com/uxlfoundation/onetbb), and
 	4. (optionally) [jemalloc](https://jemalloc.net/),
 
-	which are all available through most package managers. [Make sure your compiler complies with the C++23 standard](https://en.cppreference.com/cpp/compiler_support/23); GCC ≥ 15 is a good bet. mimalloc is _not_ required to use this software, but it is recommended; if you don't want to use it, set the `mimalloc` variable in `CMakeLists.txt` to `FALSE` and it will be excluded.
+	which are all available through most package managers. [Make sure your compiler complies with the C++23 standard](https://en.cppreference.com/cpp/compiler_support/23); GCC ≥ 15 is a good bet. **jemalloc is _not_ required to use this software, but it is recommended**; if you don't want to use it, set the `jemalloc` variable in the CMake config file (`CMakeLists.txt`) to `FALSE` and it will be excluded.
 
 	To install these
 	* **on macOS**,
@@ -87,6 +87,26 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 		```
 		> vcpkg install flint tbb jemalloc
 		```
+
+	If you want to use another memory allocator like [mimalloc](https://github.com/microsoft/mimalloc) or [tcmalloc](https://github.com/google/tcmalloc), install it in the same way as jemalloc:
+	* **on macOS**,
+		```bash
+		$ brew install gperftools mimalloc
+		```
+	* **on Linux (Ubuntu)**,
+		```bash
+		$ sudo apt update
+		$ sudo apt install libgoogle-perftools-dev libmimalloc-dev
+		```
+	* **on Windows** (using [vcpkg](https://vcpkg.io/en/)),
+		```
+		> vcpkg install gperftools mimalloc
+
+	You can set any of the `jemalloc`, `tcmalloc`, or `mimalloc` tools to `TRUE` in the CMake config file (`CMakeLists.txt`), but the build will fail if more than one of the variables is set to `TRUE`.
+
+	<div style="margin: 1em auto; width: 80%; padding: 0.5em; background-color: #0077BB66">
+		**Note:**
+	</div>
 
 3. **Build and install the library.** In your favorite shell, running
 	```bash

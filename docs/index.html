@@ -184,7 +184,7 @@ Installation</h2>
 <li><a href="https://github.com/uxlfoundation/onetbb">TBB</a>, and</li>
 <li>(optionally) <a href="https://jemalloc.net/">jemalloc</a>,</li>
 </ol>
-<p class="startli">which are all available through most package managers. <a href="https://en.cppreference.com/cpp/compiler_support/23">Make sure your compiler complies with the C++23 standard</a>; GCC ≥ 15 is a good bet. mimalloc is <em>not</em> required to use this software, but it is recommended; if you don't want to use it, set the <span class="tt">mimalloc</span> variable in <span class="tt">CMakeLists.txt</span> to <span class="tt">FALSE</span> and it will be excluded.</p>
+<p class="startli">which are all available through most package managers. <a href="https://en.cppreference.com/cpp/compiler_support/23">Make sure your compiler complies with the C++23 standard</a>; GCC ≥ 15 is a good bet. <b>jemalloc is <em>not</em> required to use this software, but it is recommended</b>; if you don't want to use it, set the <span class="tt">jemalloc</span> variable in the CMake config file (<span class="tt">CMakeLists.txt</span>) to <span class="tt">FALSE</span> and it will be excluded.</p>
 <p class="startli">To install these</p><ul>
 <li><b>on macOS</b>, <div class="fragment"><div class="line">$ brew install flint tbb jemalloc</div>
 </div><!-- fragment --></li>
@@ -195,7 +195,18 @@ Installation</h2>
         &gt; vcpkg install flint tbb jemalloc
         </span></li>
 </ul>
-</li>
+<p class="startli">If you want to use another memory allocator like <a href="https://github.com/microsoft/mimalloc">mimalloc</a> or <a href="https://github.com/google/tcmalloc">tcmalloc</a>, install it in the same way as jemalloc:</p><ul>
+<li><b>on macOS</b>, <span class="tt">bash
+        $ brew install gperftools mimalloc
+        </span></li>
+<li><b>on Linux (Ubuntu)</b>, <span class="tt">bash
+        $ sudo apt update
+        $ sudo apt install libgoogle-perftools-dev libmimalloc-dev
+        </span></li>
+<li><b>on Windows</b> (using <a href="https://vcpkg.io/en/">vcpkg</a>), ``` &gt; vcpkg install gperftools mimalloc</li>
+</ul>
+<p class="startli">You can set any of the <span class="tt">jemalloc</span>, <span class="tt">tcmalloc</span>, or <span class="tt">mimalloc</span> tools to <span class="tt">TRUE</span> in the CMake config file (<span class="tt">CMakeLists.txt</span>), but the build will fail if more than one of the variables is set to <span class="tt">TRUE</span>.</p>
+<div style="margin: 1em auto; width: 80%; padding: 0.5em; background-color: #0077BB66"> <b>Note:</b> </div></li>
 <li><b>Build and install the library.</b> In your favorite shell, running <div class="fragment"><div class="line">$ cd ATEAMSplusplus</div>
 <div class="line">$ make build</div>
 <div class="line">$ make install</div>
