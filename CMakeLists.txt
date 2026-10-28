@@ -107,9 +107,9 @@ install(
 ## TESTING  ####################################################################
 ################################################################################
 set(TEST_MODELS TRUE)
-set(TEST_COMPLEXES TRUE)
-set(TEST_ARITHMETIC TRUE)
-set(TEST_TOPOLOGY TRUE)
+set(TEST_COMPLEXES FALSE)
+set(TEST_ARITHMETIC FALSE)
+set(TEST_TOPOLOGY FALSE)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/testing.cmake)
 

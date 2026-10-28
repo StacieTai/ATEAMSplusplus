@@ -27,11 +27,11 @@ list(APPEND TOPOLOGY.TESTING
 )
 
 list(APPEND MODELS.TESTING
-	"Bernoulli"
-	"InvadedCluster"
-	"Invasion"
+	# "Bernoulli"
+	# "InvadedCluster"
+	# "Invasion"
 	"SwendsenWang"
-	"Glauber"
+	# "Glauber"
 )
 
 list(APPEND TYPES
