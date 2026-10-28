@@ -68,6 +68,7 @@ namespace ATEAMS {
 
 			int stop = this->complex->Breaks[d][1];
 			int start = this->complex->Breaks[d][0];
+			int offset = (d > 0) ? this->complex->Offsets[d-1] : 0;
 			
 			// Fill in all the indices for cells of dimension not equal to d.
 			// TODO a small optimization: we only have to do the persistence algorithm
@@ -131,6 +132,15 @@ namespace ATEAMS {
 				);
 				assert(outcome.size() < 1);
 			}
+
+			// Variable names are confusing; sorry.
+			// Knock off the offset value (so the kth entry in `essential` is the index
+			// of each d-cell with respect to the filtration on the d-skeleton, not the
+			// entire filtration), then erase the homological percolation times that
+			// are greater than the number of cells included.
+			int includes = included.size();
+			std::for_each(essential.begin(), essential.end(), [start](int &k) { k -= start; });
+			std::erase_if(essential, [includes](int &t) { return t > includes; });
 
 			state.cochain = sample;
 			state.includes = included;

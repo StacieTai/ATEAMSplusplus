@@ -51,12 +51,14 @@ namespace ATEAMS::models {
 			resources
 		);
 
+		int stopAtTime = essential[this->stoppingFunction(t)]-offset;
+		std::vector<int> included(this->indices.begin(), this->indices.begin()+stopAtTime);
+
 		// Now, determine at what time we hit the desired number of giant cycles
 		// and return the indices of the d-cells included at or before that time.
+		int includes = included.size();
 		std::for_each(essential.begin(), essential.end(), [offset](int &k) { k -= offset; });
-		
-		int stopAtTime = essential[this->stoppingFunction(t)];
-		std::vector<int> included(this->indices.begin(), this->indices.begin()+stopAtTime);
+		std::erase_if(essential, [includes](int &t) { return t > includes; });
 
 		state.includes = included;
 		state.essential = essential;

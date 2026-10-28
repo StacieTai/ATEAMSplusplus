@@ -41,7 +41,6 @@ namespace ATEAMS::models {
 		}
 
 		int included = include.size();
-		state.includes = include;
 
 		// Construct the filtration.
 		int stop = this->complex->Breaks[d][0];
@@ -70,8 +69,14 @@ namespace ATEAMS::models {
 			printvector<int>(essential);
 		}
 
-		// Knock off the offset value, set state, and done.
+		// Knock off the offset value (so the kth entry in `essential` is the index
+		// of each d-cell with respect to the filtration on the d-skeleton, not the
+		// entire filtration), then erase the homological percolation times that
+		// are greater than the number of cells included.
 		std::for_each(essential.begin(), essential.end(), [offset](int &k) { k -= offset; });
+		std::erase_if(essential, [included](int &t) { return t > included; });
+
+		state.includes = include;
 		state.essential = essential;
 		state.rank = essential.size();
 		state.t = t;
