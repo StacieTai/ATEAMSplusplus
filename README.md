@@ -49,7 +49,7 @@ compilation terminated.
 ```
 
 ### Linux
-On Linux (Ubuntu 22.04/24.04)** use the same [installation steps as on macOS](#macOS) (adjusting your shell if you're using bash), or by following [these instructions](https://askubuntu.com/a/1518433) (adjusting the version from 14 to 15).
+On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#macOS) (adjusting your shell if you're using bash), or by following [these instructions](https://askubuntu.com/a/1518433) (adjusting the version from 14 to 15).
 
 ### Windows
 [Try MinGW](https://www.mingw-w64.org/getting-started/msys2/); it should come with a recent version of GCC.
