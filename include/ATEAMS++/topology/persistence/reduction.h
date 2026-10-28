@@ -30,6 +30,25 @@ namespace ATEAMS::topology::persistence {
 		arithmetic::SparseVectorAddition<RingLike>(cell, youngest, R, resources);
 	}
 
+	template <>
+	inline void reduceChain<Z2>(
+		SparseMatrix<Z2>& Full,
+		std::vector<int>& lookup,
+		SparseVector<Z2>& cell,
+		Ring* R,
+		arithmetic::ComputeResources<Z2>& resources
+	) {
+		// Get the youngest chain (column) sharing a face with `cell` and zero
+		// out the pivot row.
+		SparseVector<Z2> youngest = Full.rows[lookup[helpers::youngestOf<Z2>(cell)]];
+
+		// typename RingLike::dtype q = *youngest.find(helpers::youngestOf<RingLike>(cell));
+		// typename RingLike::dtype s = resources.arithmetic->negate[resources.arithmetic->invert[q]];
+
+		// arithmetic::SparseVectorRescaling<RingLike>(s, youngest, R, resources);
+		arithmetic::SparseVectorAddition<Z2>(cell, youngest, R, resources);
+	}
+
 
 	template <typename RingLike>
 	inline void reduceBlock(
