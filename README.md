@@ -12,7 +12,8 @@ ATEAMS++ is a high-performance C++ library for simulating
 
 ## Prerequisites
 
-**Note:** The [Homebrew](https://brew.sh/) package manager is strongly recommended for users running macOS, any flavor of Linux, or Windows Subsystem for Linux (WSL).
+> [!TIP]
+> The [Homebrew](https://brew.sh/) package manager is strongly recommended for users running macOS, any flavor of Linux, or Windows Subsystem for Linux (WSL).
 
 The only real prerequisite is **a compiler that supports the C++23 standard.** GCC 15 is the oldest cross-compatible compiler that supports all ATEAMS++'s features. Newer versions of GCC (e.g. 16) work as well.
 
@@ -71,7 +72,7 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 	3. [TBB](https://github.com/uxlfoundation/onetbb), and
 	4. (optionally) [jemalloc](https://jemalloc.net/),
 
-	which are all available through most package managers. [Make sure your compiler complies with the C++23 standard](https://en.cppreference.com/cpp/compiler_support/23); GCC ≥ 15 is a good bet. **jemalloc is _not_ required to use this software, but it is recommended**; if you don't want to use it, set the `jemalloc` variable in the CMake config file (`CMakeLists.txt`) to `FALSE` and it will be excluded.
+	which are all available through most package managers. [Make sure your compiler complies with the C++23 standard](https://en.cppreference.com/cpp/compiler_support/23); GCC ≥ 15 is a good bet.
 
 	To install these
 	* **on macOS**,
@@ -105,7 +106,13 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 	You can set any of the `jemalloc`, `tcmalloc`, or `mimalloc` tools to `TRUE` in the CMake config file (`CMakeLists.txt`), but the build will fail if more than one of the variables is set to `TRUE`.
 
 > [!NOTE]
-> l;kasjdfasf
+> **jemalloc is _not_ required to use this software, but it is recommended**; if you don't want to use it, set the `jemalloc` variable in the CMake config file (`CMakeLists.txt`) to `FALSE` and it will be excluded.
+
+</br>
+
+> [!NOTE]
+> After extensive testing on machines with 4 (macOS M2), 36 (Intel Xeon W-2295), and 192 (AMD Ryzen Threadripper PRO 7995WX) logical cores, **jemalloc provides the best multi-threaded performance** when compared to no alternate memory allocator, mimalloc, and tcmalloc.
+
 
 3. **Build and install the library.** In your favorite shell, running
 	```bash
@@ -177,11 +184,21 @@ $ ./main
 expected rank is 3.09
 ```
 
-This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor. **If you plan to run large-scale simulations on an external machine, the [`magnetizationplusplus` workflow](https://github.com/apizzimenti/magnetizationplusplus) may be of use to you.**
+This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor.
+
+> [!TIP]
+> If you plan to run large-scale simulations on an external machine, the [`magnetizationplusplus` workflow](https://github.com/apizzimenti/magnetizationplusplus) may be of use to you.**
+
 
 ## Known issues
-* `InvadedCluster` and `Invasion` perform $`\mathbb Z/2\mathbb Z`$ persistence when using rational coefficients.
-* Some models don't have complete debugging information.
+</br>
+> [!WARNING]
+> `InvadedCluster` and `Invasion` perform $`\mathbb Z/2\mathbb Z`$ persistence when using rational coefficients.
+
+</br>
+
+> [!WARNING]
+> Some models don't have complete debugging information.
 
 
 ## Contributing
