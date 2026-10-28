@@ -104,7 +104,7 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 
 	You can set any of the `jemalloc`, `tcmalloc`, or `mimalloc` tools to `TRUE` in the CMake config file (`CMakeLists.txt`), but the build will fail if more than one of the variables is set to `TRUE`.
 
-	<div style="margin: 1em auto; width: 80%; padding: 0.5em; background-color: #0077BB66"><strong>Note:</strong></div>
+<div style="background-color: #0077BB66"><strong>Note:</strong></div>
 
 3. **Build and install the library.** In your favorite shell, running
 	```bash
