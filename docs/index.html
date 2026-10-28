@@ -148,9 +148,8 @@ Algebraic Topology-Enabled AlgorithMs for Spin systems, in C++</h1>
 Prerequisites</h2>
 <dl class="section remark"><dt>Remarks</dt><dd>The <a href="https://brew.sh/">Homebrew</a> package manager is strongly recommended for users running macOS, any flavor of Linux, or Windows Subsystem for Linux (WSL).</dd></dl>
 <p>The only real prerequisite is <b>a compiler that supports the C++23 standard.</b> GCC 15 is the oldest cross-compatible compiler that supports all ATEAMS++'s features. Newer versions of GCC (e.g. 16) work as well.</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
-macOS</h3>
-<p>Install <a href="https://formulae.brew.sh/formula/gcc@15">GCC 15</a> <a href="https://formulae.brew.sh/formula/gcc">(or 16)</a> through Homebrew. After installation, test that you have the correct version by running </p><div class="fragment"><div class="line">$ g++-15 --version</div>
+<ul>
+<li><p class="startli"><b>on macOS</b>, Install <a href="https://formulae.brew.sh/formula/gcc@15">GCC 15</a> <a href="https://formulae.brew.sh/formula/gcc">(or 16)</a> through Homebrew. After installation, test that you have the correct version by running </p><div class="fragment"><div class="line">$ g++-15 --version</div>
 <div class="line"> </div>
 <div class="line">g++-15 (Homebrew GCC 15.3.0) 15.3.0</div>
 <div class="line">Copyright (C) 2025 Free Software Foundation, Inc.</div>
@@ -163,17 +162,15 @@ macOS</h3>
 <div class="line">export CXX=&quot;g++-15&quot;</div>
 <div class="line">alias gcc=$CC</div>
 <div class="line">alias g++=$CXX</div>
-</div><!-- fragment --><p>You can then run <span class="tt">g++</span> (with no arguments) just to check:</p>
+</div><!-- fragment --><p class="startli">You can then run <span class="tt">g++</span> (with no arguments) just to check:</p>
 <div class="fragment"><div class="line">$ g++</div>
 <div class="line">g++-15: fatal error: no input files</div>
 <div class="line">compilation terminated.</div>
-</div><!-- fragment --><h3 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
-Linux</h3>
-<p>On Linux (Ubuntu 22.04/24.04), use the same installation steps as on macOS (adjusting your shell if you're using bash), or by following <a href="https://askubuntu.com/a/1518433">these instructions</a> (adjusting the version from 14 to 15).</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
-Windows</h3>
-<p><a href="https://www.mingw-w64.org/getting-started/msys2/">Try MinGW</a>; it should come with a recent version of GCC.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --></li>
+<li><b>on Linux</b>, (Ubuntu 22.04/24.04), use the same installation steps as on macOS (adjusting your shell if you're using bash), or by following <a href="https://askubuntu.com/a/1518433">these instructions</a> (adjusting the version from 14 to 15).</li>
+<li><b>on Windows</b>, <a href="https://www.mingw-w64.org/getting-started/msys2/">Try MinGW</a>; it should come with a recent version of GCC.</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 Installation</h2>
 <ol type="1">
 <li><b>Clone the repository.</b> In your favorite shell, navigate to a sensible directory and run <div class="fragment"><div class="line">$ git clone --recursive https://github.com/apizzimenti/ATEAMSplusplus.git</div>
@@ -185,14 +182,14 @@ Installation</h2>
 <li>(optionally) <a href="https://jemalloc.net/">jemalloc</a>,</li>
 </ol>
 <p class="startli">which are all available through most package managers. <a href="https://en.cppreference.com/cpp/compiler_support/23">Make sure your compiler complies with the C++23 standard</a>; GCC ≥ 15 is a good bet.</p>
-<p class="startli">To install these</p><ul>
+<p class="startli">To install the dependencies...</p><ul>
 <li><b>on macOS</b>, <div class="fragment"><div class="line">$ brew install flint tbb jemalloc</div>
 </div><!-- fragment --></li>
 <li><b>on Linux (Ubuntu)</b>, <div class="fragment"><div class="line">$ sudo apt update</div>
 <div class="line">$ sudo apt install libgmp-dev libmpfr-dev libflint-dev libtbb-dev libjemalloc-dev</div>
 </div><!-- fragment --></li>
-<li><b>on Windows</b> (using <a href="https://vcpkg.io/en/">vcpkg</a>), <span class="tt">
-        &gt; vcpkg install flint tbb jemalloc
+<li><b>on Windows</b> (using <a href="https://vcpkg.io/en/">vcpkg</a>), <span class="tt">bash
+        $ vcpkg install flint tbb jemalloc
         </span></li>
 </ul>
 </li>
@@ -205,25 +202,20 @@ Installation</h2>
 <li><b>on Linux (Ubuntu)</b>, <div class="fragment"><div class="line">$ sudo apt update</div>
 <div class="line">$ sudo apt install libgoogle-perftools-dev libmimalloc-dev</div>
 </div><!-- fragment --></li>
-<li><b>on Windows</b> (using <a href="https://vcpkg.io/en/">vcpkg</a>), ``<span class="tt">
-&lt;blockquote&gt;&amp;zwj;vcpkg install gperftools mimalloc
-&lt;/blockquote&gt;\ilinebr &lt;br&gt;&lt;br&gt;
-You can set any of the </span>jemalloc<span class="tt">, </span>tcmalloc<span class="tt">, or </span>mimalloc<span class="tt"> tools to </span>TRUE<span class="tt"> in the CMake config file (</span>CMakeLists.txt<span class="tt">), but the build will fail if more than one of the variables is set to </span>TRUE`.</li>
+<li><b>on Windows</b> (using <a href="https://vcpkg.io/en/">vcpkg</a>), <div class="fragment"><div class="line">$ vcpkg install gperftools mimalloc</div>
+</div><!-- fragment --> You can set any of the <span class="tt">jemalloc</span>, <span class="tt">tcmalloc</span>, or <span class="tt">mimalloc</span> tools to <span class="tt">TRUE</span> in the CMake config file (<span class="tt">CMakeLists.txt</span>), but the build will fail if more than one of the variables is set to <span class="tt">TRUE</span>.</li>
 </ul>
+</dd></dl>
 <ol type="1">
 <li><b>Build and install the library.</b> In your favorite shell, running <div class="fragment"><div class="line">$ cd ATEAMSplusplus</div>
-<div class="line">$ make build</div>
-<div class="line">$ make install</div>
-</div><!-- fragment --> will build ATEAMS++ to the <span class="tt">build</span> directory, then install its headers and bundled dependencies (SparseRREF, PHAT) to your system's default install location. If you want to install it somewhere else, <div class="fragment"><div class="line">$ sudo cmake --install build --prefix &quot;somewhere/else&quot;</div>
+<div class="line">$ make build test install</div>
+</div><!-- fragment --> will build ATEAMS++'s tests to the <span class="tt">build</span> directory, run those tests, then install its headers and bundled dependencies (SparseRREF, PHAT) to your system's default install location. If you want to install it somewhere else, <div class="fragment"><div class="line">$ sudo cmake --install build --prefix &quot;somewhere/else&quot;</div>
 </div><!-- fragment --> will do the trick.</li>
 <li><b>Double-check.</b> To verify that the library is installed correctly, running <div class="fragment"><div class="line">$ pkg-config --cflags --libs ATEAMS++</div>
 </div><!-- fragment --> should give something like <div class="fragment"><div class="line">-I/usr/local/include -std=c++23 -fopenmp -Ofast -march=native -flto -funroll-loops -fprefetch-loop-arrays -fomit-frame-pointer -fno-rtti -L/usr/local/lib -lflint -L/opt/homebrew/lib -ltbb -ljemalloc</div>
 </div><!-- fragment --></li>
-<li><b>Triple-check.</b> If you want to run pre-built tests, set the <span class="tt">TEST</span> variable in <span class="tt">CMakeLists.txt</span> to <span class="tt">TRUE</span>, á la <div class="fragment"><div class="line">set(TEST TRUE)</div>
-</div><!-- fragment --> then run <span class="tt">make build test</span>.</li>
 </ol>
-</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 Usage</h2>
 <p>Most experiments follow a straightforward template:</p>
 <ol type="1">
@@ -264,21 +256,21 @@ Usage</h2>
 <div class="line">$ ./main</div>
 <div class="line">expected rank is 3.09</div>
 </div><!-- fragment --><p>This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor.</p>
-<dl class="section remark"><dt>Remarks</dt><dd>If you plan to run large-scale simulations on an external machine, the <a href="https://github.com/apizzimenti/magnetizationplusplus"><span class="tt">magnetizationplusplus</span> workflow</a> may be of use to you.**</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+<dl class="section remark"><dt>Remarks</dt><dd>If you plan to run large-scale simulations on an external machine, the <a href="https://github.com/apizzimenti/magnetizationplusplus"><span class="tt">magnetizationplusplus</span> workflow</a> may be of use to you.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 Known issues</h2>
 <ul>
 <li><span class="tt">InvadedCluster</span> and <span class="tt">Invasion</span> perform \(\mathbb Z/2\mathbb Z\) persistence when using rational coefficients.</li>
 <li>Some models don't have complete debugging information.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 Contributing</h2>
 <p>We welcome contributions. A few housekeeping rules:</p>
 <ol type="1">
 <li><b>Use the fork + branch + PR flow.</b> Fork + clone this repository, then create a new branch for each new feature you add. Once it's camera-ready, open a pull request on the main repository page, and we'll review it.</li>
-<li><b>Test!</b> Please write unit tests (like the ones in <span class="tt">tests/</span>) for any significant features (e.g. new Models, arithmetic functions, parallelization) you add. <em>Pull requests without accompanying unit tests will be automatically closed.</em></li>
+<li><b>Test!</b> Please write unit tests (like the ones in <span class="tt">tests/</span>) for any significant features (e.g. new Models, arithmetic functions, parallelization) you add. <b><em>Pull requests without accompanying unit tests will be automatically closed.</em></b></li>
 </ol>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Citing</h2>
 <div class="fragment"><div class="line">@software{ATEAMS++,</div>
 <div class="line">    title={{ATEAMS++: Algebraic Topology-Enabled AlgorithMs for Spin systems, in C++}},</div>

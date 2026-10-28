@@ -17,43 +17,43 @@ ATEAMS++ is a high-performance C++ library for simulating
 
 The only real prerequisite is **a compiler that supports the C++23 standard.** GCC 15 is the oldest cross-compatible compiler that supports all ATEAMS++'s features. Newer versions of GCC (e.g. 16) work as well.
 
-### macOS
-Install [GCC 15](https://formulae.brew.sh/formula/gcc@15) [(or 16)](https://formulae.brew.sh/formula/gcc) through Homebrew. After installation, test that you have the correct version by running
-```bash
-$ g++-15 --version
+* **on macOS**,
+	Install [GCC 15](https://formulae.brew.sh/formula/gcc@15) [(or 16)](https://formulae.brew.sh/formula/gcc) through Homebrew. After installation, test that you have the correct version by running
+	```bash
+	$ g++-15 --version
 
-g++-15 (Homebrew GCC 15.3.0) 15.3.0
-Copyright (C) 2025 Free Software Foundation, Inc.
-This is free software; see the source for copying conditions.  There is NO
-warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	
-```
-You can set `gcc-15` and `g++-15` to be your user's default C/C++ compilers by running
-```bash
-$ echo "export CC=\"gcc-15\" \nexport CXX=\"g++-15\" \nalias gcc=\$CC \nalias g++=\$CXX" >> ~/.zshrc && source ~/.zshrc
-```
-which appends aliases to your zsh configuration file (and creates the file if it doesn't already exist, which it should). You can verify that the aliases were correctly installed by running
-```bash
-$ cat ~/.zshrc
+	g++-15 (Homebrew GCC 15.3.0) 15.3.0
+	Copyright (C) 2025 Free Software Foundation, Inc.
+	This is free software; see the source for copying conditions.  There is NO
+	warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	
+	```
+	You can set `gcc-15` and `g++-15` to be your user's default C/C++ compilers by running
+	```bash
+	$ echo "export CC=\"gcc-15\" \nexport CXX=\"g++-15\" \nalias gcc=\$CC \nalias g++=\$CXX" >> ~/.zshrc && source ~/.zshrc
+	```
+	which appends aliases to your zsh configuration file (and creates the file if it doesn't already exist, which it should). You can verify that the aliases were correctly installed by running
+	```bash
+	$ cat ~/.zshrc
 
-export CC="gcc-15"
-export CXX="g++-15"
-alias gcc=$CC
-alias g++=$CXX
-```
+	export CC="gcc-15"
+	export CXX="g++-15"
+	alias gcc=$CC
+	alias g++=$CXX
+	```
 
-You can then run `g++` (with no arguments) just to check:
+	You can then run `g++` (with no arguments) just to check:
 
-```bash
-$ g++
-g++-15: fatal error: no input files
-compilation terminated.
-```
+	```bash
+	$ g++
+	g++-15: fatal error: no input files
+	compilation terminated.
+	```
 
-### Linux
-On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#macOS) (adjusting your shell if you're using bash), or by following [these instructions](https://askubuntu.com/a/1518433) (adjusting the version from 14 to 15).
+* **on Linux**,
+	(Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#macOS) (adjusting your shell if you're using bash), or by following [these instructions](https://askubuntu.com/a/1518433) (adjusting the version from 14 to 15).
 
-### Windows
-[Try MinGW](https://www.mingw-w64.org/getting-started/msys2/); it should come with a recent version of GCC.
+* **on Windows**,
+	[Try MinGW](https://www.mingw-w64.org/getting-started/msys2/); it should come with a recent version of GCC.
 		
 
 
@@ -74,7 +74,7 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 
 	which are all available through most package managers. [Make sure your compiler complies with the C++23 standard](https://en.cppreference.com/cpp/compiler_support/23); GCC ≥ 15 is a good bet.
 
-	To install these
+	To install the dependencies...
 	* **on macOS**,
 		```bash
 		$ brew install flint tbb jemalloc
@@ -85,9 +85,10 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 		$ sudo apt install libgmp-dev libmpfr-dev libflint-dev libtbb-dev libjemalloc-dev
 		```
 	* **on Windows** (using [vcpkg](https://vcpkg.io/en/)),
+		```bash
+		$ vcpkg install flint tbb jemalloc
 		```
-		> vcpkg install flint tbb jemalloc
-		```
+
 
 > [!NOTE]
 > **jemalloc is _not_ required to use this software, but it is recommended:** after extensive testing on machines with 4 (macOS M2), 36 (Intel Xeon W-2295), and 192 (AMD Ryzen Threadripper PRO 7995WX) logical cores, **jemalloc provides the best multi-threaded performance** when compared to no alternate memory allocator, mimalloc, and tcmalloc. If you don't want to use it, set the `jemalloc` variable in the CMake config file (`CMakeLists.txt`) to `FALSE` and it will be excluded.
@@ -103,19 +104,19 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 > 	$ sudo apt install libgoogle-perftools-dev libmimalloc-dev
 > 	```
 > * **on Windows** (using [vcpkg](https://vcpkg.io/en/)),
-> 	```
-> 	> vcpkg install gperftools mimalloc
-> 
+> 	```bash
+> 	$ vcpkg install gperftools mimalloc
+>	```
 > You can set any of the `jemalloc`, `tcmalloc`, or `mimalloc` tools to `TRUE` in the CMake config file (`CMakeLists.txt`), but the build will fail if more than one of the variables is set to `TRUE`.
 
+</br>
 
 3. **Build and install the library.** In your favorite shell, running
 	```bash
 	$ cd ATEAMSplusplus
-	$ make build
-	$ make install
+	$ make build test install
 	```
-	will build ATEAMS++ to the `build` directory, then install its headers and bundled dependencies (SparseRREF, PHAT) to your system's default install location. If you want to install it somewhere else,
+	will build ATEAMS++'s tests to the `build` directory, run those tests, then install its headers and bundled dependencies (SparseRREF, PHAT) to your system's default install location. If you want to install it somewhere else,
 	```bash
 	$ sudo cmake --install build --prefix "somewhere/else"
 	```
@@ -129,12 +130,6 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 	```bash
 	-I/usr/local/include -std=c++23 -fopenmp -Ofast -march=native -flto -funroll-loops -fprefetch-loop-arrays -fomit-frame-pointer -fno-rtti -L/usr/local/lib -lflint -L/opt/homebrew/lib -ltbb -ljemalloc
 	```
-
-5. **Triple-check.** If you want to run pre-built tests, set the `TEST` variable in `CMakeLists.txt` to `TRUE`, á la
-	```
-	set(TEST TRUE)
-	```
-	then run `make build test`.
 
 ## Usage
 
@@ -182,7 +177,7 @@ expected rank is 3.09
 This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor.
 
 > [!TIP]
-> If you plan to run large-scale simulations on an external machine, the [`magnetizationplusplus` workflow](https://github.com/apizzimenti/magnetizationplusplus) may be of use to you.**
+> If you plan to run large-scale simulations on an external machine, the [`magnetizationplusplus` workflow](https://github.com/apizzimenti/magnetizationplusplus) may be of use to you.
 
 
 ## Known issues
@@ -194,7 +189,7 @@ This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor.
 We welcome contributions. A few housekeeping rules:
 
 1. **Use the fork + branch + PR flow.** Fork + clone this repository, then create a new branch for each new feature you add. Once it's camera-ready, open a pull request on the main repository page, and we'll review it.
-2. **Test!** Please write unit tests (like the ones in `tests/`) for any significant features (e.g. new Models, arithmetic functions, parallelization) you add. _Pull requests without accompanying unit tests will be automatically closed._
+2. **Test!** Please write unit tests (like the ones in `tests/`) for any significant features (e.g. new Models, arithmetic functions, parallelization) you add. **_Pull requests without accompanying unit tests will be automatically closed._**
 
 ## Citing
 

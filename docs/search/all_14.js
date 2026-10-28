@@ -1,5 +1,5 @@
 var searchData=
 [
   ['unsatisfied_0',['unsatisfied',['../namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b',1,'ATEAMS::statistics']]],
-  ['usage_1',['Usage',['../index.html#autotoc_md6',1,'']]]
+  ['usage_1',['Usage',['../index.html#autotoc_md3',1,'']]]
 ];
