@@ -89,29 +89,24 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 		> vcpkg install flint tbb jemalloc
 		```
 
-	If you want to use another memory allocator like [mimalloc](https://github.com/microsoft/mimalloc) or [tcmalloc](https://github.com/google/tcmalloc), install it in the same way as jemalloc:
-	* **on macOS**,
-		```bash
-		$ brew install gperftools mimalloc
-		```
-	* **on Linux (Ubuntu)**,
-		```bash
-		$ sudo apt update
-		$ sudo apt install libgoogle-perftools-dev libmimalloc-dev
-		```
-	* **on Windows** (using [vcpkg](https://vcpkg.io/en/)),
-		```
-		> vcpkg install gperftools mimalloc
-
-	You can set any of the `jemalloc`, `tcmalloc`, or `mimalloc` tools to `TRUE` in the CMake config file (`CMakeLists.txt`), but the build will fail if more than one of the variables is set to `TRUE`.
-
 > [!NOTE]
-> **jemalloc is _not_ required to use this software, but it is recommended**; if you don't want to use it, set the `jemalloc` variable in the CMake config file (`CMakeLists.txt`) to `FALSE` and it will be excluded.
-
-</br>
-
-> [!NOTE]
-> After extensive testing on machines with 4 (macOS M2), 36 (Intel Xeon W-2295), and 192 (AMD Ryzen Threadripper PRO 7995WX) logical cores, **jemalloc provides the best multi-threaded performance** when compared to no alternate memory allocator, mimalloc, and tcmalloc.
+> **jemalloc is _not_ required to use this software, but it is recommended:** after extensive testing on machines with 4 (macOS M2), 36 (Intel Xeon W-2295), and 192 (AMD Ryzen Threadripper PRO 7995WX) logical cores, **jemalloc provides the best multi-threaded performance** when compared to no alternate memory allocator, mimalloc, and tcmalloc. If you don't want to use it, set the `jemalloc` variable in the CMake config file (`CMakeLists.txt`) to `FALSE` and it will be excluded.
+>
+> If you want to use another memory allocator like [mimalloc](https://github.com/microsoft/mimalloc) or [tcmalloc](https://github.com/google/tcmalloc), install it in the same way as jemalloc:
+> * **on macOS**,
+> 	```bash
+> 	$ brew install gperftools mimalloc
+> 	```
+> * **on Linux (Ubuntu)**,
+> 	```bash
+> 	$ sudo apt update
+> 	$ sudo apt install libgoogle-perftools-dev libmimalloc-dev
+> 	```
+> * **on Windows** (using [vcpkg](https://vcpkg.io/en/)),
+> 	```
+> 	> vcpkg install gperftools mimalloc
+> 
+> You can set any of the `jemalloc`, `tcmalloc`, or `mimalloc` tools to `TRUE` in the CMake config file (`CMakeLists.txt`), but the build will fail if more than one of the variables is set to `TRUE`.
 
 
 3. **Build and install the library.** In your favorite shell, running
