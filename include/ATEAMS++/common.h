@@ -101,7 +101,7 @@ namespace ATEAMS {
 			/**
 			 * @brief Data type @ref FINITE.
 			 */
-			typedef FINITE dtype;
+			typedef bool dtype;
 
 			/**
 			 * @brief Constructor.

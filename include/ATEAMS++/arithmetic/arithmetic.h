@@ -47,7 +47,7 @@ namespace ATEAMS {
 		template <typename RingLike>
 		inline void SparseVectorAddition(
 			SparseVector<RingLike>& u,
-			const SparseVector<RingLike>& v,
+			SparseVector<RingLike>& v,
 			Ring* R,
 			ComputeResources<RingLike>& resources
 		) {
@@ -125,6 +125,17 @@ namespace ATEAMS {
 
 			// Canonicalize.
 			u.canonicalize();
+		}
+
+
+		template <>
+		inline void SparseVectorAddition<Z2>(
+			SparseVector<Z2>& u,
+			SparseVector<Z2>& v,
+			Ring* R,
+			ComputeResources<Z2>& resources
+		) {
+			sparse_vec_add<INDEX>(u, v, R->ring);
 		}
 
 		/**
