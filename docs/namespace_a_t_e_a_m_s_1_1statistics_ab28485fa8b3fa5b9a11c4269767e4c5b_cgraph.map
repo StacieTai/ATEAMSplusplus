@@ -1,10 +1,7 @@
 <map id="unsatisfied" name="unsatisfied">
 <area shape="rect" id="Node000001" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,37,90,62"/>
-<area shape="poly" id="edge5_Node000001_Node000001" title=" " alt="" coords="14,37,7,28,11,18,25,12,48,10,72,13,86,22,81,23,71,18,47,15,26,17,15,22,13,28,19,36"/>
-<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a3d2982d2b0fb712cd76a48c77f4ba912" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel." alt="" coords="138,29,358,70"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,47,125,49,119,50,90,52"/>
-<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="210,27,208,19,214,10,228,5,248,3,270,5,284,14,279,13,268,10,248,8,229,10,217,15,213,20,215,30"/>
-<area shape="rect" id="Node000003" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#acaca566eef40bba411fc8f778016fa7c" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="406,29,546,70"/>
-<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="358,47,393,50,388,50,358,52"/>
-<area shape="poly" id="edge4_Node000003_Node000003" title=" " alt="" coords="434,27,431,19,438,10,453,5,476,3,501,5,517,14,512,13,500,10,476,8,454,10,441,15,436,21,438,30"/>
+<area shape="poly" id="edge3_Node000001_Node000001" title=" " alt="" coords="17,37,11,28,15,19,27,12,48,10,69,13,82,21,77,22,67,18,47,15,29,17,19,22,17,28,22,36"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="138,29,315,70"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,47,124,49,119,50,90,52"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="192,27,190,19,196,10,208,5,226,3,246,5,259,14,254,13,244,10,226,8,210,10,199,14,196,20,197,30"/>
 </map>

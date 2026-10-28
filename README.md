@@ -28,14 +28,24 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 You can set `gcc-15` and `g++-15` to be your user's default C/C++ compilers by running
 ```bash
-$ echo "alias gcc=gcc-15\nalias g++=g++-15" >> ~/.zshrc
+$ echo "export CC=\"gcc-15\" \nexport CXX=\"g++-15\" \nalias gcc=\$CC \nalias g++=\$CXX" >> ~/.zshrc && source ~/.zshrc
 ```
 which appends aliases to your zsh configuration file (and creates the file if it doesn't already exist, which it should). You can verify that the aliases were correctly installed by running
 ```bash
 $ cat ~/.zshrc
 
-alias gcc=gcc-15
-alias g++=g++-15
+export CC="gcc-15"
+export CXX="g++-15"
+alias gcc=$CC
+alias g++=$CXX
+```
+
+You can then run `g++` (with no arguments) just to check:
+
+```bash
+$ g++
+g++-15: fatal error: no input files
+compilation terminated.
 ```
 
 ### Linux
@@ -56,11 +66,27 @@ On Linux (Ubuntu 22.04/24.04)** use the same [installation steps as on macOS](#m
 
 2. **Install dependencies.** ATEAMS++ requires
 
-	1. [OpenMP](https://github.com/openmp),
-	2. [FLINT](https://flintlib.org/), and
-	3. (optionally!) [mimalloc](https://github.com/microsoft/mimalloc),
+	1. [OpenMP](https://github.com/openmp) (which comes prepackaged with GCC compilers),
+	2. [FLINT](https://flintlib.org/),
+	3. [TBB](https://github.com/uxlfoundation/onetbb), and
+	4. (optionally) [jemalloc](https://jemalloc.net/),
 
 	which are all available through most package managers. [Make sure your compiler complies with the C++23 standard](https://en.cppreference.com/cpp/compiler_support/23); GCC ≥ 15 is a good bet. mimalloc is _not_ required to use this software, but it is recommended; if you don't want to use it, set the `mimalloc` variable in `CMakeLists.txt` to `FALSE` and it will be excluded.
+
+	To install these
+	* **on macOS**,
+		```bash
+		$ brew install flint tbb jemalloc
+		```
+	* **on Linux (Ubuntu)**,
+		```bash
+		$ sudo apt update
+		$ sudo apt install libgmp-dev libmpfr-dev libflint-dev libtbb-dev libjemalloc-dev
+		```
+	* **on Windows** (using [vcpkg](https://vcpkg.io/en/)),
+		```
+		> vcpkg install flint tbb jemalloc
+		```
 
 3. **Build and install the library.** In your favorite shell, running
 	```bash
@@ -80,14 +106,14 @@ On Linux (Ubuntu 22.04/24.04)** use the same [installation steps as on macOS](#m
 	```
 	should give something like
 	```bash
-	-I/usr/local/include -std=c++23 -fopenmp -Ofast -march=native -flto -funroll-loops -fprefetch-loop-arrays -fomit-frame-pointer -fno-rtti -L/usr/local/lib -lflint
+	-I/usr/local/include -std=c++23 -fopenmp -Ofast -march=native -flto -funroll-loops -fprefetch-loop-arrays -fomit-frame-pointer -fno-rtti -L/usr/local/lib -lflint -L/opt/homebrew/lib -ltbb -ljemalloc
 	```
 
 5. **Triple-check.** If you want to run pre-built tests, set the `TEST` variable in `CMakeLists.txt` to `TRUE`, á la
 	```
 	set(TEST TRUE)
 	```
-	then run `make test`.
+	then run `make build test`.
 
 ## Usage
 
@@ -135,15 +161,6 @@ expected rank is 3.09
 This takes ~8 seconds on a 2022 MacBook Air with an Apple M2 processor. **If you plan to run large-scale simulations on an external machine, the [`magnetizationplusplus` workflow](https://github.com/apizzimenti/magnetizationplusplus) may be of use to you.**
 
 ## Known issues
-* On some Linux systems, linking against ATEAMS++ may admit a linking error talking about undefined symbols in a `tbb` namespace. Recompile your program with the linking flag `-ltbb`, like
-
-	```bash
-	$ $CXX yourfile.cpp `pkg-config --libs --cflags ATEAMS++` -ltbb -o executable
-	```
-
-	for things to work.
-
-* Using `mimalloc` on macOS with GCC ≥ 16 can sometimes yield slower compute times and segfaults.
 * `InvadedCluster` and `Invasion` perform $`\mathbb Z/2\mathbb Z`$ persistence when using rational coefficients.
 * Some models don't have complete debugging information.
 
@@ -161,7 +178,7 @@ We welcome contributions. A few housekeeping rules:
 	title={{ATEAMS++: Algebraic Topology-Enabled AlgorithMs for Spin systems, in C++}},
 	author={Pizzimenti, Anthony E. and Eldridge, Summer and Schweinhart, Ben and Duncan, Paul},
 	url={github.com/apizzimenti/ATEAMSplusplus},
-	version={1.0},
+	version={1.0.0},
 	doi={10.5281/zenodo.20817889}
 }
 ```

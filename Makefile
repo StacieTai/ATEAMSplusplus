@@ -19,7 +19,7 @@ clean:
 	rm -rf build
 
 reset: clean
-	sudo rm -rf /usr/local/include/ATEAMS++ /usr/local/include/ATEAMS++.h
+	sudo rm -rf /usr/local/include/phat /usr/local/include/SparseRREF /usr/local/include/ATEAMS++ /usr/local/include/ATEAMS++.h
 
 build-noisy:
 	cmake -B build

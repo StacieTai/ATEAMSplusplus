@@ -1,0 +1,6 @@
+<map id="nonzeroIndices" name="nonzeroIndices">
+<area shape="rect" id="Node000001" title="Performs the matrix multiplication &#160;and returns the indices of nonzero entries in ...." alt="" coords="163,29,272,55"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="243,14,235,10,217,8,201,10,192,15,191,20,195,30,190,28,185,21,188,11,199,5,217,3,237,5,248,15"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a93a7fe8b85fb1fac613d07a625128338" title="Performs the matrix multiplication &#160;and returns the indices of nonzero entries in ...." alt="" coords="5,29,115,55"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="145,42,115,45,115,40,150,42"/>
+</map>

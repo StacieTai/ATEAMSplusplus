@@ -1,0 +1,6 @@
+<map id="SparseRightMultiplication" name="SparseRightMultiplication">
+<area shape="rect" id="Node000001" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel...." alt="" coords="5,29,175,55"/>
+<area shape="rect" id="Node000002" href="$namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="223,29,392,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="175,40,210,42,204,42,175,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="271,28,264,21,268,11,283,5,307,3,334,5,349,15,344,14,332,10,307,8,284,10,272,15,269,20,276,30"/>
+</map>

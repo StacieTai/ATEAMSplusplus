@@ -3,6 +3,7 @@ var annotated_dup =
     [ "ATEAMS", "namespace_a_t_e_a_m_s.html", [
       [ "arithmetic", "namespace_a_t_e_a_m_s_1_1arithmetic.html", [
         [ "SerialContainers", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_serial_containers.html", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_serial_containers" ],
+        [ "TypedParallelContainers", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_typed_parallel_containers.html", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_typed_parallel_containers" ],
         [ "ParallelContainers", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_parallel_containers.html", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_parallel_containers" ],
         [ "FiniteArithmetic", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_finite_arithmetic.html", "struct_a_t_e_a_m_s_1_1arithmetic_1_1_finite_arithmetic" ],
         [ "ComputeResources", "class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html", "class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources" ]

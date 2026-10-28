@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespace_a_t_
 Classes</h2></td></tr>
 <tr class="memitem:SerialContainers" id="r_SerialContainers"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_a_t_e_a_m_s_1_1arithmetic_1_1_serial_containers.html">SerialContainers</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reusable containers for serial persistence computation. See <a class="el" href="namespace_a_t_e_a_m_s_1_1topology_1_1persistence.html#ac6958f059e588d0033ea5bb07b6d5395" title="twist">twist</a>.  <a href="struct_a_t_e_a_m_s_1_1arithmetic_1_1_serial_containers.html#details">More...</a><br /></td></tr>
+<tr class="memitem:TypedParallelContainers" id="r_TypedParallelContainers"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_a_t_e_a_m_s_1_1arithmetic_1_1_typed_parallel_containers.html">TypedParallelContainers</a></td></tr>
 <tr class="memitem:ParallelContainers" id="r_ParallelContainers"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_a_t_e_a_m_s_1_1arithmetic_1_1_parallel_containers.html">ParallelContainers</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reusable containers for parallel persistence computation. See <a class="el" href="namespace_a_t_e_a_m_s_1_1topology_1_1persistence.html#accb8e8b1aed2ca025c410fea20b8552c" title="JIT">JIT</a>.  <a href="struct_a_t_e_a_m_s_1_1arithmetic_1_1_parallel_containers.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FiniteArithmetic" id="r_FiniteArithmetic"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_a_t_e_a_m_s_1_1arithmetic_1_1_finite_arithmetic.html">FiniteArithmetic</a></td></tr>
@@ -171,9 +172,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a0030f1b3f6243a3f8094596eef404c5f" id="r_a0030f1b3f6243a3f8094596eef404c5f"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
 <tr class="memitem:a0030f1b3f6243a3f8094596eef404c5f template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0030f1b3f6243a3f8094596eef404c5f">SparseRightMultiplication</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
 <tr class="memdesc:a0030f1b3f6243a3f8094596eef404c5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse (right) matrix multiplication \( A \vec x \).  <br /></td></tr>
-<tr class="memitem:a3d2982d2b0fb712cd76a48c77f4ba912" id="r_a3d2982d2b0fb712cd76a48c77f4ba912"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
-<tr class="memitem:a3d2982d2b0fb712cd76a48c77f4ba912 template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3d2982d2b0fb712cd76a48c77f4ba912">ParallelSparseRightMultiplication</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
-<tr class="memdesc:a3d2982d2b0fb712cd76a48c77f4ba912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel.  <br /></td></tr>
+<tr class="memitem:a1a8ebada97ebaf454b30b68b8c2680d2" id="r_a1a8ebada97ebaf454b30b68b8c2680d2"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
+<tr class="memitem:a1a8ebada97ebaf454b30b68b8c2680d2 template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1a8ebada97ebaf454b30b68b8c2680d2">OpenMPSparseRightMultiplication</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
+<tr class="memdesc:a1a8ebada97ebaf454b30b68b8c2680d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel. Uses OpenMP.  <br /></td></tr>
+<tr class="memitem:a33d0a906aac3e2b96943cf256dea363a" id="r_a33d0a906aac3e2b96943cf256dea363a"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
+<tr class="memitem:a33d0a906aac3e2b96943cf256dea363a template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a33d0a906aac3e2b96943cf256dea363a">SparseRightMultiplication</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;resources)</td></tr>
+<tr class="memdesc:a33d0a906aac3e2b96943cf256dea363a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel. Uses <span class="tt">BS::thread_pool</span>.  <br /></td></tr>
 <tr class="memitem:ab7087fa033516694f6d702122ea7143e" id="r_ab7087fa033516694f6d702122ea7143e"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
 <tr class="memitem:ab7087fa033516694f6d702122ea7143e template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab7087fa033516694f6d702122ea7143e">SparseVectorRescaling</a> (typename RingLike::dtype a, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;resources)</td></tr>
 <tr class="memitem:a41c0fe25f857de33869baf10247269fc" id="r_a41c0fe25f857de33869baf10247269fc"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
@@ -191,8 +195,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ac2a7f129add7fdd44d3162f4560ccc52" id="r_ac2a7f129add7fdd44d3162f4560ccc52"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
 <tr class="memitem:ac2a7f129add7fdd44d3162f4560ccc52 template"><td class="memItemLeft"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ac2a7f129add7fdd44d3162f4560ccc52">submatrixKernelSample</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; coboundary, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, std::vector&lt; int &gt; exclude, std::uniform_int_distribution&lt; int &gt; &amp;intuniform, std::mt19937 &amp;RNG, <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;resources, bool DEBUG=false)</td></tr>
 <tr class="memdesc:ac2a7f129add7fdd44d3162f4560ccc52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a cochain \(f\) at uniform random from \(\delta^{d-1}\) such that \(f\) is a cocycle on the \(d\)-cells corresponding to the rows not in <span class="tt">exclude</span>. See the implementations of <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage.  <br /></td></tr>
-<tr class="memitem:a09c0380c730fd06d21a19fb0a1d79096" id="r_a09c0380c730fd06d21a19fb0a1d79096"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
-<tr class="memitem:a09c0380c730fd06d21a19fb0a1d79096 template"><td class="memItemLeft">std::vector&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a09c0380c730fd06d21a19fb0a1d79096">excludedCells</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;coboundary, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;cochain, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
+<tr class="memitem:a3dc7e5d9b7d685c4616567deb54d473c" id="r_a3dc7e5d9b7d685c4616567deb54d473c"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
+<tr class="memitem:a3dc7e5d9b7d685c4616567deb54d473c template"><td class="memItemLeft">std::vector&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a3dc7e5d9b7d685c4616567deb54d473c">nonzeroIndices</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R)</td></tr>
+<tr class="memdesc:a3dc7e5d9b7d685c4616567deb54d473c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the matrix multiplication \(Ax = y\) and returns the indices of nonzero entries in \(y\). See <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage.  <br /></td></tr>
+<tr class="memitem:a93a7fe8b85fb1fac613d07a625128338" id="r_a93a7fe8b85fb1fac613d07a625128338"><td class="memTemplParams" colspan="2">template&lt;typename RingLike&gt; </td></tr>
+<tr class="memitem:a93a7fe8b85fb1fac613d07a625128338 template"><td class="memItemLeft">std::vector&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a93a7fe8b85fb1fac613d07a625128338">nonzeroIndices</a> (<a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;A, <a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;x, <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *R, <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;resources)</td></tr>
+<tr class="memdesc:a93a7fe8b85fb1fac613d07a625128338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the matrix multiplication \(Ax = y\) and returns the indices of nonzero entries in \(y\). This overload performs the multiplication in parallel using the <code class="param">resource</code> thread pool. See <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sparse, finite-field linear algebra and support routines. </p>
@@ -234,8 +242,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a09c0380c730fd06d21a19fb0a1d79096" name="a09c0380c730fd06d21a19fb0a1d79096"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09c0380c730fd06d21a19fb0a1d79096">&#9670;&#160;</a></span>excludedCells()</h2>
+<a id="a3dc7e5d9b7d685c4616567deb54d473c" name="a3dc7e5d9b7d685c4616567deb54d473c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dc7e5d9b7d685c4616567deb54d473c">&#9670;&#160;</a></span>nonzeroIndices() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,61 +254,7 @@ template&lt;typename RingLike&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; int &gt; excludedCells </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>coboundary</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>cochain</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *</td>          <td class="paramname"><span class="paramname"><em>R</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph" loading="lazy" alt=""/></div>
-<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_cgraph">
-<area shape="rect" title=" " alt="" coords="5,29,109,55"/>
-<area shape="poly" title=" " alt="" coords="38,29,35,21,37,11,45,5,57,3,70,5,78,14,73,14,68,10,57,8,47,10,42,14,40,20,43,29"/>
-</map>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph" loading="lazy" alt=""/></div>
-<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a09c0380c730fd06d21a19fb0a1d79096_icgraph">
-<area shape="rect" title=" " alt="" coords="5,29,109,55"/>
-<area shape="poly" title=" " alt="" coords="73,14,68,10,57,8,47,10,42,14,40,20,43,29,38,29,35,21,37,11,45,5,57,3,70,5,78,14"/>
-</map>
-</div>
-
-</div>
-</div>
-<a id="a3d2982d2b0fb712cd76a48c77f4ba912" name="a3d2982d2b0fb712cd76a48c77f4ba912"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d2982d2b0fb712cd76a48c77f4ba912">&#9670;&#160;</a></span>ParallelSparseRightMultiplication()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename RingLike&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; ParallelSparseRightMultiplication </td>
+          <td class="memname">std::vector&lt; int &gt; nonzeroIndices </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
         </tr>
@@ -322,7 +276,150 @@ template&lt;typename RingLike&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel. </p>
+<p>Performs the matrix multiplication \(Ax = y\) and returns the indices of nonzero entries in \(y\). See <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">RingLike</td><td>A coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>Matrix, usually a coboundary. </td></tr>
+    <tr><td class="paramname">x</td><td>Vector, usuall a cochain. </td></tr>
+    <tr><td class="paramname">R</td><td>(Pointer to) a coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of indices of the multiplication \(Ax = y\) with nonzero entries. </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_cgraph">
+<area shape="rect" title="Performs the matrix multiplication &#160;and returns the indices of nonzero entries in ...." alt="" coords="5,29,115,55"/>
+<area shape="poly" title=" " alt="" coords="40,29,37,21,39,11,47,5,60,3,74,5,82,14,77,14,72,10,60,8,49,10,44,14,42,20,46,29"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a3dc7e5d9b7d685c4616567deb54d473c_icgraph">
+<area shape="rect" title="Performs the matrix multiplication &#160;and returns the indices of nonzero entries in ...." alt="" coords="163,29,272,55"/>
+<area shape="poly" title=" " alt="" coords="243,14,235,10,217,8,201,10,192,15,191,20,195,30,190,28,185,21,188,11,199,5,217,3,237,5,248,15"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#a93a7fe8b85fb1fac613d07a625128338" title="Performs the matrix multiplication &#160;and returns the indices of nonzero entries in ...." alt="" coords="5,29,115,55"/>
+<area shape="poly" title=" " alt="" coords="145,42,115,45,115,40,150,42"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a93a7fe8b85fb1fac613d07a625128338" name="a93a7fe8b85fb1fac613d07a625128338"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93a7fe8b85fb1fac613d07a625128338">&#9670;&#160;</a></span>nonzeroIndices() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RingLike&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int &gt; nonzeroIndices </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *</td>          <td class="paramname"><span class="paramname"><em>R</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>resources</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Performs the matrix multiplication \(Ax = y\) and returns the indices of nonzero entries in \(y\). This overload performs the multiplication in parallel using the <code class="param">resource</code> thread pool. See <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_swendsen_wang.html" title="SwendsenWang">SwendsenWang</a> or <a class="el" href="class_a_t_e_a_m_s_1_1models_1_1_invaded_cluster.html" title="InvadedCluster">InvadedCluster</a> for usage. This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">RingLike</td><td>A coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>Matrix, usually a coboundary. </td></tr>
+    <tr><td class="paramname">x</td><td>Vector, usuall a cochain. </td></tr>
+    <tr><td class="paramname">R</td><td>(Pointer to) a coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>. </td></tr>
+    <tr><td class="paramname">resources</td><td>A <a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html" title="ComputeResources">ComputeResources</a> instance.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of indices of the multiplication \(Ax = y\) with nonzero entries. </dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a93a7fe8b85fb1fac613d07a625128338_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a93a7fe8b85fb1fac613d07a625128338_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a93a7fe8b85fb1fac613d07a625128338_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a93a7fe8b85fb1fac613d07a625128338_cgraph">
+<area shape="rect" title="Performs the matrix multiplication &#160;and returns the indices of nonzero entries in ...." alt="" coords="5,29,115,55"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#a3dc7e5d9b7d685c4616567deb54d473c" title="Performs the matrix multiplication &#160;and returns the indices of nonzero entries in ...." alt="" coords="163,29,272,55"/>
+<area shape="poly" title=" " alt="" coords="115,40,150,42,145,42,115,45"/>
+<area shape="poly" title=" " alt="" coords="190,28,185,21,188,11,199,5,217,3,237,5,248,15,243,14,235,10,217,8,201,10,192,15,191,20,195,30"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1a8ebada97ebaf454b30b68b8c2680d2" name="a1a8ebada97ebaf454b30b68b8c2680d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a8ebada97ebaf454b30b68b8c2680d2">&#9670;&#160;</a></span>OpenMPSparseRightMultiplication()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RingLike&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; OpenMPSparseRightMultiplication </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *</td>          <td class="paramname"><span class="paramname"><em>R</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel. Uses OpenMP. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">RingLike</td><td>A coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
@@ -339,39 +436,26 @@ template&lt;typename RingLike&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( \vec y = A \vec x \). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00165">165</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00164">164</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph" loading="lazy" alt=""/></div>
-<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_cgraph">
-<area shape="rect" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel." alt="" coords="5,29,218,55"/>
-<area shape="poly" title=" " alt="" coords="75,29,69,21,73,11,88,5,112,3,138,5,153,15,147,15,136,10,111,8,89,10,77,15,74,20,81,29"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#acaca566eef40bba411fc8f778016fa7c" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="266,29,387,55"/>
-<area shape="poly" title=" " alt="" coords="218,40,253,42,248,42,218,45"/>
-<area shape="poly" title=" " alt="" coords="290,28,284,21,288,11,302,5,326,3,353,5,367,15,362,14,351,10,326,8,304,10,291,15,289,20,295,30"/>
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_cgraph">
+<area shape="rect" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel...." alt="" coords="5,29,226,55"/>
+<area shape="poly" title=" " alt="" coords="79,29,72,21,76,11,91,5,116,3,142,5,157,15,152,15,141,10,115,8,92,10,80,15,77,20,84,29"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#acaca566eef40bba411fc8f778016fa7c" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="274,29,395,55"/>
+<area shape="poly" title=" " alt="" coords="226,40,261,42,255,42,226,45"/>
+<area shape="poly" title=" " alt="" coords="298,28,291,21,295,11,310,5,334,3,361,5,376,15,371,14,360,10,334,8,311,10,299,15,296,20,303,30"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph" loading="lazy" alt=""/></div>
-<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a3d2982d2b0fb712cd76a48c77f4ba912_icgraph">
-<area shape="rect" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel." alt="" coords="374,156,586,181"/>
-<area shape="poly" title=" " alt="" coords="517,141,506,137,480,134,457,136,444,141,441,146,448,156,443,154,436,147,440,137,455,131,480,129,507,132,523,141"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#a84057b52565f61ccb4a02ec1dd01796e" title="Computes the total energy of the given configuration." alt="" coords="190,29,326,70"/>
-<area shape="poly" title=" " alt="" coords="440,148,325,85,302,73,302,68,327,81,445,147"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#abb392f63461f412585f1864b963ac02a" title="Computes the number of satisfied &#45;cells in the complex with respect to : that is, the number of &#45;cell..." alt="" coords="190,119,326,159"/>
-<area shape="poly" title=" " alt="" coords="361,153,326,151,326,145,366,152"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ad65f2bb1f9628f12f8a86326d991702f" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,217,142,258"/>
-<area shape="poly" title=" " alt="" coords="385,187,143,229,142,223,386,182"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="190,257,326,298"/>
-<area shape="poly" title=" " alt="" coords="441,188,302,259,300,254,436,189"/>
-<area shape="poly" title=" " alt="" coords="286,14,276,10,258,8,240,10,230,14,226,20,228,29,223,28,221,19,227,10,239,5,258,3,278,5,291,13"/>
-<area shape="poly" title=" " alt="" coords="286,103,276,100,258,97,240,99,230,104,226,110,228,119,223,117,221,109,227,100,239,94,258,92,278,94,291,103"/>
-<area shape="poly" title=" " alt="" coords="102,202,92,198,73,196,56,198,46,202,42,208,43,217,38,217,37,207,42,198,55,193,74,191,94,193,107,201"/>
-<area shape="poly" title=" " alt="" coords="172,260,142,255,142,250,177,259"/>
-<area shape="poly" title=" " alt="" coords="286,241,276,238,258,236,240,238,230,242,226,248,227,258,223,255,221,247,227,238,239,233,258,231,278,233,291,242"/>
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_icgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a1a8ebada97ebaf454b30b68b8c2680d2_icgraph">
+<area shape="rect" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel...." alt="" coords="5,29,226,55"/>
+<area shape="poly" title=" " alt="" coords="152,15,141,10,115,8,92,10,80,15,77,20,84,29,78,29,72,21,76,11,91,5,116,3,142,5,158,15"/>
 </map>
 </div>
 
@@ -505,7 +589,7 @@ template&lt;typename RingLike&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( \ker(\RREF(A)) \). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00263">263</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00332">332</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -581,7 +665,7 @@ template&lt;typename RingLike&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( \RREF(A) \). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00221">221</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00290">290</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -663,7 +747,7 @@ template&lt;typename RingLike&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>\( \ker(A) \). </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00242">242</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00311">311</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -686,7 +770,7 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <a id="a0030f1b3f6243a3f8094596eef404c5f" name="a0030f1b3f6243a3f8094596eef404c5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0030f1b3f6243a3f8094596eef404c5f">&#9670;&#160;</a></span>SparseRightMultiplication()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a0030f1b3f6243a3f8094596eef404c5f">&#9670;&#160;</a></span>SparseRightMultiplication() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -751,8 +835,95 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph" loading="lazy" alt=""/></div>
 <map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a0030f1b3f6243a3f8094596eef404c5f_icgraph">
-<area shape="rect" title="Sparse (right) matrix multiplication ." alt="" coords="5,29,175,55"/>
-<area shape="poly" title=" " alt="" coords="117,14,109,10,90,8,72,10,63,15,61,20,66,29,61,29,56,21,59,11,71,5,90,3,111,5,123,14"/>
+<area shape="rect" title="Sparse (right) matrix multiplication ." alt="" coords="407,184,576,209"/>
+<area shape="poly" title=" " alt="" coords="528,169,517,165,492,162,469,164,456,169,454,174,460,184,455,182,448,175,453,165,467,159,492,157,518,160,533,169"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#a84057b52565f61ccb4a02ec1dd01796e" title="Computes the total energy of the given configuration." alt="" coords="206,29,342,70"/>
+<area shape="poly" title=" " alt="" coords="465,172,418,130,358,85,335,73,335,68,360,81,421,126,470,173"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#abb392f63461f412585f1864b963ac02a" title="Computes the number of satisfied &#45;cells in the complex with respect to : that is, the number of &#45;cell..." alt="" coords="206,119,342,159"/>
+<area shape="poly" title=" " alt="" coords="423,180,343,160,343,154,428,178"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ad65f2bb1f9628f12f8a86326d991702f" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,243,142,283"/>
+<area shape="poly" title=" " alt="" coords="389,199,294,208,190,224,125,245,123,240,189,219,293,203,394,197"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#a33d0a906aac3e2b96943cf256dea363a" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel...." alt="" coords="190,234,359,260"/>
+<area shape="poly" title=" " alt="" coords="416,214,333,236,332,231,421,212"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="206,308,342,349"/>
+<area shape="poly" title=" " alt="" coords="458,217,311,310,309,305,453,218"/>
+<area shape="poly" title=" " alt="" coords="305,14,295,10,274,8,255,10,244,15,239,20,241,29,236,28,234,19,241,10,254,5,274,3,296,5,311,13"/>
+<area shape="poly" title=" " alt="" coords="305,103,295,100,274,97,255,99,244,104,239,110,241,119,236,117,234,109,241,100,254,94,274,92,296,94,311,103"/>
+<area shape="poly" title=" " alt="" coords="105,228,94,224,73,221,54,223,43,228,39,234,41,242,35,242,33,233,40,224,53,218,74,216,95,218,110,226"/>
+<area shape="poly" title=" " alt="" coords="193,303,138,287,139,281,198,302"/>
+<area shape="poly" title=" " alt="" coords="305,292,295,289,274,287,255,289,244,293,239,299,241,309,236,306,234,298,241,289,254,283,274,281,296,284,311,293"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a33d0a906aac3e2b96943cf256dea363a" name="a33d0a906aac3e2b96943cf256dea363a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33d0a906aac3e2b96943cf256dea363a">&#9670;&#160;</a></span>SparseRightMultiplication() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RingLike&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; SparseRightMultiplication </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#a300100047e4923c006886da5e51435c8">SparseMatrix</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>A</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_a_t_e_a_m_s.html#ad9d3764e00f70957b63a1223ed0ff5e1">SparseVector</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>x</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html">Ring</a> *</td>          <td class="paramname"><span class="paramname"><em>R</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_a_t_e_a_m_s_1_1arithmetic_1_1_compute_resources.html">ComputeResources</a>&lt; RingLike &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>resources</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sparse (right) matrix multiplication \( A \vec x \), performed by computing dot products \(A_i \cdot \vec x\) in parallel. Uses <span class="tt">BS::thread_pool</span>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">RingLike</td><td>A coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td>Matrix. </td></tr>
+    <tr><td class="paramname">x</td><td>Vector. </td></tr>
+    <tr><td class="paramname">R</td><td>(Pointer to) a coefficient <a class="el" href="struct_a_t_e_a_m_s_1_1_ring.html" title="Ring">Ring</a>, like <a class="el" href="struct_a_t_e_a_m_s_1_1_zp.html" title="Zp">Zp</a> or <a class="el" href="struct_a_t_e_a_m_s_1_1_q.html" title="Q">Q</a>. </td></tr>
+    <tr><td class="paramname">resources</td><td>Compute resources.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>\( \vec y = A \vec x \). </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00211">211</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_a33d0a906aac3e2b96943cf256dea363a_cgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_a33d0a906aac3e2b96943cf256dea363a_cgraph" loading="lazy" alt=""/></div>
+<map name="anamespace_a_t_e_a_m_s_1_1arithmetic_a33d0a906aac3e2b96943cf256dea363a_cgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_a33d0a906aac3e2b96943cf256dea363a_cgraph">
+<area shape="rect" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel...." alt="" coords="5,29,175,55"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#a0030f1b3f6243a3f8094596eef404c5f" title="Sparse (right) matrix multiplication ." alt="" coords="223,29,392,55"/>
+<area shape="poly" title=" " alt="" coords="175,40,210,42,204,42,175,45"/>
+<area shape="poly" title=" " alt="" coords="271,28,264,21,268,11,283,5,307,3,334,5,349,15,344,14,332,10,307,8,284,10,272,15,269,20,276,30"/>
 </map>
 </div>
 
@@ -902,24 +1073,11 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph.png" border="0" usemap="#anamespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph" loading="lazy" alt=""/></div>
 <map name="anamespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph" id="anamespace_a_t_e_a_m_s_1_1arithmetic_acaca566eef40bba411fc8f778016fa7c_icgraph">
-<area shape="rect" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="634,156,756,181"/>
-<area shape="poly" title=" " alt="" coords="731,140,720,137,695,134,672,136,660,141,657,146,664,156,659,154,652,147,656,137,671,131,695,129,721,132,736,141"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#a3d2982d2b0fb712cd76a48c77f4ba912" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel." alt="" coords="374,156,586,181"/>
-<area shape="poly" title=" " alt="" coords="616,169,587,171,587,166,621,168"/>
-<area shape="poly" title=" " alt="" coords="516,141,505,137,480,134,457,136,445,141,443,146,449,156,444,154,437,147,442,137,456,131,480,129,506,132,521,141"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#a84057b52565f61ccb4a02ec1dd01796e" title="Computes the total energy of the given configuration." alt="" coords="190,29,326,70"/>
-<area shape="poly" title=" " alt="" coords="440,148,325,85,302,73,302,68,327,81,445,147"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#abb392f63461f412585f1864b963ac02a" title="Computes the number of satisfied &#45;cells in the complex with respect to : that is, the number of &#45;cell..." alt="" coords="190,119,326,159"/>
-<area shape="poly" title=" " alt="" coords="361,153,326,151,326,145,366,152"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ad65f2bb1f9628f12f8a86326d991702f" title="Computes the indices of satisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="5,217,142,258"/>
-<area shape="poly" title=" " alt="" coords="385,187,143,229,142,223,386,182"/>
-<area shape="rect" href="namespace_a_t_e_a_m_s_1_1statistics.html#ab28485fa8b3fa5b9a11c4269767e4c5b" title="Computes the indices of unsatisfied &#45;cells in the complex with respect to : that is,..." alt="" coords="190,257,326,298"/>
-<area shape="poly" title=" " alt="" coords="441,188,302,259,300,254,436,189"/>
-<area shape="poly" title=" " alt="" coords="286,14,276,10,258,8,240,10,230,14,226,20,228,29,223,28,221,19,227,10,239,5,258,3,278,5,291,13"/>
-<area shape="poly" title=" " alt="" coords="286,103,276,100,258,97,240,99,230,104,226,110,228,119,223,117,221,109,227,100,239,94,258,92,278,94,291,103"/>
-<area shape="poly" title=" " alt="" coords="102,202,92,198,73,196,56,198,46,202,42,208,43,217,38,217,37,207,42,198,55,193,74,191,94,193,107,201"/>
-<area shape="poly" title=" " alt="" coords="172,260,142,255,142,250,177,259"/>
-<area shape="poly" title=" " alt="" coords="286,241,276,238,258,236,240,238,230,242,226,248,227,258,223,255,221,247,227,238,239,233,258,231,278,233,291,242"/>
+<area shape="rect" title="Sparse vector dot product &#160;for vectors over a Ring." alt="" coords="274,29,395,55"/>
+<area shape="poly" title=" " alt="" coords="371,14,360,10,334,8,311,10,299,15,296,20,303,30,298,28,291,21,295,11,310,5,334,3,361,5,376,15"/>
+<area shape="rect" href="namespace_a_t_e_a_m_s_1_1arithmetic.html#a1a8ebada97ebaf454b30b68b8c2680d2" title="Sparse (right) matrix multiplication , performed by computing dot products &#160;in parallel...." alt="" coords="5,29,226,55"/>
+<area shape="poly" title=" " alt="" coords="255,42,226,45,226,40,261,42"/>
+<area shape="poly" title=" " alt="" coords="152,15,141,10,115,8,92,10,80,15,77,20,84,29,79,29,72,21,76,11,91,5,116,3,142,5,157,15"/>
 </map>
 </div>
 
@@ -964,7 +1122,7 @@ template&lt;typename RingLike&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00198">198</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="arithmetic_8h_source.html#l00267">267</a> of file <a class="el" href="arithmetic_8h_source.html">arithmetic.h</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
