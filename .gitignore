@@ -5,9 +5,10 @@ README.friendly.md
 
 build
 
-performance/profiling
-performance/timing
-performance/__pycache__
+# performance/profiling
+# performance/timing
+# performance/__pycache__
+performance
 
 *megltower*
 *pangolin*
