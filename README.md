@@ -104,8 +104,8 @@ On Linux (Ubuntu 22.04/24.04), use the same [installation steps as on macOS](#ma
 
 	You can set any of the `jemalloc`, `tcmalloc`, or `mimalloc` tools to `TRUE` in the CMake config file (`CMakeLists.txt`), but the build will fail if more than one of the variables is set to `TRUE`.
 
-[!NOTE]
-l;kasjdfasf
+> [!NOTE]
+> l;kasjdfasf
 
 3. **Build and install the library.** In your favorite shell, running
 	```bash
