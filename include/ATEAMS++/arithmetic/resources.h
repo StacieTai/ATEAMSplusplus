@@ -73,7 +73,7 @@ namespace ATEAMS::arithmetic {
 
 			void defaultPreferredBlocks(int N) {
 				if (N < this->threads*this->scaleFactor) this->blocks = this->threads;
-				else this->blocks = std::min(this->squaredThreads/2, N/(this->scaleFactor/2));
+				else this->blocks = std::max(this->squaredThreads/2, N/(this->scaleFactor/2));
 			}
 
 			void build() {
