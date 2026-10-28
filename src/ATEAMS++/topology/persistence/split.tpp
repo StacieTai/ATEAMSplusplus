@@ -76,12 +76,8 @@ namespace ATEAMS::topology::persistence {
 		vector<int> endpoints = traversalPolicy(complex);
 		int halfway = (endpoints[1]+endpoints[0])/2;
 
-		#pragma omp parallel sections default(shared)
-		{
-
-			// Do the second half
-			#pragma omp section
-			{
+		resources.opt->pool.detach_task(
+			[&] {
 				for (int d=endpoints[0]; d >= halfway; d--) {
 					reduceBlock<RingLike>(
 						Full,
@@ -96,10 +92,10 @@ namespace ATEAMS::topology::persistence {
 					);
 				}
 			}
+		);
 
-			// Do the first half
-			#pragma omp section
-			{
+		resources.opt->pool.detach_task(
+			[&] {
 				for (int d=halfway-1; d >= endpoints[1]; d--) {
 					reduceBlock<RingLike>(
 						Full,
@@ -114,7 +110,49 @@ namespace ATEAMS::topology::persistence {
 					);
 				}
 			}
-		}
+		);
+
+		resources.opt->pool.wait();
+
+		// #pragma omp parallel sections default(shared)
+		// {
+
+		// 	// Do the second half
+		// 	#pragma omp section
+		// 	{
+		// 		for (int d=endpoints[0]; d >= halfway; d--) {
+		// 			reduceBlock<RingLike>(
+		// 				Full,
+		// 				complex->Breaks[d],
+		// 				resources.parallel->lookup,
+		// 				d,
+		// 				R,
+		// 				reductionPolicy,
+		// 				creationPolicy,
+		// 				destructionPolicy,
+		// 				resources
+		// 			);
+		// 		}
+		// 	}
+
+		// 	// Do the first half
+		// 	#pragma omp section
+		// 	{
+		// 		for (int d=halfway-1; d >= endpoints[1]; d--) {
+		// 			reduceBlock<RingLike>(
+		// 				Full,
+		// 				complex->Breaks[d],
+		// 				resources.parallel->lookup,
+		// 				d,
+		// 				R,
+		// 				reductionPolicy,
+		// 				creationPolicy,
+		// 				destructionPolicy,
+		// 				resources
+		// 			);
+		// 		}
+		// 	}
+		// }
 
 		// Re-constitute the marked columns.
 		set<int> marked;

@@ -82,12 +82,12 @@ namespace ATEAMS {
 					// arithmetic::ComputeResources<typename ModelType::RingType> resources(this->model->coefficients);
 					// this->resources = resources;
 
-					resources.arithmetize(model->coefficients);
+					this->resources.arithmetize(model->coefficients);
 
 					// Initialize parallel computing capability.
-					resources.parallel->enabled = true;
-					resources.parallel->build(model->complex->size(), model->complex->Cells.size());
-					resources.serial->build(model->complex->size());
+					this->resources.parallel->enabled = true;
+					this->resources.parallel->build(model->complex->size(), model->complex->Cells.size());
+					this->resources.serial->build(model->complex->size());
 
 					State state;
 					this->state = state;
@@ -108,10 +108,10 @@ namespace ATEAMS {
 					// this->resources = resources;
 
 					// Initialize parallel computing capability.
-					resources.parallel->enabled = false;
+					this->resources.parallel->enabled = false;
 					// resources.parallel->build(model->complex.size(), model->complex.Cells.size());
-					resources.serial->build(model->complex->size());
-					resources.arithmetize(model->coefficients);
+					this->resources.serial->build(model->complex->size());
+					this->resources.arithmetize(model->coefficients);
 
 					State state;
 					this->state = state;
@@ -133,7 +133,7 @@ namespace ATEAMS {
 					this->steps = steps;
 					this->resources = resources;
 
-					resources.arithmetize(model->coefficients);
+					this->resources.arithmetize(model->coefficients);
 
 					State state;
 					this->state = state;
@@ -154,7 +154,7 @@ namespace ATEAMS {
 				 * @returns A `std::generator`.
 				 */
 				std::generator<State> simulate() {
-					std::thread listener = resources.spinUp();
+					std::thread listener = this->resources.spinUp();
 					this->model->initialize(this->state);
 
 					for (int t=0; t < this->steps; t++) {
@@ -163,7 +163,7 @@ namespace ATEAMS {
 					}
 
 					// Spin down multithreading environment.
-					resources.spinDown(&listener);
+					this->resources.spinDown(&listener);
 				}
 		};
 	}

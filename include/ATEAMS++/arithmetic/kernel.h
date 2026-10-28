@@ -62,12 +62,51 @@ namespace ATEAMS::arithmetic {
 		bool DEBUG=false
 	);
 
-
+	/**
+	 * @brief Performs the matrix multiplication \f$Ax = y\f$ and returns the
+	 *  indices of nonzero entries in \f$y\f$. See @ref ATEAMS::models::SwendsenWang
+	 * 	or @ref ATEAMS::models::InvadedCluster for usage.
+	 * 
+	 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
+	 * 
+	 * @param A Matrix, usually a coboundary.
+	 * @param x Vector, usuall a cochain.
+	 * @param R (Pointer to) a coefficient @ref Ring, like @ref Zp or @ref Q.
+	 * 
+	 * @returns A vector of indices of the multiplication \f$Ax = y\f$ with nonzero
+	 * 	entries.
+	 */
 	template <typename RingLike>
-	inline std::vector<int> excludedCells(
-		SparseMatrix<RingLike>& coboundary,
-		SparseVector<RingLike>& cochain,
+	inline std::vector<int> nonzeroIndices(
+		SparseMatrix<RingLike>& A,
+		SparseVector<RingLike>& x,
 		Ring* R
+	);
+
+
+	/**
+	 * @brief Performs the matrix multiplication \f$Ax = y\f$ and returns the
+	 *  indices of nonzero entries in \f$y\f$. This overload performs the
+	 * 	multiplication in parallel using the @p resource thread pool. See
+	 * 	@ref ATEAMS::models::SwendsenWang or @ref ATEAMS::models::InvadedCluster for usage.
+	 * @overload
+	 * 
+	 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
+	 * 
+	 * @param A Matrix, usually a coboundary.
+	 * @param x Vector, usuall a cochain.
+	 * @param R (Pointer to) a coefficient @ref Ring, like @ref Zp or @ref Q.
+	 * @param resources A @ref arithmetic::ComputeResources instance.
+	 * 
+	 * @returns A vector of indices of the multiplication \f$Ax = y\f$ with nonzero
+	 * 	entries.
+	 */
+	template <typename RingLike>
+	inline std::vector<int> nonzeroIndices(
+		SparseMatrix<RingLike>& A,
+		SparseVector<RingLike>& x,
+		Ring* R,
+		ComputeResources<RingLike>& resources
 	);
 }
 

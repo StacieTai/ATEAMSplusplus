@@ -23,6 +23,7 @@ namespace ATEAMS {
 
 	/** Represents an element of \f$\Z/p\Z\f$. See @ref Zp. */
 	typedef unsigned long FINITE;
+	// typedef uint16_t FINITE;
 
 	/** Alias of `SparseRREF::rat_t`; represents an element of \f$\Q\f$. See @ref Q. */
 	typedef SparseRREF::rat_t RATIONAL;

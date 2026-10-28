@@ -143,16 +143,15 @@ namespace ATEAMS {
 			SparseVector<RingLike>& x,
 			Ring* R
 		) {
-			SparseVector<RingLike> y = sparse_mat_dot_sparse_vec<typename RingLike::dtype,INDEX>(
+			return sparse_mat_dot_sparse_vec<typename RingLike::dtype,INDEX>(
 				A, x, R->ring
 			);
-			
-			return y;
 		};
 
 		/**
 		 * @brief Sparse (right) matrix multiplication \f$ A \vec x \f$, performed
-		 * 	by computing dot products \f$A_i \cdot \vec x\f$ in parallel.
+		 * 	by computing dot products \f$A_i \cdot \vec x\f$ in parallel. Uses
+		 *  OpenMP.
 		 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
 		 * 
 		 * @param A Matrix.
@@ -162,7 +161,7 @@ namespace ATEAMS {
 		 * @returns \f$ \vec y = A \vec x \f$.
 		 */
 		template <typename RingLike>
-		inline SparseVector<RingLike> ParallelSparseRightMultiplication(
+		inline SparseVector<RingLike> OpenMPSparseRightMultiplication(
 			SparseMatrix<RingLike>& A,
 			SparseVector<RingLike>& x,
 			Ring* R
@@ -193,6 +192,76 @@ namespace ATEAMS {
 
 			return r;
 		}
+
+
+		/**
+		 * @brief Sparse (right) matrix multiplication \f$ A \vec x \f$, performed
+		 * 	by computing dot products \f$A_i \cdot \vec x\f$ in parallel. Uses
+		 *  `BS::thread_pool`.
+		 * @tparam RingLike A coefficient @ref Ring, like @ref Zp or @ref Q.
+		 * 
+		 * @param A Matrix.
+		 * @param x Vector.
+		 * @param R (Pointer to) a coefficient @ref Ring, like @ref Zp or @ref Q.
+		 * @param resources Compute resources.
+		 * 
+		 * @returns \f$ \vec y = A \vec x \f$.
+		 */
+		template <typename RingLike>
+		inline SparseVector<RingLike> SparseRightMultiplication(
+			SparseMatrix<RingLike>& A,
+			SparseVector<RingLike>& x,
+			Ring* R,
+			ComputeResources<RingLike>& resources
+		) {
+			// If parallelism isn't enabled, kick to the other version.
+			if (!resources.parallel->enabled) return SparseRightMultiplication<RingLike>(A, x, R);
+
+			// If we haven't yet decided on a preferred number of blocks, let's
+			// compute that now.
+			if (resources.typed->blocks < 0) {
+				resources.typed->defaultPreferredBlocks(A.rows.size());
+				resources.typed->build();
+			}
+
+
+			// Compute the dot products in parallel.
+			resources.opt->pool.detach_blocks(
+				0, A.rows.size(),
+				[&](const size_t start, const size_t end) {
+					if (resources.opt->abort) return;
+
+					// Get the thread ID
+					auto tid = SparseRREF::thread_id();
+					typename RingLike::dtype r;
+
+					// Loop over each block.
+					for (size_t i=start; i < end; i++) {
+						r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+						if (r > 0) resources.typed->parts[tid].push_back((INDEX)i, r);
+					}
+				},
+				resources.typed->blocks
+			);
+			resources.opt->pool.wait();
+
+			// Reconstitute the vector.
+			SparseVector<RingLike> r;
+
+			for (int j=0; j < resources.typed->parts.size(); j++) {
+				// Skip this row if there's nothing in it.
+				if (resources.typed->parts[j].size() < 1) continue;
+
+				for (int k=0; k < resources.typed->parts[j].size(); k++) {
+					r.push_back(resources.typed->parts[j](k), resources.typed->parts[j][k]);
+				}
+			}
+			r.sort_indices();
+			resources.typed->flush();
+
+			return r;
+		}
+
 
 		template <typename RingLike>
 		inline void SparseVectorRescaling(

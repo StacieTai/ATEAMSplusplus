@@ -16,6 +16,7 @@
 #include <random>
 #include <algorithm>
 #include <cassert>
+#include <execution>
 
 
 namespace ATEAMS {
@@ -54,11 +55,15 @@ namespace ATEAMS {
 			//			each cell for which the coin shows "tails." (For any cell
 			//			already excluded, this does nothing; for any cell not yet
 			//			excluded, this excludes it.)
+			//
+			// Passing `resources` as a fourth argument performs the underlying
+			// matrix multiplication in parallel.
 
-			vector<int> exclude = arithmetic::excludedCells<RingLike>(
+			vector<int> exclude = arithmetic::nonzeroIndices<RingLike>(
 				this->complex->Coboundary.Matrices[d],
 				state.cochain,
-				this->coefficients
+				this->coefficients,
+				resources
 			);
 
 			satisfied = N-exclude.size();
@@ -85,7 +90,9 @@ namespace ATEAMS {
 			}
 
 			// Delete duplicates.
-			std::sort(exclude.begin(), exclude.end());
+			if (exclude.size() > 1e6) std::sort(std::execution::par, exclude.begin(), exclude.end());
+			else std::sort(exclude.begin(), exclude.end());
+			
 			exclude.erase(std::unique(exclude.begin(), exclude.end()), exclude.end());
 
 			// Sample from the kernel.
@@ -108,11 +115,14 @@ namespace ATEAMS {
 				cbd.compress();
 
 				// Multiply, and check whether there's anything in the resulting vector;
-				// there shouldn't be (i.e. it should have size 0).
-				SparseVector<RingLike> outcome = arithmetic::ParallelSparseRightMultiplication<RingLike>(
+				// there shouldn't be (i.e. it should have size 0). Adding a fourth
+				// argument (passing `resources`) performs this multiplication in
+				// parallel.
+				SparseVector<RingLike> outcome = arithmetic::SparseRightMultiplication<RingLike>(
 					cbd,
 					sample,
-					this->coefficients
+					this->coefficients,
+					resources
 				);
 
 				assert(outcome.size() < 1);
