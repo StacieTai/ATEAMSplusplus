@@ -8,5 +8,5 @@ Description: @PROJECT_DESCRIPTION@
 Version: @PROJECT_VERSION@
 
 Requires:
-Libs: -L${libdir} -lflint
-Cflags: -I${includedir} -std=c++23 -fopenmp -Ofast -march=native -flto -funroll-loops -fprefetch-loop-arrays -fomit-frame-pointer -fno-rtti
+Libs: -L${libdir} @PKG_CONFIG_LIBS@
+Cflags: -I${includedir} @PKG_CONFIG_CFLAGS@

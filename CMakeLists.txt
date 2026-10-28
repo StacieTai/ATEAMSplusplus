@@ -1,4 +1,8 @@
 
+################################################################################
+## PROJECT METADATA ############################################################
+################################################################################
+
 cmake_minimum_required(VERSION 4.2)
 
 project(ATEAMS++
@@ -13,161 +17,53 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_compile_options(
-	-Ofast
-	-march=native
-	-flto
-	-funroll-loops
-	-fprefetch-loop-arrays
-	-fno-rtti
-)
-
-
 ################################################################################
-## EXTERNAL DEPENDENCIES                                                      ##
-################################################################################
-find_package(PkgConfig REQUIRED)
-find_package(OpenMP REQUIRED)
-
-pkg_check_modules(FLINT REQUIRED IMPORTED_TARGET flint)
-
-# If we want to use mimalloc (which we should, by default) then set this to
-# TRUE. Otherwise, set it to FALSE.
-set(mimalloc FALSE)
-set(tcmalloc FALSE)
-set(jemalloc TRUE)
-
-if(mimalloc AND NOT tcmalloc AND NOT jemalloc)
-	find_package(mimalloc REQUIRED)
-	pkg_check_modules(mimalloc REQUIRED IMPORTED_TARGET mimalloc)
-endif()
-
-if(tcmalloc AND NOT mimalloc AND NOT jemalloc)
-	find_library(TCMALLOC_LIB NAMES tcmalloc tcmalloc_minimal REQUIRED)
-endif()
-
-if(jemalloc AND NOT mimalloc AND NOT tcmalloc)
-	find_library(JEMALLOC_LIB NAMES jemalloc jemalloc_minimal REQUIRED)
-endif()
-
-################################################################################
-## TESTING/PROFILING?                                                         ##
+## LOCAL BUILD CONFIG ##########################################################
 ################################################################################
 set(TEST TRUE)
 set(PROFILE FALSE)
 set(TIMING FALSE)
+
 set(DEBUG FALSE)
 
-if (NOT(PROFILE OR DEBUG))
-	add_compile_options(
-		-fomit-frame-pointer
-	)
-endif()
-
-if (TEST)
-	enable_testing()
-endif()
-
-if (DEBUG)
-	add_compile_options(-g2 -O1)
-endif()
-
-if (PROFILE)
-	set(PROFILE_COMPILE_OPTIONS
-		-g2
-		-fno-omit-frame-pointer
-	)
-
-	set(PROFILE_LINK_OPTIONS
-		-g2
-		-fno-omit-frame-pointer
-	)
-else()
-	set(PROFILE_COMPILE_OPTIONS )
-	set(PROFILE_LINK_OPTIONS )
-endif()
-
-
+include(cmake/build-config.cmake)
 
 
 ################################################################################
-## MAIN LIBRARY BUILD                                                         ##
+## GLOBAL DEPENDENCIES #########################################################
 ################################################################################
+
+find_package(PkgConfig REQUIRED)
+find_package(OpenMP REQUIRED)
+pkg_check_modules(FLINT REQUIRED IMPORTED_TARGET flint)
+
+# Set the choice of memory allocator. In testing on meglTower, jemalloc does
+# the best. ONLY ONE OF THESE CAN BE USED AT A TIME.
+set(jemalloc TRUE)
+set(mimalloc FALSE)
+set(tcmalloc FALSE)
+
+# threading building blocks (tbb) is required to use standard library parallelism
+# (and parallelism more generally on linux systems on intel hardware).
+find_library(TBB NAMES tbb lbb REQUIRED)
+
+# List core external dependencies.
+list(APPEND COREDEPENDENCIES
+	"PkgConfig::FLINT"
+	"OpenMP::OpenMP_CXX"
+	"${TBB}"
+)
+
+
+################################################################################
+## MAIN LIBRARY BUILD ##########################################################
+################################################################################
+
+# Add library and sources.
 add_library(ATEAMS++ INTERFACE)
+include(cmake/library.cmake)
+include(GNUInstallDirs)
 
-if(mimalloc AND NOT tcmalloc)
-	list(APPEND SOURCE_HEADERS
-		${PROJECT_SOURCE_DIR}/include/ATEAMS++/enable_mimalloc.h
-	)
-endif()
-
-
-list(APPEND SOURCE_HEADERS
-	# Headers
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/common.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/util.h
-
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/arithmetic/arithmetic.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/arithmetic/kernel.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/arithmetic/resources.h
-
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/topology.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/helpers.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/JIT.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/parallel.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/PHAT.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/split.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/stagger.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/standard.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/twist.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/reduction.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/topology/persistence/policies.h
-
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/complexes/complexes.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/complexes/Complex.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/complexes/Cubical.h
-
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/models.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/ModelState.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/ModelParameters.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/Model.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/Bernoulli.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/Glauber.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/InvadedCluster.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/SwendsenWang.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/models/Invasion.h
-
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/statistics/statistics.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/statistics/Chain.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/statistics/observables.h
-	${PROJECT_SOURCE_DIR}/include/ATEAMS++/statistics/schedules.h
-)
-
-
-list(APPEND SOURCE_IMPLEMENTATIONS
-	# Templated implementations
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/arithmetic/kernel.tpp
-	
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/topology/persistence/JIT.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/topology/persistence/parallel.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/topology/persistence/PHAT.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/topology/persistence/split.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/topology/persistence/stagger.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/topology/persistence/standard.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/topology/persistence/twist.tpp
-
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/complexes/Cubical.tpp
-
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/models/SwendsenWang.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/models/Bernoulli.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/models/Glauber.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/models/InvadedCluster.tpp
-	${PROJECT_SOURCE_DIR}/src/ATEAMS++/models/Invasion.tpp
-)
-
-
-# Public headers.
 target_sources(ATEAMS++
 	PUBLIC
 	FILE_SET HEADERS
@@ -175,55 +71,19 @@ target_sources(ATEAMS++
 	FILES ${SOURCE_HEADERS} ${SOURCE_IMPLEMENTATIONS}
 )
 
-set_target_properties(ATEAMS++ PROPERTIES PUBLIC_HEADER include/ATEAMS++/ATEAMS++.h)
-target_link_libraries(ATEAMS++ INTERFACE PkgConfig::FLINT)
-target_link_libraries(ATEAMS++ INTERFACE OpenMP::OpenMP_CXX)
-
-if(mimalloc)
-	target_link_libraries(ATEAMS++ INTERFACE PkgConfig::mimalloc)
-endif()
-
-target_include_directories(ATEAMS++ INTERFACE dependencies)
-
-include(GNUInstallDirs)
-
 # Special rule for building locally on macOS and using gnu screen: when screen
 # creates a subshell, it doesn't remember what @rpath means, so the load path
 # for libATEAMS++.dylib is uninterpretable.
 if(APPLE)
 	set_target_properties(ATEAMS++ PROPERTIES INSTALL_NAME_DIR ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
-	pkg_check_modules(TBB REQUIRED IMPORTED_TARGET tbb)
-	target_link_libraries(ATEAMS++ INTERFACE PkgConfig::TBB)
 endif()
 
-if(LINUX)
-	find_package(TBB REQUIRED)
-	link_libraries(tbb)
-
-	if(tcmalloc AND NOT mimalloc AND NOT jemalloc)
-		find_library(TCMALLOC_LIBRARY NAMES tcmalloc_minimal tcmalloc)
-		target_link_libraries(ATEAMS++ INTERFACE ${TCMALLOC_LIBRARY})
-	endif()
-
-	if(jemalloc AND NOT mimalloc AND NOT tcmalloc)
-		find_library(JEMALLOC_LIBRARY NAMES jemalloc_minimal jemalloc)
-		target_link_libraries(ATEAMS++ INTERFACE ${JEMALLOC_LIBRARY})
-	endif()
-endif()
-
-
-# Install headers.
-install(DIRECTORY "${PROJECT_SOURCE_DIR}/dependencies/phat/"
-	DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/phat"
-	FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
-)
-
-install(DIRECTORY "${PROJECT_SOURCE_DIR}/dependencies/SparseRREF/"
-	DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/SparseRREF"
-	FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp"
-)
+# Install dependencies.
+include(cmake/dependencies.cmake)
 
 # Install the library.
+set_target_properties(ATEAMS++ PROPERTIES PUBLIC_HEADER include/ATEAMS++/ATEAMS++.h)
+
 install(
 	TARGETS ${PROJECT_NAME}
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -231,13 +91,8 @@ install(
 	FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-
 # Install the pkg-config file.
-if (mimalloc)
-	configure_file(ATEAMS++.pc.mimalloc.in ATEAMS++.pc @ONLY)
-else()
-	configure_file(ATEAMS++.pc.in ATEAMS++.pc @ONLY)
-endif()
+include(cmake/pkg-config.cmake)
 
 install(
 	FILES ${CMAKE_BINARY_DIR}/ATEAMS++.pc
@@ -245,193 +100,37 @@ install(
 )
 
 
-
 ################################################################################
 ## TESTING  ####################################################################
 ################################################################################
+set(TEST_MODELS TRUE)
+set(TEST_COMPLEXES TRUE)
+set(TEST_ARITHMETIC TRUE)
+set(TEST_TOPOLOGY TRUE)
 
-list(APPEND COMPLEXES.TESTING
-	# "Cubical"
-)
-
-list(APPEND ARITHMETIC.TESTING
-	"matmul"
-	"kernel"
-)
-
-list(APPEND TOPOLOGY.TESTING
-	# "JIT"
-	# "parallel"
-	# "PHAT"
-	# "split"
-	# "stagger"
-	# "standard"
-	# "twist"
-)
-
-list(APPEND MODELS.TESTING
-	# "Bernoulli"
-	# "InvadedCluster"
-	# "Invasion"
-	"SwendsenWang"
-	# "Glauber"
-)
-
-list(APPEND TYPES
-	# "Q"
-	"Zp"
-)
-
-if (TEST)
-	foreach(TYPE IN LISTS TYPES)
-		# Making sure models are calling all the required subroutines appropriately
-		foreach(MODEL IN LISTS MODELS.TESTING)
-			add_executable(tests.${MODEL}.${TYPE} tests/models/${MODEL}.${TYPE}.cpp)
-			target_include_directories(tests.${MODEL}.${TYPE} PUBLIC tests)
-			target_link_libraries(tests.${MODEL}.${TYPE} PUBLIC ATEAMS++)
-
-			if("${TYPE}" STREQUAL "Q")
-				add_test(NAME models::${MODEL}.${TYPE} COMMAND tests.${MODEL}.${TYPE} 0)
-			else()
-				add_test(NAME models::${MODEL}.${TYPE}.2 COMMAND tests.${MODEL}.${TYPE} 2)
-				add_test(NAME models::${MODEL}.${TYPE}.3 COMMAND tests.${MODEL}.${TYPE} 3)
-			endif()
-		endforeach()
-
-		# Making sure complexes work the way we want
-		foreach(COMPLEX IN LISTS COMPLEXES.TESTING)
-			add_executable(tests.${COMPLEX}.${TYPE} tests/complexes/${COMPLEX}.${TYPE}.cpp)
-			target_include_directories(tests.${COMPLEX}.${TYPE} PUBLIC tests)
-			target_link_libraries(tests.${COMPLEX}.${TYPE} PUBLIC ATEAMS++)
-
-			add_test(NAME ${COMPLEX}.${TYPE} COMMAND tests.${COMPLEX}.${TYPE})
-		endforeach()
-
-		# Arithmetic subroutines
-		foreach(FUNCTION IN LISTS ARITHMETIC.TESTING)
-			add_executable(tests.${FUNCTION}.${TYPE} tests/arithmetic/${FUNCTION}.${TYPE}.cpp)
-			target_include_directories(tests.${FUNCTION}.${TYPE} PUBLIC tests)
-			target_link_libraries(tests.${FUNCTION}.${TYPE} PUBLIC ATEAMS++)
-
-			set(COPIES 1000)
-
-			if("${TYPE}" STREQUAL "Q")
-				add_test(NAME ${FUNCTION}.${TYPE} COMMAND tests.${FUNCTION}.${TYPE} 0)
-			else()
-				# Test for Z/2Z
-				add_test(NAME ${FUNCTION}.${TYPE}.2.100x100 COMMAND tests.${FUNCTION}.${TYPE} 2 100 100 ${COPIES})
-				add_test(NAME ${FUNCTION}.${TYPE}.2.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 2 100 1000 ${COPIES})
-				add_test(NAME ${FUNCTION}.${TYPE}.2.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 2 1000 100 ${COPIES})
-
-				# Test for Z/3Z
-				add_test(NAME ${FUNCTION}.${TYPE}.3.100x100 COMMAND tests.${FUNCTION}.${TYPE} 3 100 100 ${COPIES})
-				add_test(NAME ${FUNCTION}.${TYPE}.3.100x1000 COMMAND tests.${FUNCTION}.${TYPE} 3 100 1000 ${COPIES})
-				add_test(NAME ${FUNCTION}.${TYPE}.3.1000x100 COMMAND tests.${FUNCTION}.${TYPE} 3 1000 100 ${COPIES})
-			endif()
-		endforeach()
-
-		# Topological support subroutines
-		foreach(FUNCTION IN LISTS TOPOLOGY.TESTING)
-			add_executable(tests.persistence.${FUNCTION}.${TYPE} tests/topology/persistence.${FUNCTION}.${TYPE}.cpp)
-			target_include_directories(tests.persistence.${FUNCTION}.${TYPE} PUBLIC tests)
-			target_link_libraries(tests.persistence.${FUNCTION}.${TYPE} PUBLIC ATEAMS++)
-
-			if("${TYPE}" STREQUAL "Q")
-				add_test(NAME topology::persistence::${FUNCTION}.${TYPE} COMMAND tests.persistence.${FUNCTION}.${TYPE} 0)
-			else()
-				add_test(NAME topology::persistence::${FUNCTION}.${TYPE}.2 COMMAND tests.persistence.${FUNCTION}.${TYPE} 2)
-				add_test(NAME topology::persistence::${FUNCTION}.${TYPE}.3 COMMAND tests.persistence.${FUNCTION}.${TYPE} 3)
-			endif()
-		endforeach()
-	endforeach()
-endif()
-
-
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/testing.cmake)
 
 
 ################################################################################
 ## PROFILING  ##################################################################
 ################################################################################
+set(PROFILE_MODELS TRUE)
+set(PROFILE_ARITHMETIC FALSE)
+set(PROFILE_TOPOLOGY FALSE)
 
-list(APPEND ARITHMETIC.PROFILING
-	# "addition"
-)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/profiling.cmake)
 
-list(APPEND MODELS.PROFILING
-	# "Bernoulli"
-	"InvadedCluster"
-	# "Invasion"
-	"SwendsenWang"
-	# "Glauber"
-)
+################################################################################
+## TIMING ######################################################################
+################################################################################
+set(TIMING_MODELS FALSE)
+set(TIMING_ARITHMETIC FALSE)
+set(TIMING_TOPOLOGY TRUE)
 
-list(APPEND TOPOLOGY.PROFILING
-	# "persistence"
-)
-
-if (PROFILE)
-	foreach(MODEL IN LISTS MODELS.PROFILING)
-		add_executable(profiling.${MODEL} performance/profiling.${MODEL}.cpp)
-		target_link_libraries(profiling.${MODEL} PUBLIC ATEAMS++)
-		target_compile_options(profiling.${MODEL} PUBLIC ${PROFILE_COMPILE_OPTIONS})
-	endforeach()
-
-	foreach(FUNCTION IN LISTS TOPOLOGY.PROFILING)
-		add_executable(profiling.${FUNCTION} performance/profiling.${FUNCTION}.cpp)
-		target_link_libraries(profiling.${FUNCTION} PUBLIC ATEAMS++)
-		target_link_options(profiling.${FUNCTION} PUBLIC ${PROFILE_COMPILE_OPTIONS})
-		target_compile_options(profiling.${FUNCTION} PUBLIC ${PROFILE_COMPILE_OPTIONS})
-	endforeach()
-
-	foreach(FUNCTION IN LISTS ARITHMETIC.PROFILING)
-		add_executable(profiling.${FUNCTION} performance/profiling.${FUNCTION}.cpp)
-		target_link_libraries(profiling.${FUNCTION} PUBLIC ATEAMS++)
-		target_compile_options(profiling.${FUNCTION} PUBLIC ${PROFILE_COMPILE_OPTIONS})
-		target_link_options(profiling.${FUNCTION} PUBLIC ${PROFILE_COMPILE_OPTIONS})
-	endforeach()
-endif()
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/timing.cmake)
 
 
 if (PROFILE OR TIMING)
 	add_executable(performance.samples performance/performance.samples.cpp)
 	target_link_libraries(performance.samples PUBLIC ATEAMS++)
-endif()
-
-
-################################################################################
-## TIMING ######################################################################
-################################################################################
-
-
-list(APPEND ARITHMETIC.TIMING
-	# "addition"
-)
-
-list(APPEND MODELS.TIMING
-	# "Bernoulli"
-	# "InvadedCluster"
-	# "Invasion"
-	# "SwendsenWang"
-	# "Glauber"
-)
-
-list(APPEND TOPOLOGY.TIMING
-	"persistence"
-)
-
-if (TIMING)
-	foreach(MODEL IN LISTS MODELS.TIMING)
-		add_executable(timing.${MODEL} performance/timing.${MODEL}.cpp)
-		target_link_libraries(timing.${MODEL} PUBLIC ATEAMS++)
-	endforeach()
-
-	foreach(FUNCTION IN LISTS TOPOLOGY.TIMING)
-		add_executable(timing.${FUNCTION} performance/timing.${FUNCTION}.cpp)
-		target_link_libraries(timing.${FUNCTION} PUBLIC ATEAMS++)
-	endforeach()
-
-	foreach(FUNCTION IN LISTS ARITHMETIC.TIMING)
-		add_executable(timing.${FUNCTION} performance/timing.${FUNCTION}.cpp)
-		target_link_libraries(timing.${FUNCTION} PUBLIC ATEAMS++)
-	endforeach()
 endif()

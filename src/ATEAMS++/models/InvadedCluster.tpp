@@ -135,6 +135,7 @@ namespace ATEAMS {
 			state.cochain = sample;
 			state.includes = included;
 			state.essential = essential;
+			state.rank = essential.size();
 			state.satisfied = include.size();	// TODO satisfied of the previous cochain
 			state.occupied = included.size();
 			state.energy = -exclude.size();		// TODO energy of the previous cochain

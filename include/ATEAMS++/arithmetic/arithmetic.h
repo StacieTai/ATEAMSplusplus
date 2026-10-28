@@ -233,10 +233,11 @@ namespace ATEAMS {
 
 					// Get the thread ID
 					auto tid = SparseRREF::thread_id();
+					typename RingLike::dtype r;
 
 					// Loop over each block.
 					for (size_t i=start; i < end; i++) {
-						typename RingLike::dtype r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
+						r = arithmetic::SparseVectorDot<RingLike>(A.rows[i], x, R);
 						if (r > 0) resources.typed->parts[tid].push_back((INDEX)i, r);
 					}
 				},
